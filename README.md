@@ -10,7 +10,7 @@ npx create-next-app -e https://github.com/cristiana214/marketplace.git project-n
 
 ## to run locally  just clone
 ```bash
-git clone https://github.com/cristiana214/marketplace.git foldername
+git clone https://github.com/cristiana214/marketplace.git foldername    //foldername can be any othername
 ```
 
 ### How to run locally
