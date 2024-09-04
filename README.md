@@ -5,7 +5,7 @@ A Next.js 14 template for building apps with Radix UI and Tailwind CSS.
 ## Usage
 
 ```bash
-npx create-next-app -e https://github.com/cristiana214/next-boiler.git project-name
+npx create-next-app -e https://github.com/cristiana214/marketplace.git project-name
 ```
 
 ## Features
