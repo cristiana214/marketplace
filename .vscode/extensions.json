@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "csstools.postcss",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-complete-tag",
+    "formulahendry.auto-rename-tag",
+    "aaron-bond.better-comments",
+    "donjayamanne.githistory",
+    "wix.vscode-import-cost",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    // "akamud.vscode-theme-onedark" //this is for my favorite theme
+  ]
+}

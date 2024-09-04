@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:tailwindcss/recommended",
+    "plugin:prettier/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+    // "ecmaFeatures": {
+    //   "jsx": true
+    // }
+  },
+  "plugins": ["tailwindcss", "prettier"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": true,
+        "singleQuote": false,
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cn"],
+      "config": "tailwind.config.js"
+    },
+    "next": {
+      "rootDir": ["./"]
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts"],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "semi": true,
+            "singleQuote": false,
+            "endOfLine": "auto"
+          }
+        ],
+        "@next/next/no-html-link-for-pages": "off",
+        "react/jsx-key": "off",
+        "tailwindcss/no-custom-classname": "off",
+        "import/extensions": "off",
+        "react/function-component-definition": "off",
+        "react/destructuring-assignment": "off",
+        "react/require-default-props": "off",
+        "react/jsx-props-no-spreading": "off",
+        "@typescript-eslint/comma-dangle": "off",
+        "@typescript-eslint/consistent-type-imports": "error",
+        "no-restricted-syntax": [
+          "error",
+          "ForInStatement",
+          "LabeledStatement",
+          "WithStatement"
+        ], // overrides Airbnb config and enable no restricted syntax
+        "import/prefer-default-export": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "react/jsx-pascal-case": "off",
+        "react/react-in-jsx-scope": "off",
+        "unused-imports/no-unused-imports": "off",
+        "unused-imports/no-unused-vars": "off",
+        "react/no-array-index-key": "off",
+        "react/prop-types":"off",
+        "jsx-a11y/heading-has-content":"off"
+      }
+    }
+  ]
+}
