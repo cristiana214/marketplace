@@ -2,14 +2,18 @@
 
 A Next.js 14 template for building apps with Radix UI and Tailwind CSS.
 
-## Usage
+## Template Usage, no need if already cloned
 
 ```bash
 npx create-next-app -e https://github.com/cristiana214/marketplace.git project-name
 ```
 
+## to run locally  just clone
+```bash
+git clone https://github.com/cristiana214/marketplace.git
+```
 
-### how to run locally
+### How to run locally
 ```bash
 cd marketplace
 ```
@@ -21,6 +25,32 @@ npm install
 ```bash
 npm run dev
 ```
+
+### Github commands
+add all files for commit
+```bash
+git add .
+```
+Commit update
+```bash
+git commit -m "commit message"
+```
+git pull latest update
+
+```bash
+git pull
+```
+git push latest commit
+```bash
+git push
+```
+
+
+
+
+
+
+
 
 
 ## Features
