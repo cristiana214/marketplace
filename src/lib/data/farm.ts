@@ -1,4 +1,4 @@
-import type { CardData } from "@/types/data";
+import type { CardData, Category } from "@/types/data";
 
 const cardData: CardData[] = [
   {
@@ -58,17 +58,111 @@ const cardData: CardData[] = [
   },
 ];
 
-const categories: string[] = [
-  "JavaScript Memes",
-  "Web design",
-  "AI memes",
-  "React Memes",
-  "Python Memes",
-  "Java Memes",
-  "HTML CSS Memes",
-  "Git Memes",
-  "Debugging Memes",
-  "Stack Overflow Memes",
-  "Programming Humor",
+const categories: Category[] = [
+  {
+    name: "Rice",
+    url: "rice",
+    items: [
+      { name: "Corn Rice", url: "corn-rice" },
+      { name: "Glutinous Rice", url: "glutinous-rice" },
+    ],
+  },
+  {
+    name: "Fruits",
+    url: "fruits",
+    items: [
+      { name: "Marang", url: "marang" },
+      { name: "Mangoes", url: "mangoes" },
+      { name: "Bananas", url: "bananas" },
+      { name: "Watermelon", url: "watermelon" },
+      { name: "Papayas", url: "papayas" },
+      { name: "Avocados", url: "avocados" },
+    ],
+  },
+  {
+    name: "Legumes",
+    url: "legumes",
+    items: [
+      { name: "Mongo", url: "mongo-beans" },
+      { name: "String Beans", url: "string-beans" },
+    ],
+  },
+  {
+    name: "Green Leafy Vegetables",
+    url: "green-leafy-vegetables",
+    items: [
+      { name: "Alugbate", url: "alugbate" },
+      { name: "Kangkong", url: "kangkong" },
+      { name: "Lettuce", url: "lettuce" },
+      { name: "Petchay", url: "petchay" },
+      { name: "Camote tops", url: "camote-tops" },
+      { name: "Chinese Kangkong", url: "chinese-kangkong" },
+    ],
+  },
+  {
+    name: "Livestocks",
+    url: "livestocks",
+    items: [
+      { name: "Bisaya Chickens", url: "chickens" },
+      { name: "45 days Chicken", url: "45days-chicken" },
+      { name: "Pigs", url: "pigs" },
+      { name: "Goats", url: "goats" },
+    ],
+  },
+  {
+    name: "Farm Tools",
+    url: "farm-tools",
+    items: [
+      { name: "Hand Tracktor - rotavator", url: "rotavator" },
+      { name: "Deep Plows", url: "deep-plows" },
+      { name: "Plows", url: "deep-plows" },
+      { name: "Spiral plow", url: "spiral plow" },
+      { name: "Rakes", url: "rakes" },
+      { name: "Grasscutter", url: "grasscutter" },
+    ],
+  },
+  {
+    name: "Vegetables",
+    url: "vegetables",
+    items: [
+      { name: "Tomatoes", url: "tomatoes" },
+      { name: "Cucumbers", url: "cucumbers" },
+      { name: "Bell Peppers", url: "bell-peppers" },
+      { name: "Eggplant", url: "eggplants" },
+      { name: "Spring union", url: "spring-onions" },
+    ],
+  },
+  {
+    name: "Herbs and Spices",
+    url: "herbs-and-spices",
+    items: [
+      { name: "Basil", url: "basil" },
+      { name: "Mint", url: "mint" },
+      { name: "Ginger", url: "ginger" },
+      { name: "Lemon Grass", url: "lemon grass" },
+    ],
+  },
+  {
+    name: "Firewood",
+    url: "firewood",
+    items: [
+      { name: "Hardwood", url: "hardwood" },
+      { name: "Softwood", url: "softwood" },
+      { name: "Charcoal", url: "charcoal" },
+      { name: "Logs", url: "logs" },
+    ],
+  },
+  {
+    name: "Tubers and Roots",
+    url: "tubers-and-roots",
+    items: [
+      { name: "Sweet Potatoes", url: "sweet-potatoes" },
+      { name: "Yams", url: "yams" },
+      { name: "Cassava", url: "cassava" },
+      { name: "Taro/Gabi", url: "taro" },
+      { name: "Ginger", url: "ginger" },
+    ],
+  },
 ];
+
 export { cardData, categories };

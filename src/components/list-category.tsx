@@ -13,7 +13,9 @@ const ListCategory = () => (
           key={index}
           className="cursor-pointer rounded-md bg-white p-2 shadow transition duration-200 ease-in-out hover:bg-slate-700 hover:text-white dark:bg-gray-700 dark:hover:bg-slate-400 dark:hover:text-white"
         >
-          <Link href={`/category/${generateUrl(category)}`}>{category}</Link>
+          <Link href={`/category/${generateUrl(category.url)}`}>
+            {category.name}
+          </Link>
         </li>
       ))}
     </ul>
