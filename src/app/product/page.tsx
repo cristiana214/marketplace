@@ -1,11 +1,11 @@
-import ListCategory from "@/components/list-category";
+import CategoryList from "@/components/list-category";
 import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 import { siteConfig } from "@/config/site";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: `Product ${siteConfig.name}`,
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -15,19 +15,12 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
 };
-export default function ItemPage() {
+export default function CategoryPage() {
   return (
     <GridLayout>
       <GridItemEight>
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Product Item
-        </h1>
-        <h2 className="text-4xl">Add to cart</h2>
-        this will be updated with actual page content Lorem ipsum, dolor sit
-        amet consectetur adipisicing elit. Harum ut possimus veritatis
-        cupiditate a vitae nisi est dolorum, quaerat iste tempore accusamus
-        voluptate! Dolore nam vel, totam quaerat sed doloremque?
-        <ListCategory />
+        <h1 className="mb-8 text-4xl font-bold"> Memes</h1>
+        <CategoryList />
       </GridItemEight>
       <GridItemFour>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex facere,
