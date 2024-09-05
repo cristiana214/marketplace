@@ -23,7 +23,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/devcodingmemes",
+    twitter: "https://twitter.com/itsicice",
 
     github: "https://github.com/cristiana214/marketplace",
     facebook: "https://www.facebook.com/freshveggiesfarm",

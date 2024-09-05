@@ -5,7 +5,7 @@ import Link from "next/link";
 const ListCategory = () => (
   <div className="mx-auto mt-6 max-w-md rounded-sm bg-gray-100 p-6 shadow-md dark:bg-gray-800">
     <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100">
-      Coding Meme Categories
+      Farm Categories
     </h2>
     <ul className="space-y-2">
       {categories.map((category, index) => (
