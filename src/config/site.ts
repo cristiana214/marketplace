@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Coding Memes",
+  name: "Marketplace",
   description:
-    "Collection of coding jokes, memes, funny programming quotes, algorithm jokes, funny developer comments, computer programming pictures that can help to make your day better.",
+    " Welcome to NanayNitz Fresh Veggies Farm your one-stop shop for the finest locally grown produce! We offer a wide variety of farm-fresh products straight from our farm.All our products are sustainably grown, ensuring both quality and freshness in every bite. Experience the best nature has to offer, delivered straight to your doorstep.",
   mainNav: [
     {
       title: "Categories",
