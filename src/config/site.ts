@@ -7,19 +7,23 @@ export const siteConfig = {
   mainNav: [
     {
       title: "Categories",
-      href: "/genre",
+      href: "/category/",
     },
     {
       title: "Farm tools ",
-      href: "/tools",
+      href: "/category/tools/",
+    },
+    {
+      title: "LiveStocks ",
+      href: "/category/livestocks/",
     },
     {
       title: "Vegetables",
-      href: "/genre/vegetables/",
+      href: "/category/vegetables/",
     },
     {
       title: "Banana",
-      href: "/item/banana/",
+      href: "/product/banana/",
     },
   ],
   links: {

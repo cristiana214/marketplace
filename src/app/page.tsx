@@ -23,23 +23,23 @@ export default function IndexPage() {
         organic produce!
       </h2>
       <div className="flex flex-wrap gap-4">
-        <Link href="/genre/fruits/">
+        <Link href="/category/fruits/">
           <Button className="bg-green-400 hover:font-semibold" rel="noreferrer">
             Fruits
           </Button>
         </Link>
 
-        <Link href="/genre/vegetables/">
+        <Link href="/category/vegetables/">
           <Button className="bg-green-600 hover:font-semibold" rel="noreferrer">
             Vegetables
           </Button>
         </Link>
-        <Link href="/item/coconuts/">
+        <Link href="/product/coconuts/">
           <Button className="bg-green-700 hover:font-semibold" rel="noreferrer">
             Fresh Coconuts
           </Button>
         </Link>
-        <Link href="/genre/">
+        <Link href="/category/">
           <Button variant="outline" rel="noreferrer">
             Categories
           </Button>
