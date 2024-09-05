@@ -5,7 +5,7 @@ import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: `Product ${siteConfig.name}`,
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
