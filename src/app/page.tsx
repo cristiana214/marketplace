@@ -19,7 +19,7 @@ export default function IndexPage() {
       </div>
 
       <h2 className="mt-8 text-2xl font-semibold leading-tight tracking-tighter sm:text-3xl">
-        Shop now and support local farmers while enjoying healthy, fresh, and
+        Shop now and support our local farm while enjoying healthy, fresh, and
         organic produce!
       </h2>
       <div className="flex flex-wrap gap-4">

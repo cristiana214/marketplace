@@ -1,4 +1,4 @@
-import { categories } from "@/lib/data/memes";
+import { categories } from "@/lib/data/farm";
 import { generateUrl } from "@/lib/helper/generate-url";
 import Link from "next/link";
 

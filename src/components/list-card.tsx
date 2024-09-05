@@ -1,4 +1,4 @@
-import { cardData } from "@/lib/data/memes";
+import { cardData } from "@/lib/data/farm";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 
