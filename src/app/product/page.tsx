@@ -19,7 +19,7 @@ export default function CategoryPage() {
   return (
     <GridLayout>
       <GridItemEight>
-        <h1 className="mb-8 text-4xl font-bold"> Memes</h1>
+        <h1 className="mb-8 text-4xl font-bold"> List of product page</h1>
         <CategoryList />
       </GridItemEight>
       <GridItemFour>

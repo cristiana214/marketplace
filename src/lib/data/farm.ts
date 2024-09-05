@@ -73,16 +73,19 @@ const categories: Category[] = [
     items: [
       { name: "Marang", url: "marang" },
       { name: "Mangoes", url: "mangoes" },
-      { name: "Bananas", url: "bananas" },
+      { name: "Fresh Coconut", url: "coconuts" },
+      { name: "Banana", url: "banana" },
       { name: "Watermelon", url: "watermelon" },
       { name: "Papayas", url: "papayas" },
       { name: "Avocados", url: "avocados" },
+      { name: "Jackfruits", url: "jackfruits" },
     ],
   },
   {
     name: "Legumes",
     url: "legumes",
     items: [
+      { name: "Peanuts", url: "peanuts" },
       { name: "Mongo", url: "mongo-beans" },
       { name: "String Beans", url: "string-beans" },
     ],
@@ -125,11 +128,14 @@ const categories: Category[] = [
     name: "Vegetables",
     url: "vegetables",
     items: [
+      { name: "Sponge gourd/Patola", url: "patola" },
+      { name: "Banana heart", url: "banana-heart" },
       { name: "Tomatoes", url: "tomatoes" },
       { name: "Cucumbers", url: "cucumbers" },
-      { name: "Bell Peppers", url: "bell-peppers" },
+      { name: "Sili Labuyo", url: "hot-peppers" },
       { name: "Eggplant", url: "eggplants" },
-      { name: "Spring union", url: "spring-onions" },
+      { name: "Okra", url: "okra" },
+      { name: "Spring onion", url: "spring-onions" },
     ],
   },
   {
@@ -157,10 +163,17 @@ const categories: Category[] = [
     url: "tubers-and-roots",
     items: [
       { name: "Sweet Potatoes", url: "sweet-potatoes" },
-      { name: "Yams", url: "yams" },
       { name: "Cassava", url: "cassava" },
       { name: "Taro/Gabi", url: "taro" },
       { name: "Ginger", url: "ginger" },
+    ],
+  },
+  {
+    name: "Process Products",
+    url: "process-product",
+    items: [
+      { name: "Peanut butter", url: "peanut-butter" },
+      { name: "Cassava Cake", url: "cassava-cake" },
     ],
   },
 ];

@@ -6,7 +6,7 @@ export default function Four04Page() {
       <div className="flex w-full flex-col items-center justify-center py-2">
         <div className="mt-1 flex flex-col items-center p-10 shadow-md">
           <h1 className="mb-4 mt-10 text-4xl font-bold">404 Not found..</h1>
-          <Label>check other memes</Label>
+          <Label>check other product</Label>
         </div>
       </div>
     </section>

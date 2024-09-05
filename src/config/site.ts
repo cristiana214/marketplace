@@ -11,7 +11,7 @@ export const siteConfig = {
     },
     {
       title: "Farm tools ",
-      href: "/category/tools/",
+      href: "/category/farm-tools/",
     },
     {
       title: "LiveStocks ",
