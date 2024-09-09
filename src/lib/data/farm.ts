@@ -1,6 +1,6 @@
-import type { CardData, Category } from "@/types/data";
+import type { Products, Product, Category, CategoryItem } from "@/types/data";
 
-const cardData: CardData[] = [
+const products: Products = [
   {
     title: "Rice",
     url: "rice",
@@ -110,6 +110,7 @@ const categories: Category[] = [
       { name: "45 days Chicken", url: "45days-chicken" },
       { name: "Pigs", url: "pigs" },
       { name: "Goats", url: "goats" },
+      { name: "Ducks", url: "duck" },
     ],
   },
   {
@@ -142,6 +143,7 @@ const categories: Category[] = [
     name: "Herbs and Spices",
     url: "herbs-and-spices",
     items: [
+      { name: "Oregano", url: "oregano" },
       { name: "Basil", url: "basil" },
       { name: "Mint", url: "mint" },
       { name: "Ginger", url: "ginger" },
@@ -178,4 +180,16 @@ const categories: Category[] = [
   },
 ];
 
-export { cardData, categories };
+// Combine products into category items based on matching URLs
+const combinedProducts: (Category & { items: (CategoryItem & Product)[] })[] =
+  categories.map((category) => ({
+    ...category,
+    items: category.items.map((item) => {
+      const matchingProduct = products.find(
+        (product) => product.url === item.url,
+      );
+      return matchingProduct ? { ...item, ...matchingProduct } : item;
+    }) as (CategoryItem & Product)[],
+  }));
+
+export { products, categories, combinedProducts };
