@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/agrilogo.png",
+    shortcut: "/agrilogo.png",
+    apple: "/agrilogo.png",
   },
 };
-export default function CategoryPage() {
+export default function productPage() {
   return (
     <GridLayout>
       <GridItemEight>
-        <h1 className="mb-8 text-4xl font-bold"> Memes</h1>
+        <h1 className="mb-8 text-4xl font-bold"> Vegetables</h1>
         <CategoryList />
       </GridItemEight>
       <GridItemFour>
