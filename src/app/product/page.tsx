@@ -5,21 +5,21 @@ import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: `Product ${siteConfig.name}`,
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
   icons: {
-    icon: "/agrilogo.png",
-    shortcut: "/agrilogo.png",
-    apple: "/agrilogo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
 };
-export default function productPage() {
+export default function CategoryPage() {
   return (
     <GridLayout>
       <GridItemEight>
-        <h1 className="mb-8 text-4xl font-bold"> Vegetables</h1>
+        <h1 className="mb-8 text-4xl font-bold"> List of product page</h1>
         <CategoryList />
       </GridItemEight>
       <GridItemFour>

@@ -1,10 +1,10 @@
-import { cardData } from "@/lib/data/memes";
+import { products } from "@/lib/data/farm";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 
 const ListCard = () => (
   <>
-    {cardData
+    {products
       .sort(() => Math.random() - 0.5)
       .map((card, index) => (
         <Card

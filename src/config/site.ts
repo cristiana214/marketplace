@@ -1,25 +1,36 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "AgriWeb",
-  description: "Freshly vegetables for delivery and pick-up.",
+  name: "Marketplace",
+  description:
+    "Welcome to NanayNitz Fresh Veggies Farm your one-stop shop for the finest locally grown produce! We offer a wide variety of farm-fresh products straight from our farm. All our products are sustainably grown, ensuring both quality and freshness in every bite. Experience the best nature has to offer, delivered straight to your doorstep.",
   mainNav: [
     {
-      title: "Products",
-      href: "/categories",
+      title: "Categories",
+      href: "/category/",
+    },
+    {
+      title: "Farm tools ",
+      href: "/category/farm-tools/",
     },
 
     {
-      title: "Where we Deliever",
-      href: "/us",
+      title: "LiveStocks ",
+      href: "/category/livestocks/",
     },
     {
-      title: "About Us",
-      href: "/me",
+      title: "Vegetables",
+      href: "/category/vegetables/",
     },
     {
-      title: "FAQ",
-      href: "/questions",
+      title: "Banana",
+      href: "/product/banana/",
     },
   ],
+  links: {
+    twitter: "https://twitter.com/itsicice",
+
+    github: "https://github.com/cristiana214/marketplace",
+    facebook: "https://www.facebook.com/freshveggiesfarm",
+  },
 };

@@ -5,7 +5,7 @@ import Image from "next/image";
 import type { NavItem } from "@/types/nav";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import logo from "@/public/coding.webp";
+import logo from "@/public/agrilogo.png";
 
 interface MainNavProps {
   items?: NavItem[];
@@ -17,7 +17,7 @@ export function MainNav({ items }: MainNavProps) {
       <Link href="/" className="flex items-center space-x-2">
         <Image
           src={logo}
-          alt="Coding Memes"
+          alt="Fresh Veggies Farm"
           width={40}
           height={40}
           className="border-1 rounded-md"

@@ -19,6 +19,10 @@ export default bundleAnalyzer({
         protocol: "https",
         hostname: "*",
       },
+      {
+        protocol: "http",
+        hostname: "*",
+      },
     ],
   },
   experimental: {
