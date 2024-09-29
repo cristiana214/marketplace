@@ -5,7 +5,7 @@ const products: Products = [
     title: "Rice",
     url: "rice",
     description:
-      "Premium quality rice harvested from the finest fields. Available in different varieties such as Jasmine, Sinandomeng, and Dinorado. Perfect for daily meals or special occasions, known for its fluffy texture and delicious taste.",
+      "Premiums quality rice harvested from the finest fields. Available in different varieties such as Jasmine, Sinandomeng, and Dinorado. Perfect for daily meals or special occasions, known for its fluffy texture and delicious taste.",
     imageUrl:
       "https://images.immediate.co.uk/production/volatile/sites/30/2013/05/rice-a941d59.jpg?resize=1200%2C630",
   },
