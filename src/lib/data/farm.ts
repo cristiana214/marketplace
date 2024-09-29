@@ -18,8 +18,8 @@ const products: Products = [
       "https://images.squarespace-cdn.com/content/v1/5c1074accc8fed6a4251da8f/4882b78a-b5d4-47a1-a9a0-d05a4fdbd724/shutterstock_490174816.jpg",
   },
   {
-    title: "Banana (Cavendish)",
-    url: "banana",
+    title: "Bananas (Cavendish)",
+    url: "bananas",
     description:
       "Top-grade Cavendish bananas, known for their sweet, firm texture and rich potassium content. Great for snacks, smoothies, or baking. Available in different sizes and packaging options for export and local markets.",
     imageUrl:
