@@ -19,9 +19,10 @@ const productFarmer: ProductFarmer = {
   farmer: {
     farmerId: 1,
     name: "Nanay Nitz",
+    url: "nanay-nitz-fresh-veggies-farm",
     farmName: "Nanay Nitz Fresh Vegies Farm",
     image:
-      "https://images.squarespace-cdn.com/content/v1/5c1074accc8fed6a4251da8f/4882b78a-b5d4-47a1-a9a0-d05a4fdbd724/shutterstock_490174816.jpg",
+      "https://scontent.fmnl8-3.fna.fbcdn.net/v/t39.30808-6/327178826_842506286810064_8956730658938393487_n.png?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=SzGJ24Z0opwQ7kNvgEccTne&_nc_ht=scontent.fmnl8-3.fna&_nc_gid=AY6NgxWMtCnxlic8Iu6ULGu&oh=00_AYB28eRXS89GEwfMFEMCr9JfTYrXDFZYL8iSx98KNlaQgQ&oe=66FFF3AD",
     bio: "Nanay Nitz has been growing organic produce for over 15 years. Her farm specializes in heirloom varieties and sustainable farming practices.",
     address: "sadasdas",
     phone: "2924",

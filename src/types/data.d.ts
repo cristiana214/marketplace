@@ -21,6 +21,7 @@ export type Product = {
 export type Farmer = {
   farmerId: number;
   name: string;
+  url: string;
   farmName: string;
   bio: string;
   image: string;

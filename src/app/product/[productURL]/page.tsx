@@ -1,24 +1,18 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import type { Metadata } from "next";
+import Link from "next/link";
+
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Star, Plus, Minus } from "lucide-react";
-import {
-  GridItemEight,
-  GridItemFour,
-  GridItemSix,
-  GridItemTwelve,
-  GridLayout,
-} from "@/components/ui/grid";
+import { Plus, Minus } from "lucide-react";
+import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 import { productFarmer as product, productFarmer } from "@/lib/data/product";
-import { comments } from "@/lib/data/comments";
+// import { comments } from "@/lib/data/comments";
+import Cards from "@/components/reusable/cards";
 
 export default function ItemPage() {
   const [quantity, setQuantity] = useState(1);
@@ -127,17 +121,14 @@ export default function ItemPage() {
           </Button>
           <Button onClick={handleAddToCart}>Add to Cart</Button>
         </div>
-        <Tabs defaultValue="nutrition">
+        <Tabs defaultValue="farmer">
           <TabsList>
-            <TabsTrigger value="nutrition">Nutrition Facts</TabsTrigger>
             <TabsTrigger value="farmer">Farmer Profile</TabsTrigger>
+            <TabsTrigger value="more-info">Description</TabsTrigger>
           </TabsList>
-          <TabsContent value="nutrition">
-            <Card>
-              <CardHeader>
-                <CardTitle>Nutrition Facts</CardTitle>
-              </CardHeader>
-              <CardContent>
+          <TabsContent value="more-info">
+            <Cards title="Description">
+              <>
                 <p>Serving Size: {product.nutritionFacts.servingSize}</p>
                 <p>Calories: {product.nutritionFacts.calories}</p>
                 <p>Total Fat: {product.nutritionFacts.totalFat}</p>
@@ -146,35 +137,32 @@ export default function ItemPage() {
                   Total Carbohydrate: {product.nutritionFacts.totalCarbohydrate}
                 </p>
                 <p>Protein: {product.nutritionFacts.protein}</p>
-              </CardContent>
-            </Card>
+              </>
+            </Cards>
           </TabsContent>
           <TabsContent value="farmer">
-            <Card>
-              <CardHeader>
-                <CardTitle>{product.farmer.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="mb-4 flex items-center gap-4">
-                  <Avatar className="size-16">
-                    <AvatarImage
-                      src={product.farmer.image}
-                      alt={product.farmer.name}
-                    />
-                    <AvatarFallback>
-                      {product.farmer.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h3 className="font-semibold">{product.farmer.farmName}</h3>
-                    <p>{product.farmer.bio}</p>
-                  </div>
+            <Cards title={product.farmer.name}>
+              <div className="mb-4 flex items-center gap-4">
+                <Avatar className="size-16">
+                  <AvatarImage
+                    src={product.farmer.image}
+                    alt={product.farmer.name}
+                  />
+                  <AvatarFallback>
+                    {product.farmer.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <Link href={`/farm/${product.farmer.url}/`}>
+                    <h3 className="font-semibold">{product.farmer.farmName}</h3>{" "}
+                  </Link>
+                  <p>{product.farmer.bio}</p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </Cards>
           </TabsContent>
         </Tabs>
       </GridItemFour>
