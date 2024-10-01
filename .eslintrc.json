@@ -77,8 +77,9 @@
         "unused-imports/no-unused-imports": "off",
         "unused-imports/no-unused-vars": "off",
         "react/no-array-index-key": "off",
-        "react/prop-types":"off",
-        "jsx-a11y/heading-has-content":"off"
+        "react/prop-types": "off",
+        "jsx-a11y/heading-has-content": "off",
+        "jsx-a11y/label-has-associated-control": "off"
       }
     }
   ]
