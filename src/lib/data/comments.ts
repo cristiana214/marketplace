@@ -1,13 +1,20 @@
-const comments = [
+type Comment = {
+  commentId: number;
+  userName: string;
+  content: string;
+  rating: number;
+};
+
+const comments: Comment[] = [
   {
-    id: 1,
-    user: "John D.",
+    commentId: 1,
+    userName: "John D.",
     content: "These tomatoes are amazing! So flavorful.",
     rating: 5,
   },
   {
-    id: 2,
-    user: "Emily R.",
+    commentId: 2,
+    userName: "Emily R.",
     content: "Great quality, will buy again.",
     rating: 4,
   },
