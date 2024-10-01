@@ -7,7 +7,7 @@ export type Product = {
   unit: string;
   description: string;
   imageUrl: string;
-  images?: string[];
+  images: string[];
 };
 
 // export type Farmer = {
@@ -18,12 +18,13 @@ export type Product = {
 //   bio: string;
 // };
 
-interface Farmer {
+export type Farmer = {
   farmerId: number;
   name: string;
   farmName: string;
   bio: string;
   image: string;
+  images: string[];
   address: string;
   phone: string;
   email: string;
@@ -31,7 +32,7 @@ interface Farmer {
   socialMedia: {
     facebook: string;
   };
-}
+};
 
 export type CategoryItem = {
   name: string;

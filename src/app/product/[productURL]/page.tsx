@@ -17,7 +17,7 @@ import {
   GridItemTwelve,
   GridLayout,
 } from "@/components/ui/grid";
-import { product } from "@/lib/data/product";
+import { productFarmer as product, productFarmer } from "@/lib/data/product";
 import { comments } from "@/lib/data/comments";
 
 export default function ItemPage() {
@@ -26,7 +26,7 @@ export default function ItemPage() {
   const [newComment, setNewComment] = useState("");
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${product.name} to cart`);
+    console.log(`Added ${quantity} ${product.title} to cart`);
   };
 
   const handleSubmitComment = (e: React.FormEvent) => {
@@ -39,15 +39,15 @@ export default function ItemPage() {
       <GridItemEight>
         <div className="relative mb-4 aspect-square">
           <Image
-            src={product.images[activeImage]}
-            alt={product.name}
+            src={product?.images[activeImage]}
+            alt={product.title}
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
           />
         </div>
         <div className="flex gap-4 overflow-x-auto">
-          {product.images.map((image, index) => (
+          {product?.images.map((image, index) => (
             <button
               type="button"
               key={index}
@@ -58,7 +58,7 @@ export default function ItemPage() {
             >
               <Image
                 src={image}
-                alt={`${product.name} thumbnail ${index + 1}`}
+                alt={`${productFarmer.title} thumbnail ${index + 1}`}
                 layout="fill"
                 objectFit="cover"
               />
@@ -68,7 +68,7 @@ export default function ItemPage() {
 
         <div className="mt-12">
           <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2>
-          <div className="mb-8 space-y-4">
+          {/* <div className="mb-8 space-y-4">
             {comments.map((comment) => (
               <Card key={comment.id}>
                 <CardContent className="pt-4">
@@ -90,7 +90,7 @@ export default function ItemPage() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </div> */}
           <form onSubmit={handleSubmitComment}>
             <h3 className="mb-2 text-xl font-semibold">Leave a Comment</h3>
             <Textarea
@@ -104,7 +104,7 @@ export default function ItemPage() {
         </div>
       </GridItemEight>
       <GridItemFour>
-        <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
+        <h1 className="mb-4 text-3xl font-bold">{product.title}</h1>
         <p className="mb-4 text-2xl font-semibold">
           ${product.price.toFixed(2)} / {product.unit}
         </p>
@@ -169,7 +169,7 @@ export default function ItemPage() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="font-semibold">{product.farmer.farm}</h3>
+                    <h3 className="font-semibold">{product.farmer.farmName}</h3>
                     <p>{product.farmer.bio}</p>
                   </div>
                 </div>
