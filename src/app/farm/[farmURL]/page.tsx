@@ -13,6 +13,7 @@ import FarmLocation from "@/components/farm-location";
 import FarmRecentOrders from "@/components/farm-recent-orders";
 import FarmUpdates from "@/components/farm-updates";
 import ContactForm from "@/components/contact-form";
+import Cards from "@/components/reusable/cards";
 
 export default function FarmerPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<string>("products");
@@ -92,79 +93,45 @@ export default function FarmerPage(): JSX.Element {
               </div>
             </TabsContent>
             <TabsContent value="harvests">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Upcoming Harvests</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <FarmUpcomingHarvest />
-                </CardContent>
-              </Card>
+              <Cards title="Upcoming Harvests">
+                <FarmUpcomingHarvest />
+              </Cards>
             </TabsContent>
             <TabsContent value="map">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Farm Location</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <FarmLocation mapUrl={farmer.mapUrl} />
-                </CardContent>
-              </Card>
+              <Cards title="Farm Location">
+                <FarmLocation mapUrl={farmer.mapUrl} />
+              </Cards>
             </TabsContent>
             <TabsContent value="orders">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Recent Successful Orders</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <FarmRecentOrders />
-                </CardContent>
-              </Card>
+              <Cards title="Recent Successful Orders">
+                <FarmRecentOrders />
+              </Cards>
             </TabsContent>
 
             <TabsContent value="blog">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Farm Updates</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <FarmUpdates />
-                </CardContent>
-              </Card>
+              <Cards title="Farm Updates">
+                <FarmUpdates />
+              </Cards>
             </TabsContent>
             <TabsContent value="gallery">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Farm and Product Gallery</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <GalleryImage />
-                </CardContent>
-              </Card>
+              <Cards title="Farm and Product Gallery">
+                <GalleryImage />
+              </Cards>
             </TabsContent>
           </Tabs>
         </div>
       </div>
       <div className="grid gap-8 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <TruckIcon className="mr-2 size-6" />
-              Available Crops
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <FarmAvailableCrops />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Contact the Farmer</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ContactForm />
-          </CardContent>
-        </Card>
+        <Cards
+          title="Available Crops"
+          icon={<TruckIcon className="mr-2 size-6" />}
+        >
+          <FarmAvailableCrops />
+        </Cards>
+
+        <Cards title="Contact the Farmer">
+          <ContactForm />
+        </Cards>
       </div>
     </div>
   );
