@@ -10,17 +10,17 @@ export const siteConfig = {
       href: "/category/",
     },
     {
-      title: "Fruits ",
-      href: "/category/fruits/",
+      title: "Farms",
+      href: "/farm/nanay-nitz-fresh-veggies-farm/",
     },
 
     {
-      title: "Farms",
-      href: "/category/farms/",
+      title: "Products",
+      href: "/products/",
     },
     {
-      title: "Vegetables",
-      href: "/category/vegetables/",
+      title: "Fruits",
+      href: "/category/fruits/",
     },
     {
       title: "About",
