@@ -1,10 +1,11 @@
 // one product
 export type Product = {
-  productId?: number;
+  productId: number;
   title: string;
   url: string;
   price: number;
   unit: string;
+  quantity: number;
   description: string;
   imageUrl: string;
   images: string[];
