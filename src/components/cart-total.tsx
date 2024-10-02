@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/sheet";
 
 const CartTotal = () => {
-  const { cart, addToCart, removeFromCart } = useCartStore();
+  const { cart, cartTotal, addToCart, removeFromCart } = useCartStore();
+  const total = cartTotal();
 
   return (
     <div className="flex items-center space-x-4">
@@ -80,7 +81,7 @@ const CartTotal = () => {
           <div className="mt-8 space-y-4">
             <div className="flex items-center justify-between">
               <span className="font-semibold">Total:</span>
-              {/* <span className="font-semibold">P{cartTotal.toFixed(2)}</span> */}
+              <span className="font-semibold">P{total}</span>
             </div>
             <Button className="w-full">Proceed to Checkout</Button>
           </div>
