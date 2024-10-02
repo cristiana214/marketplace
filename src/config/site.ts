@@ -10,13 +10,13 @@ export const siteConfig = {
       href: "/category/",
     },
     {
-      title: "Farm tools ",
-      href: "/category/farm-tools/",
+      title: "Farm ",
+      href: "/farm/nanay-nitz-fresh-veggies-farm/",
     },
 
     {
-      title: "LiveStocks ",
-      href: "/category/livestocks/",
+      title: "Products ",
+      href: "/products",
     },
     {
       title: "Vegetables",
