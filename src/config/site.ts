@@ -20,7 +20,7 @@ export const siteConfig = {
     },
     {
       title: "Fruits",
-      href: "/category/fruits/",
+      href: "/product/fruits/",
     },
     {
       title: "About",
