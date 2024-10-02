@@ -24,98 +24,51 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ChevronDown, Minus, Plus, ShoppingCart, X } from "lucide-react";
-
-const products = [
-  {
-    id: 1,
-    name: "Fresh Eggs",
-    price: 3.99,
-    category: "Dairy",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 2,
-    name: "Organic Apples",
-    price: 2.49,
-    category: "Fruit",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 3,
-    name: "Grass-fed Beef",
-    price: 9.99,
-    category: "Meat",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 4,
-    name: "Honey",
-    price: 5.99,
-    category: "Sweeteners",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 5,
-    name: "Organic Carrots",
-    price: 1.99,
-    category: "Vegetables",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 6,
-    name: "Fresh Milk",
-    price: 3.49,
-    category: "Dairy",
-    image: "/placeholder.svg?height=200&width=200",
-  },
-];
-
-type CartItem = {
-  id: number;
-  quantity: number;
-};
+import { useCartStore } from "@/lib/store/useCartStore";
+import { products } from "@/lib/data/farm";
 
 export default function FarmMarketplace() {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  // const [cart, setCart] = useState<CartItem[]>([]);
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
+  const { cart, addToCart, removeFromCart, cartTotal } = useCartStore();
 
-  const addToCart = (productId: number) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === productId);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
-      }
-      return [...prevCart, { id: productId, quantity: 1 }];
-    });
-  };
+  // const addToCart = (productId: number) => {
+  //   setCart((prevCart) => {
+  //     const existingItem = prevCart.find((item) => item.id === productId);
+  //     if (existingItem) {
+  //       return prevCart.map((item) =>
+  //         item.id === productId
+  //           ? { ...item, quantity: item.quantity + 1 }
+  //           : item,
+  //       );
+  //     }
+  //     return [...prevCart, { id: productId, quantity: 1 }];
+  //   });
+  // };
 
-  const removeFromCart = (productId: number) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === productId);
-      if (existingItem && existingItem.quantity > 1) {
-        return prevCart.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: item.quantity - 1 }
-            : item,
-        );
-      }
-      return prevCart.filter((item) => item.id !== productId);
-    });
-  };
+  // const removeFromCart = (productId: number) => {
+  //   setCart((prevCart) => {
+  //     const existingItem = prevCart.find((item) => item.id === productId);
+  //     if (existingItem && existingItem.quantity > 1) {
+  //       return prevCart.map((item) =>
+  //         item.id === productId
+  //           ? { ...item, quantity: item.quantity - 1 }
+  //           : item,
+  //       );
+  //     }
+  //     return prevCart.filter((item) => item.id !== productId);
+  //   });
+  // };
+  const filteredProducts = products;
+  // const filteredProducts =
+  //   categoryFilter.length > 0
+  //     ? products.filter((product) => categoryFilter.includes(product.category))
+  //     : products;
 
-  const filteredProducts =
-    categoryFilter.length > 0
-      ? products.filter((product) => categoryFilter.includes(product.category))
-      : products;
-
-  const cartTotal = cart.reduce((total, item) => {
-    const product = products.find((p) => p.id === item.id);
-    return total + (product ? product.price * item.quantity : 0);
-  }, 0);
+  // const cartTotal = cart.reduce((total, item) => {
+  //   const product = products.find((p) => p.productId === item.productId);
+  //   return total + (product ? product.price * item.quantity : 0);
+  // }, 0);
 
   return (
     <div className="container mx-auto p-4">
@@ -164,21 +117,23 @@ export default function FarmMarketplace() {
               </SheetHeader>
               <div className="mt-8 space-y-4">
                 {cart.map((item) => {
-                  const product = products.find((p) => p.id === item.id);
+                  const product = products.find(
+                    (p) => p.productId === item.productId,
+                  );
                   if (!product) return null;
                   return (
                     <div
-                      key={item.id}
+                      key={item.productId}
                       className="flex items-center justify-between"
                     >
                       <div className="flex items-center space-x-4">
                         <img
-                          src={product.image}
-                          alt={product.name}
+                          src={product.imageUrl}
+                          alt={product.title}
                           className="size-16 rounded object-cover"
                         />
                         <div>
-                          <h3 className="font-semibold">{product.name}</h3>
+                          <h3 className="font-semibold">{product.title}</h3>
                           <p className="text-sm text-gray-500">
                             ${product.price.toFixed(2)} each
                           </p>
@@ -188,7 +143,7 @@ export default function FarmMarketplace() {
                         <Button
                           size="icon"
                           variant="outline"
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() => removeFromCart(item.productId)}
                         >
                           <Minus className="size-4" />
                         </Button>
@@ -196,7 +151,7 @@ export default function FarmMarketplace() {
                         <Button
                           size="icon"
                           variant="outline"
-                          onClick={() => addToCart(item.id)}
+                          onClick={() => addToCart(item.productId)}
                         >
                           <Plus className="size-4" />
                         </Button>
@@ -208,7 +163,7 @@ export default function FarmMarketplace() {
               <div className="mt-8 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">Total:</span>
-                  <span className="font-semibold">${cartTotal.toFixed(2)}</span>
+                  {/* <span className="font-semibold">P{cartTotal.toFixed(2)}</span> */}
                 </div>
                 <Button className="w-full">Proceed to Checkout</Button>
               </div>
@@ -218,23 +173,26 @@ export default function FarmMarketplace() {
       </header>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredProducts.map((product) => (
-          <Card key={product.id}>
+          <Card key={product.productId}>
             <CardHeader>
-              <CardTitle>{product.name}</CardTitle>
+              <CardTitle>{product.title}</CardTitle>
             </CardHeader>
             <CardContent>
               <img
-                src={product.image}
-                alt={product.name}
+                src={product.imageUrl}
+                alt={product.title}
                 className="mb-4 h-48 w-full rounded-md object-cover"
               />
               <p className="text-lg font-semibold">
-                ${product.price.toFixed(2)}
+                P{product.price.toFixed(2)}
               </p>
-              <p className="text-sm text-gray-500">{product.category}</p>
+              {/* <p className="text-sm text-gray-500">{product.category}</p> */}
             </CardContent>
             <CardFooter>
-              <Button onClick={() => addToCart(product.id)} className="w-full">
+              <Button
+                onClick={() => addToCart(product.productId)}
+                className="w-full"
+              >
                 Add to Cart
               </Button>
             </CardFooter>
