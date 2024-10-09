@@ -8,7 +8,6 @@ https://orm.drizzle.team/docs/select
 
 GET /api/category_types/?category_id=9
 
-
 GET /api/category_types/
 
 GET /api/products/
