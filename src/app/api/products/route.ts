@@ -4,7 +4,7 @@ import { categoriesTb, categoryTypesTb, productsTb } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   try {
     const categoryUrl = req.nextUrl.searchParams.get("category_url");
     const typeUrl = req.nextUrl.searchParams.get("type_url");

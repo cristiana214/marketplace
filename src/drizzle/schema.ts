@@ -5,6 +5,9 @@ import {
   varchar,
   int,
   timestamp,
+  text,
+  boolean,
+  date,
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
 
@@ -49,4 +52,20 @@ export const productsTb = mysqlTable("products", {
   date_updated: timestamp("date_updated").default(
     sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`,
   ),
+});
+
+export const userTb = mysqlTable("user", {
+  user_id: serial("user_id").primaryKey(),
+  display_name: varchar("display_name", { length: 255 }).notNull(),
+  username: varchar("username", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  birthday: date("birthday").notNull(),
+  contact: varchar("contact", { length: 20 }).notNull(), // Manual input for phone number
+  about: text("about"), // Optional, can be NULL
+  email: varchar("email", { length: 255 }).notNull(),
+  active: boolean("active").default(true), // Default is active
+  blocked: boolean("blocked").default(false), // Default is not blocked
+  user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
+  date_added: timestamp("date_added").defaultNow().notNull(),
+  date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
 });
