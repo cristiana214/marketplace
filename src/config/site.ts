@@ -1,34 +1,34 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Marketplace",
+  name: "Agri CBR",
   description:
-    "Welcome to NanayNitz Fresh Veggies Farm your one-stop shop for the finest locally grown produce! We offer a wide variety of farm-fresh products straight from our farm. All our products are sustainably grown, ensuring both quality and freshness in every bite. Experience the best nature has to offer, delivered straight to your doorstep.",
+    "Welcome to Agri CBR your one-stop markertplace for the finest locally grown produce! We offer a wide variety of farm-fresh products straight from the farms. All our products are sustainably grown, ensuring both quality and freshness in every bite. Experience the best nature has to offer, delivered straight to your doorstep.",
   mainNav: [
     {
-      title: "Categories",
+      title: "Category",
       href: "/category/",
     },
     {
-      title: "Farm ",
+      title: "Farms",
       href: "/farm/nanay-nitz-fresh-veggies-farm/",
     },
 
     {
-      title: "Products ",
-      href: "/products",
+      title: "Products",
+      href: "/products/",
     },
     {
-      title: "Vegetables",
-      href: "/category/vegetables/",
+      title: "Fruits",
+      href: "/product/fruits/",
     },
     {
-      title: "Banana",
-      href: "/product/banana/",
+      title: "About",
+      href: "/marketplace/about/",
     },
   ],
   links: {
-    twitter: "https://twitter.com/itsicice",
+    twitter: "https://twitter.com/icitsice",
 
     github: "https://github.com/cristiana214/marketplace",
     facebook: "https://www.facebook.com/freshveggiesfarm",
