@@ -8,6 +8,7 @@ import {
   text,
   boolean,
   date,
+  decimal,
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
 
@@ -68,4 +69,24 @@ export const userTb = mysqlTable("user", {
   user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
   date_added: timestamp("date_added").defaultNow().notNull(),
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
+});
+
+export const ordersTable = mysqlTable("orders", {
+  order_id: serial("order_id").primaryKey(),
+  message_for_seller: text("message_for_seller").default(""), // Message for seller (optional, default empty string)
+  current_status: text("current_status").notNull(), // Current status of the order
+  current_status_comments: text("current_status_comments").default(""), // Comments on current status (optional)
+  address_id: int("address_id").notNull(), // Foreign key to user's address table
+  user_id: int("seller_id")
+    .references(() => userTb.user_id)
+    .notNull(), // Foreign key to the user table
+  seller_id: int("seller_id")
+    .references(() => userTb.user_id)
+    .notNull(), // Foreign key to seller/farmer (user_type = 2)
+  total_amount: decimal("total_amount").notNull(), // Total amount in PHP (up to 10 digits, 2 decimal places)
+  is_completed: boolean("is_completed").default(false), // 1 = true, 0 = false (default is false)
+  active: boolean("active").default(true), // Order is active by default
+  date_completed: timestamp("date_completed"), // Date order was completed (nullable)
+  date_added: timestamp("date_added").defaultNow().notNull(), // Date order was added (automatically set)
+  date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(), // Tracks changes and updates automatically
 });
