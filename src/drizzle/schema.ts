@@ -71,12 +71,28 @@ export const userTb = mysqlTable("user", {
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
 });
 
-export const ordersTable = mysqlTable("orders", {
+export const userAddressesTb = mysqlTable("user_addresses", {
+  address_id: serial("address_id").primaryKey(),
+  user_id: int("user_id")
+    .references(() => userTb.user_id)
+    .notNull(), // Foreign key to the user table
+  street_address: varchar("street_address", { length: 255 }).notNull(), // Street address (max length 255)
+  city: varchar("city", { length: 100 }).notNull(), // City (max length 100)
+  state: varchar("state", { length: 100 }).notNull(), // State/Province (max length 100)
+  zip_code: varchar("zip_code", { length: 20 }).notNull(), // Zip code (max length 20)
+  country: varchar("country", { length: 100 }).notNull(), // Country (max length 100)
+  date_added: timestamp("date_added").defaultNow().notNull(), // Timestamp when the address was added
+  date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(), // Automatically updated when the address is modified
+});
+
+export const ordersTb = mysqlTable("orders", {
   order_id: serial("order_id").primaryKey(),
   message_for_seller: text("message_for_seller").default(""), // Message for seller (optional, default empty string)
   current_status: text("current_status").notNull(), // Current status of the order
   current_status_comments: text("current_status_comments").default(""), // Comments on current status (optional)
-  address_id: int("address_id").notNull(), // Foreign key to user's address table
+  address_id: int("address_id")
+    .references(() => userAddressesTb.address_id)
+    .notNull(), // Foreign key to user's address table
   user_id: int("seller_id")
     .references(() => userTb.user_id)
     .notNull(), // Foreign key to the user table
