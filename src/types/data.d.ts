@@ -11,9 +11,7 @@ export type Product = {
   images: string[];
 };
 
-export type Products = {
-  products?: Product[];
-};
+export type Products = Product[];
 
 // export type Farmer = {
 //   farmerId: number;

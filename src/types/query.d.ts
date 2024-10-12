@@ -7,7 +7,8 @@ export type ProductsQueryParams = {
   limit?: number;
 };
 
-export type ProductsApiResponse = Products & {
+export type ProductsApiResponse = {
+  products: Products;
   totalCount?: number;
   totalPages?: number;
 };

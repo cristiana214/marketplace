@@ -9,8 +9,8 @@ import { SiteHeader } from "@/components/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 
-import ReactQueryProvider from "@/utils/providers/react-query-providers";
-import { NextAuthProvider } from "@/utils/providers/session-providers";
+import ReactQueryProvider from "@/lib/providers/react-query-providers";
+import { NextAuthProvider } from "@/lib/providers/session-providers";
 import Script from "next/script";
 
 export const viewport: Viewport = {
