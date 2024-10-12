@@ -19,7 +19,7 @@ const images = [
 const products: Products = [
   {
     productId: 1,
-    title: "Rice",
+    name: "Rice",
     url: "rice",
     description:
       "Premiums quality rice harvested from the finest fields. Available in different varieties such as Jasmine, Sinandomeng, and Dinorado. Perfect for daily meals or special occasions, known for its fluffy texture and delicious taste.",
@@ -32,7 +32,7 @@ const products: Products = [
   },
   {
     productId: 2,
-    title: "Coconut",
+    name: "Coconut",
     url: "coconut",
     description:
       "Fresh coconuts, perfect for making coconut milk, oil, or coconut water. These coconuts are organically grown, and each one is handpicked to ensure quality. Ideal for both home consumption and commercial use.",
@@ -45,7 +45,7 @@ const products: Products = [
   },
   {
     productId: 3,
-    title: "Bananas (Cavendish)",
+    name: "Bananas (Cavendish)",
     url: "bananas",
     description:
       "Top-grade Cavendish bananas, known for their sweet, firm texture and rich potassium content. Great for snacks, smoothies, or baking. Available in different sizes and packaging options for export and local markets.",
@@ -58,7 +58,7 @@ const products: Products = [
   },
   {
     productId: 4,
-    title: "Sweet Corn",
+    name: "Sweet Corn",
     url: "sweet-corn",
     description:
       "High-quality yellow and white corn, versatile for various uses: from human consumption to livestock feed. Ideal for corn meals, snacks, or flour production. Available in bulk or small quantities.",
@@ -71,7 +71,7 @@ const products: Products = [
   },
   {
     productId: 5,
-    title: "Sugarcane",
+    name: "Sugarcane",
     url: "sugarcane",
     description:
       "Fresh sugarcane, ideal for sugar production, molasses, or raw consumption. Harvested at peak sweetness, ensuring high sugar yield for industrial or artisanal processing.",
@@ -84,7 +84,7 @@ const products: Products = [
   },
   {
     productId: 6,
-    title: "Mango (Carabao)",
+    name: "Mango (Carabao)",
     url: "mango",
     description:
       "Known for its distinct sweetness, Carabao mangoes are perfect for fresh consumption, desserts, or dried products. Available in bulk for both local and export markets. Each mango is handpicked to guarantee superior quality and ripeness.",
@@ -97,7 +97,7 @@ const products: Products = [
   },
   {
     productId: 7,
-    title: "Pineapple",
+    name: "Pineapple",
     url: "pineapple",
     description:
       "Sweet, juicy pineapples ideal for fresh consumption or canning, with a naturally vibrant flavor. Available in bulk for both domestic and international buyers. Perfect for salads, juices, or as a snack.",

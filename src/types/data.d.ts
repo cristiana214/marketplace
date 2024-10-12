@@ -1,7 +1,7 @@
 // one product
 export type Product = {
   productId: number;
-  title: string;
+  name: string;
   url: string;
   price: number;
   unit: string;

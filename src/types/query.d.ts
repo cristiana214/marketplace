@@ -1,4 +1,4 @@
-import type { Products } from "@/types/data";
+import type { Product } from "@/types/data";
 
 export type ProductsQueryParams = {
   categoryUrl?: string;
@@ -8,7 +8,7 @@ export type ProductsQueryParams = {
 };
 
 export type ProductsApiResponse = {
-  products: Products;
+  products: Product[];
   totalCount?: number;
   totalPages?: number;
 };
