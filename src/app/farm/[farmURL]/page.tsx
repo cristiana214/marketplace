@@ -70,7 +70,7 @@ export default function FarmerPage(): JSX.Element {
             </TabsList>
             <TabsContent value="products">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {products.map((product) => (
+                {products?.products?.map((product) => (
                   <Card key={product.productId}>
                     <CardContent className="p-4">
                       <Image

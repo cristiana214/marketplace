@@ -11,6 +11,10 @@ export type Product = {
   images: string[];
 };
 
+export type Products = {
+  products?: Product[];
+};
+
 // export type Farmer = {
 //   farmerId: number;
 //   name: string;
@@ -55,9 +59,6 @@ type NutritionFacts = {
   totalCarbohydrate: string;
   protein: string;
 };
-
-// array of product
-export type Products = Product[];
 
 export type ProductFarmer = Product & {
   farmer: Farmer;
