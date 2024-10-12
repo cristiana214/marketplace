@@ -3,106 +3,62 @@ import { eq } from "drizzle-orm";
 import {
   categoriesTb,
   categoryTypesTb,
+  productImagesTb,
   productsTb,
   productUnitTb,
 } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+const getBaseQuery = () =>
+  // select all products
+  db
+    .select({
+      productId: productsTb.product_id,
+      name: productsTb.name,
+      // url: productsTb.url,
+      price: productsTb.price,
+      unitDisplayName: productUnitTb.display_name,
+      quantity: productsTb.quantity_available,
+      description: productsTb.description,
+      typeId: productsTb.type_id,
+      imageUrl: productImagesTb.image,
+    })
+    .from(productsTb)
+    .innerJoin(categoryTypesTb, eq(productsTb.type_id, categoryTypesTb.type_id))
+    .innerJoin(
+      categoriesTb,
+      eq(categoriesTb.category_id, categoryTypesTb.category_id),
+    )
+    .innerJoin(
+      productUnitTb,
+      eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
+    )
+    .leftJoin(
+      productImagesTb,
+      eq(productsTb.product_id, productImagesTb.product_id),
+    );
 export async function GET(req: NextRequest) {
   try {
     const categoryUrl = req.nextUrl.searchParams.get("categoryUrl");
     const categoryTypeUrl = req.nextUrl.searchParams.get("categoryTypeUrl");
-
-    let products;
+    let productsQuery;
     if (categoryUrl) {
       // get all products by category_url
-      products = await db
-        .select({
-          productId: productsTb.product_id,
-          name: productsTb.name,
-          // url: productsTb.url,
-          price: productsTb.price,
-          unitDisplayName: productUnitTb.display_name,
-          quantity: productsTb.quantity_available,
-          description: productsTb.description,
-          typeId: productsTb.type_id,
-          // imageUrl: productsTb.image;
-          // images: string[];
-        })
-        .from(productsTb)
-        .innerJoin(
-          categoryTypesTb,
-          eq(productsTb.type_id, categoryTypesTb.type_id),
-        )
-        .innerJoin(
-          categoriesTb,
-          eq(categoriesTb.category_id, categoryTypesTb.category_id),
-        )
-        .innerJoin(
-          productUnitTb,
-          eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
-        )
-        .where(eq(categoriesTb.url, String(categoryUrl)));
+      productsQuery = getBaseQuery()
+        .where(eq(categoriesTb.url, String(categoryUrl)))
+        .groupBy(productsTb.product_id);
     } else if (categoryTypeUrl) {
       // get all products by type_url
-      products = await db
-        .select({
-          productId: productsTb.product_id,
-          name: productsTb.name,
-          // url: productsTb.url,
-          price: productsTb.price,
-          unitDisplayName: productUnitTb.display_name,
-          quantity: productsTb.quantity_available,
-          description: productsTb.description,
-          typeId: productsTb.type_id,
-          // imageUrl: productsTb.image;
-          // images: string[];
-        })
-        .from(productsTb)
-        .innerJoin(
-          categoryTypesTb,
-          eq(productsTb.type_id, categoryTypesTb.type_id),
-        )
-        .innerJoin(
-          categoriesTb,
-          eq(categoriesTb.category_id, categoryTypesTb.category_id),
-        )
-        .innerJoin(
-          productUnitTb,
-          eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
-        )
-        .where(eq(categoryTypesTb.url, String(categoryTypeUrl)));
+      productsQuery = getBaseQuery()
+        .where(eq(categoryTypesTb.url, String(categoryTypeUrl)))
+        .groupBy(productsTb.product_id);
     } else {
-      // select all products
-      // /api/products/
-      products = await db
-        .select({
-          productId: productsTb.product_id,
-          name: productsTb.name,
-          // url: productsTb.url,
-          price: productsTb.price,
-          unitDisplayName: productUnitTb.display_name,
-          quantity: productsTb.quantity_available,
-          description: productsTb.description,
-          typeId: productsTb.type_id,
-          // imageUrl: productsTb.image;
-          // images: string[];
-        })
-        .from(productsTb)
-        .innerJoin(
-          categoryTypesTb,
-          eq(productsTb.type_id, categoryTypesTb.type_id),
-        )
-        .innerJoin(
-          categoriesTb,
-          eq(categoriesTb.category_id, categoryTypesTb.category_id),
-        )
-        .innerJoin(
-          productUnitTb,
-          eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
-        );
+      // get all products by type_url
+      productsQuery = getBaseQuery().groupBy(productsTb.product_id);
     }
+    // Execute the query
+    const products = await productsQuery;
 
     return NextResponse.json({ products });
   } catch (error) {

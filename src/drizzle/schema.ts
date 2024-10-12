@@ -56,6 +56,10 @@ export const productsTb = mysqlTable("products", {
     sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`,
   ),
 });
+export const productImagesTb = mysqlTable("product_image", {
+  product_id: int("product_id").references(() => productsTb.product_id),
+  image: varchar("image", "255").notNull(),
+});
 
 export const userTb = mysqlTable("user", {
   user_id: serial("user_id").primaryKey(),

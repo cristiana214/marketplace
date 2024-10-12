@@ -45,7 +45,7 @@ const ListProducts = ({ url }: ListProductsProps) => {
                 {product?.description || ""}
               </p>
               <p className="font-medium">
-                P{product.price.toFixed(2)} / {product.unit}
+                P{product.price.toFixed(2)} / {product.unitDisplayName}
               </p>
             </CardContent>
           </Card>

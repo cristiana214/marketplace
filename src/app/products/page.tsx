@@ -15,6 +15,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 import { ChevronDown } from "lucide-react";
 import { useCartStore } from "@/lib/store/useCartStore";
@@ -79,18 +80,26 @@ export default function FarmMarketplace() {
         {filteredProducts?.map((product) => (
           <Card key={product.productId}>
             <CardHeader>
-              <CardTitle>{product.name}</CardTitle>
+              <CardTitle>
+                <Link href={`/product/${product.productId}/`}>
+                  {product.name}{" "}
+                </Link>
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="mb-4 h-48 w-full rounded-md object-cover"
-              />
+              <Link href={`/product/${product.productId}/`}>
+                <img
+                  src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product.imageUrl}`}
+                  alt={product.name}
+                  className="mb-4 h-72 w-full rounded-md object-cover"
+                />
+              </Link>
               <p className="text-lg font-semibold">
                 P{product?.price?.toFixed(2)}/{product.unitDisplayName}
               </p>
-              <p className="text-sm text-gray-500">{product.description}</p>
+              <p className="text-sm text-gray-500">
+                {product.description} id={product.productId}
+              </p>
             </CardContent>
             <CardFooter>
               <Button
