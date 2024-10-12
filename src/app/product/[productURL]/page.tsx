@@ -20,7 +20,7 @@ export default function ItemPage() {
   const [newComment, setNewComment] = useState("");
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${product.title} to cart`);
+    console.log(`Added ${quantity} ${product.name} to cart`);
   };
 
   const handleSubmitComment = (e: React.FormEvent) => {
@@ -34,7 +34,7 @@ export default function ItemPage() {
         <div className="relative mb-4 aspect-square">
           <Image
             src={product?.images[activeImage]}
-            alt={product.title}
+            alt={product.name}
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
@@ -52,7 +52,7 @@ export default function ItemPage() {
             >
               <Image
                 src={image}
-                alt={`${productFarmer.title} thumbnail ${index + 1}`}
+                alt={`${productFarmer.name} thumbnail ${index + 1}`}
                 layout="fill"
                 objectFit="cover"
               />
@@ -98,7 +98,7 @@ export default function ItemPage() {
         </div>
       </GridItemEight>
       <GridItemFour>
-        <h1 className="mb-4 text-3xl font-bold">{product.title}</h1>
+        <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
         <p className="mb-4 text-2xl font-semibold">
           P{product.price.toFixed(2)} / {product.unit}
         </p>

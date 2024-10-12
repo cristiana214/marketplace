@@ -17,7 +17,7 @@ const fetchProducts = async (
   queryParams: ProductsQueryParams, // accepts query parameters of type ProductsQueryParams
 ): Promise<ProductsApiResponse> => {
   // Returns a Promise of type ProductsApiResponse
-  const response = await axios.get(`/api/products/`, {
+  const response: ProductsApiResponse = await axios.get(`/api/products/`, {
     // axios GET request to fetch products
     params: {
       categoryUrl: queryParams?.categoryUrl, // Category URL filter
@@ -26,7 +26,7 @@ const fetchProducts = async (
       limit: queryParams?.limit, // Limit of results per page
     },
   });
-  return response.data; // Return the data part of the response
+  return response;
 };
 
 /**

@@ -47,7 +47,18 @@ export async function GET(req: NextRequest) {
     } else if (categoryTypeUrl) {
       // get all products by type_url
       products = await db
-        .select()
+        .select({
+          productId: productsTb.product_id,
+          name: productsTb.name,
+          // url: productsTb.url,
+          price: productsTb.price,
+          unitDisplayName: productUnitTb.display_name,
+          quantity: productsTb.quantity_available,
+          description: productsTb.description,
+          typeId: productsTb.type_id,
+          // imageUrl: productsTb.image;
+          // images: string[];
+        })
         .from(productsTb)
         .innerJoin(
           categoryTypesTb,
@@ -66,7 +77,18 @@ export async function GET(req: NextRequest) {
       // select all products
       // /api/products/
       products = await db
-        .select()
+        .select({
+          productId: productsTb.product_id,
+          name: productsTb.name,
+          // url: productsTb.url,
+          price: productsTb.price,
+          unitDisplayName: productUnitTb.display_name,
+          quantity: productsTb.quantity_available,
+          description: productsTb.description,
+          typeId: productsTb.type_id,
+          // imageUrl: productsTb.image;
+          // images: string[];
+        })
         .from(productsTb)
         .innerJoin(
           categoryTypesTb,

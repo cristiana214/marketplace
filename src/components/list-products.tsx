@@ -1,7 +1,10 @@
+"use client";
+
 import { useProducts } from "@/hooks/query/useProducts";
 import { categories } from "@/lib/data/farm";
-import { generateUrl } from "@/lib/helper/generate-url";
+
 import Link from "next/link";
+import { Card, CardContent } from "./ui/card";
 
 type ListProductsProps = {
   url: string;
@@ -20,18 +23,34 @@ const ListProducts = ({ url }: ListProductsProps) => {
       <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100">
         {category?.name} Products
       </h2>
-      <ul className="space-y-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {data?.products?.map((product, index) => (
-          <li
-            key={index}
-            className="cursor-pointer rounded-md bg-green-200 p-2 shadow transition duration-200 ease-in-out hover:bg-green-500 hover:text-white dark:bg-gray-700 dark:hover:bg-slate-400 dark:hover:text-white"
-          >
-            <Link href={`/product/${generateUrl(product.url)}/`}>
-              {product.name}
-            </Link>
-          </li>
+          // <li
+          //   key={product.productId}
+          //   className="cursor-pointer rounded-md bg-green-200 p-2 shadow transition duration-200 ease-in-out hover:bg-green-500 hover:text-white dark:bg-gray-700 dark:hover:bg-slate-400 dark:hover:text-white"
+          // >
+          //   <Link href={`/product/${product.productId}/`}>{product.name}</Link>
+          // </li>
+          <Card key={product.productId}>
+            <CardContent className="p-4">
+              {/* <Image
+                src={product.imageUrl}
+                alt={product.name}
+                width={400}
+                height={200}
+                className="mb-2 rounded-md"
+              /> */}
+              <h3 className="font-semibold">{product.name}</h3>
+              <p className="text-sm text-gray-600">
+                {product?.description || ""}
+              </p>
+              <p className="font-medium">
+                P{product.price.toFixed(2)} / {product.unit}
+              </p>
+            </CardContent>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

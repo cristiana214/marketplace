@@ -27,7 +27,7 @@ const products: Products = [
       "https://images.immediate.co.uk/production/volatile/sites/30/2013/05/rice-a941d59.jpg?resize=1200%2C630",
     price: 78,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
   },
   {
@@ -40,7 +40,7 @@ const products: Products = [
       "https://images.squarespace-cdn.com/content/v1/5c1074accc8fed6a4251da8f/4882b78a-b5d4-47a1-a9a0-d05a4fdbd724/shutterstock_490174816.jpg",
     price: 345,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
   },
   {
@@ -53,7 +53,7 @@ const products: Products = [
       "https://images.theconversation.com/files/142716/original/image-20161021-1763-13xoceb.jpg?ixlib=rb-4.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
     price: 23,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
   },
   {
@@ -66,7 +66,7 @@ const products: Products = [
       "https://www.allthatgrows.in/cdn/shop/articles/Optimized-Feat_image-Sweetcorn_1100x1100.jpg?v=1680067377",
     price: 23,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
   },
   {
@@ -79,7 +79,7 @@ const products: Products = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTgTGoqQ6dgpPwy_6e6MOovFw61H8KouS_Yg&s",
     price: 23,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
   },
   {
@@ -91,7 +91,7 @@ const products: Products = [
     imageUrl:
       "https://www.shutterstock.com/image-photo/ripe-native-carabao-mangoes-known-600nw-2052644825.jpg",
     price: 23,
-    unit: "kl",
+    unitDisplayName: "kl",
     quantity: 24,
     images,
   },
@@ -103,7 +103,7 @@ const products: Products = [
       "Sweet, juicy pineapples ideal for fresh consumption or canning, with a naturally vibrant flavor. Available in bulk for both domestic and international buyers. Perfect for salads, juices, or as a snack.",
     imageUrl: "https://cdn.britannica.com/54/119354-050-FA32210A/pineapple.jpg",
     price: 23,
-    unit: "kl",
+    unitDisplayName: "kl",
     quantity: 24,
     images,
   },
