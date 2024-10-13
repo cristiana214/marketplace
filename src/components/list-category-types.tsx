@@ -20,7 +20,7 @@ const ListCategoryTypes = ({ url }: Props) => {
           <Link href={`/sub-category/${generateUrl(types.typeUrl)}`}>
             <Button
               key={index}
-              variant="default"
+              variant="outline"
               // onClick={() => setSelectedCategory(category)}
             >
               {types.typeName}

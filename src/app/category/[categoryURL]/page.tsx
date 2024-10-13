@@ -8,6 +8,7 @@ import {
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import { categories } from "@/lib/data/farm";
+import ListCategoryTypes from "@/components/list-category-types";
 
 export const metadata: Metadata = {
   title: {
@@ -36,6 +37,7 @@ export default function CategoryPage({
         <h1 className="mb-8 text-4xl font-bold">
           {specificCategory?.categoryName}
         </h1>
+        <ListCategoryTypes url={params?.categoryURL} />
         <ListProducts url={params?.categoryURL} />
       </GridItemTwelve>
     </GridLayout>
