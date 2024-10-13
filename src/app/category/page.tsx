@@ -1,6 +1,7 @@
-import ListCategory from "@/components/list-category";
+import ListCategory from "@/components/list-categories";
 import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 import { siteConfig } from "@/config/site";
+import { url } from "inspector";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,15 +1,32 @@
+export type Category = {
+  categoryId: number;
+  categoryName: string;
+  categoryUrl: string;
+  items?: CategoryItem[]; // array of category items
+};
+type CategoryType = {
+  typeId: number;
+  typeName: string;
+  typeUrl: string;
+};
+
 // one product
 export type Product = {
   productId: number;
-  title: string;
+  name: string;
   url: string;
   price: number;
-  unit: string;
+  unitDisplayName: string;
   quantity: number;
   description: string;
   imageUrl: string;
   images: string[];
-};
+  typeName: string;
+  typeUrl: string;
+} & Category &
+  CategoryType;
+
+export type Products = Product[];
 
 // export type Farmer = {
 //   farmerId: number;
@@ -41,12 +58,6 @@ export type CategoryItem = {
   url: string;
 };
 
-export type Category = {
-  name: string;
-  url: string;
-  items: CategoryItem[]; // array of category items
-};
-
 type NutritionFacts = {
   servingSize: string;
   calories: number;
@@ -55,9 +66,6 @@ type NutritionFacts = {
   totalCarbohydrate: string;
   protein: string;
 };
-
-// array of product
-export type Products = Product[];
 
 export type ProductFarmer = Product & {
   farmer: Farmer;

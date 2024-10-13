@@ -47,13 +47,13 @@ const CartTotal = () => {
                   <div className="flex items-center space-x-4">
                     <img
                       src={product.imageUrl}
-                      alt={product.title}
+                      alt={product.name}
                       className="size-16 rounded object-cover"
                     />
                     <div>
-                      <h3 className="font-semibold">{product.title}</h3>
+                      <h3 className="font-semibold">{product.name}</h3>
                       <p className="text-sm text-gray-500">
-                        P{product.price.toFixed(2)}/{product.unit}
+                        P{product.price.toFixed(2)}/{product.unitDisplayName}
                       </p>
                     </div>
                   </div>

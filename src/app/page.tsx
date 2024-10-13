@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
 
 import ListCard from "@/components/list-card";
+import ListCategories from "@/components/list-categories";
 
 export default function IndexPage() {
   return (
@@ -45,6 +46,7 @@ export default function IndexPage() {
           </Button>
         </Link>
       </div>
+      <ListCategories />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <ListCard />
       </div>

@@ -2,10 +2,17 @@ import type { ProductFarmer } from "@/types/data";
 
 const productFarmer: ProductFarmer = {
   productId: 1,
-  title: "Organic Heirloom Tomatoes",
+  name: "Organic Heirloom Tomatoes",
   price: 4.99,
-  unit: "kl",
+  unitDisplayName: "kl",
   url: "tomatoes-1",
+  quantity: 100,
+  typeId: 1,
+  typeName: "Tomato",
+  typeUrl: "tomato",
+  categoryId: 1,
+  categoryName: "Fruits",
+  categoryUrl: "fruits",
   imageUrl:
     "https://images.squarespace-cdn.com/content/v1/5c1074accc8fed6a4251da8f/4882b78a-b5d4-47a1-a9a0-d05a4fdbd724/shutterstock_490174816.jpg",
   description:

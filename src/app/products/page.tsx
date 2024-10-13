@@ -1,14 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -17,20 +11,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { ChevronDown } from "lucide-react";
-import { useCartStore } from "@/lib/store/useCartStore";
-import { products } from "@/lib/data/farm";
+// import { products } from "@/lib/data/farm";
 import CartTotal from "@/components/cart-total";
+import ListProducts from "@/components/list-products";
+import ListCategories from "@/components/list-categories";
 
 export default function FarmMarketplace() {
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
-  const { setProducts, addToCart } = useCartStore();
 
+  // const filteredProducts = data?.products;
   // set products when component mounts
-  useEffect(() => {
-    setProducts(products);
-  }, [products, setProducts]);
+  // useEffect(() => {
+  //   if (data?.products) setProducts(data?.products);
+  // }, [data?.products, setProducts]);
 
-  const filteredProducts = products;
   // const filteredProducts =
   //   categoryFilter.length > 0
   //     ? products.filter((product) => categoryFilter.includes(product.category))
@@ -70,34 +64,8 @@ export default function FarmMarketplace() {
           <CartTotal />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProducts.map((product) => (
-          <Card key={product.productId}>
-            <CardHeader>
-              <CardTitle>{product.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <img
-                src={product.imageUrl}
-                alt={product.title}
-                className="mb-4 h-48 w-full rounded-md object-cover"
-              />
-              <p className="text-lg font-semibold">
-                P{product.price.toFixed(2)}/{product.unit}
-              </p>
-              <p className="text-sm text-gray-500">{product.description}</p>
-            </CardContent>
-            <CardFooter>
-              <Button
-                onClick={() => addToCart(product.productId)}
-                className="w-full"
-              >
-                Add to Cart
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+      <ListCategories />
+      <ListProducts />
     </div>
   );
 }
