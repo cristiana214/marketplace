@@ -6,9 +6,17 @@ import type {
   CategoryTypesQueryParams,
 } from "@/types/query";
 
-const fetchCategoryTypes = async (): Promise<CategoryTypesApiResponse> => {
-  const response: CategoryTypesApiResponse =
-    await axios.get(`/api/category_types/`);
+const fetchCategoryTypes = async (
+  queryParams: CategoryTypesQueryParams,
+): Promise<CategoryTypesApiResponse> => {
+  const response: CategoryTypesApiResponse = await axios.get(
+    `/api/category_types/`,
+    {
+      params: {
+        categoryUrl: queryParams?.categoryUrl, // Category URL filter
+      },
+    },
+  );
   console.log(response);
   return response;
 };
@@ -19,5 +27,5 @@ const fetchCategoryTypes = async (): Promise<CategoryTypesApiResponse> => {
 export const useCategoryTypes = (queryParams: CategoryTypesQueryParams) =>
   useQuery<CategoryTypesApiResponse, Error>({
     queryKey: ["categoryTypes", queryParams],
-    queryFn: () => fetchCategoryTypes(), // query function that fetches categories
+    queryFn: () => fetchCategoryTypes(queryParams), // query function that fetches categories
   });

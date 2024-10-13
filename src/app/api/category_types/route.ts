@@ -1,28 +1,44 @@
 import { db } from "@/drizzle/db";
 import { eq } from "drizzle-orm";
-import { categoryTypesTb } from "@/drizzle/schema";
+import { categoriesTb, categoryTypesTb } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const categoryId = req.nextUrl.searchParams.get("category_id");
+    const categoryUrl = req.nextUrl.searchParams.get("categoryUrl");
 
-    let categories;
-    if (categoryId) {
-      // select by category_id
-      // api/category_types/?category_id=3
-      categories = await db
-        .select()
+    let categoryTypes;
+    if (categoryUrl) {
+      // select by category_url
+      // api/category_types/?categoryUrl=fruits
+      categoryTypes = await db
+        .select({
+          typeId: categoryTypesTb.type_id,
+          typeName: categoryTypesTb.name,
+          typeUrl: categoryTypesTb.url,
+          // categoryName: categoriesTb.name,
+          // categoryUrl: categoriesTb.url,
+        })
         .from(categoryTypesTb)
-        .where(eq(categoryTypesTb.category_id, Number(categoryId)));
+        .innerJoin(
+          categoriesTb,
+          eq(categoriesTb.category_id, categoryTypesTb.category_id),
+        )
+        .where(eq(categoriesTb.url, String(categoryUrl)));
     } else {
       // select all
       // /api/category_types/
-      categories = await db.select().from(categoryTypesTb);
+      categoryTypes = await db
+        .select({
+          typeId: categoryTypesTb.type_id,
+          typeName: categoryTypesTb.name,
+          typeUrl: categoryTypesTb.url,
+        })
+        .from(categoryTypesTb);
     }
 
-    return NextResponse.json(categories);
+    return NextResponse.json({ categoryTypes });
   } catch (error) {
     return NextResponse.json({
       message: "Error fetching category types",
