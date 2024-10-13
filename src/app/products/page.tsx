@@ -1,38 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 
 import { ChevronDown } from "lucide-react";
-import { useCartStore } from "@/lib/store/useCartStore";
 // import { products } from "@/lib/data/farm";
 import CartTotal from "@/components/cart-total";
-import { useProducts } from "@/hooks/query/useProducts";
-import { Badge } from "@/components/ui/badge";
+import ListProducts from "@/components/list-products";
+import ListCategories from "@/components/list-categories";
 
 export default function FarmMarketplace() {
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
-  const { setProducts, addToCart } = useCartStore();
-  const { data, isLoading, error } = useProducts({});
-  // todo create loading states
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading products</div>;
 
-  const filteredProducts = data?.products;
+  // const filteredProducts = data?.products;
   // set products when component mounts
   // useEffect(() => {
   //   if (data?.products) setProducts(data?.products);
@@ -77,49 +64,8 @@ export default function FarmMarketplace() {
           <CartTotal />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProducts?.map((product) => (
-          <Card key={product.productId}>
-            <CardHeader>
-              <CardTitle>
-                <Link href={`/product/${product.productId}/`}>
-                  {product.name}{" "}
-                </Link>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Link href={`/product/${product.productId}/`}>
-                <img
-                  src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product.imageUrl}`}
-                  alt={product.name}
-                  className="mb-4 h-72 w-full rounded-md object-cover"
-                />
-              </Link>
-              <p className="text-lg font-semibold">
-                P{product?.price?.toFixed(2)}/{product.unitDisplayName}
-              </p>
-              <p className="text-sm text-gray-500">
-                {product.description} id={product.productId}
-              </p>
-
-              <Link href={`/sub-category/${product.typeUrl}/`}>
-                <Badge variant="secondary">{product.typeName}</Badge>
-              </Link>
-              <Link href={`/category/${product.categoryUrl}/`}>
-                <Badge variant="outline">{product.categoryName}</Badge>
-              </Link>
-            </CardContent>
-            <CardFooter>
-              <Button
-                onClick={() => addToCart(product.productId)}
-                className="w-full"
-              >
-                Add to Cart
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+      <ListCategories />
+      <ListProducts />
     </div>
   );
 }

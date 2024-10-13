@@ -1,6 +1,7 @@
-import ListCategory from "@/components/list-category";
+import ListCategory from "@/components/list-categories";
 import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 import { siteConfig } from "@/config/site";
+import { url } from "inspector";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function CategoryPage() {
         possimus veritatis cupiditate a vitae nisi est dolorum, quaerat iste
         tempore accusamus voluptate! Dolore nam vel, totam quaerat sed
         doloremque?
-        <ListCategory url="vegetables" />
+        <ListCategory />
       </GridItemEight>
       <GridItemFour>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex facere,
