@@ -3,17 +3,18 @@
 import { useProducts } from "@/hooks/query/useProducts";
 import { categories } from "@/lib/data/farm";
 
-import Link from "next/link";
 import { Card, CardContent } from "./ui/card";
 
 type ListProductsProps = {
   url: string;
 };
 const ListProducts = ({ url }: ListProductsProps) => {
-  const category = categories.find((cat) => cat.url === url);
+  // const category = categories.find((cat) => cat.url === url);
   const { data, isLoading, error } = useProducts({
-    categoryUrl: category?.url,
+    categoryUrl: url,
   });
+  // const searchParams = useSearchParams()
+  // const search = searchParams.get('search');
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
@@ -21,7 +22,7 @@ const ListProducts = ({ url }: ListProductsProps) => {
   return (
     <div className="mx-auto mt-6 max-w-md rounded-sm bg-gray-100 p-6 shadow-md dark:bg-gray-800">
       <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100">
-        {category?.name} Products
+        {data?.products[0]?.categoryName} Products
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {data?.products?.map((product, index) => (

@@ -1,3 +1,15 @@
+export type Category = {
+  categoryId: number;
+  categoryName: string;
+  categoryUrl: string;
+  items?: CategoryItem[]; // array of category items
+};
+type CategoryType = {
+  typeId: number;
+  typeName: string;
+  typeUrl: string;
+};
+
 // one product
 export type Product = {
   productId: number;
@@ -9,7 +21,10 @@ export type Product = {
   description: string;
   imageUrl: string;
   images: string[];
-};
+  typeName: string;
+  typeUrl: string;
+} & Category &
+  CategoryType;
 
 export type Products = Product[];
 
@@ -41,12 +56,6 @@ export type Farmer = {
 export type CategoryItem = {
   name: string;
   url: string;
-};
-
-export type Category = {
-  name: string;
-  url: string;
-  items: CategoryItem[]; // array of category items
 };
 
 type NutritionFacts = {

@@ -27,13 +27,15 @@ export default function CategoryPage({
   params: { categoryURL: string };
 }) {
   const specificCategory = categories.find(
-    (category) => category.url === params.categoryURL,
+    (category) => category.categoryUrl === params.categoryURL,
   );
 
   return (
     <GridLayout>
       <GridItemTwelve>
-        <h1 className="mb-8 text-4xl font-bold">{specificCategory?.name} </h1>
+        <h1 className="mb-8 text-4xl font-bold">
+          {specificCategory?.categoryName}
+        </h1>
         <ListProducts url={params?.categoryURL} />
       </GridItemTwelve>
     </GridLayout>

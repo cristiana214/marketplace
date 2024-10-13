@@ -26,7 +26,7 @@ export default function CategoryPage() {
         possimus veritatis cupiditate a vitae nisi est dolorum, quaerat iste
         tempore accusamus voluptate! Dolore nam vel, totam quaerat sed
         doloremque?
-        <ListCategory />
+        <ListCategory url="vegetables" />
       </GridItemEight>
       <GridItemFour>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex facere,

@@ -22,6 +22,10 @@ const getBaseQuery = () =>
       quantity: productsTb.quantity_available,
       description: productsTb.description,
       typeId: productsTb.type_id,
+      categoryName: categoriesTb.name,
+      typeName: categoryTypesTb.name,
+      categoryUrl: categoriesTb.url,
+      typeUrl: categoryTypesTb.url,
       imageUrl: productImagesTb.image,
     })
     .from(productsTb)

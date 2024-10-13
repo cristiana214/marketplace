@@ -16,6 +16,15 @@ const images = [
   "https://images.theconversation.com/files/142716/original/image-20161021-1763-13xoceb.jpg?ixlib=rb-4.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
 ];
 
+const extraInfo = {
+  typeName: "Fruits",
+  typeUrl: "fruits",
+  categoryId: 1,
+  typeId: 1,
+  categoryName: "Fruits",
+  categoryUrl: "dfsdf",
+};
+
 const products: Products = [
   {
     productId: 1,
@@ -28,7 +37,9 @@ const products: Products = [
     price: 78,
     quantity: 24,
     unitDisplayName: "kl",
+
     images,
+    ...extraInfo,
   },
   {
     productId: 2,
@@ -42,6 +53,7 @@ const products: Products = [
     quantity: 24,
     unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 3,
@@ -55,6 +67,7 @@ const products: Products = [
     quantity: 24,
     unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 4,
@@ -68,6 +81,7 @@ const products: Products = [
     quantity: 24,
     unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 5,
@@ -81,6 +95,7 @@ const products: Products = [
     quantity: 24,
     unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 6,
@@ -94,6 +109,7 @@ const products: Products = [
     unitDisplayName: "kl",
     quantity: 24,
     images,
+    ...extraInfo,
   },
   {
     productId: 7,
@@ -106,21 +122,24 @@ const products: Products = [
     unitDisplayName: "kl",
     quantity: 24,
     images,
+    ...extraInfo,
   },
 ];
 
 const categories: Category[] = [
   {
-    name: "Rice",
-    url: "rice",
+    categoryId: 1,
+    categoryName: "Rice",
+    categoryUrl: "rice",
     items: [
       { name: "Corn Rice", url: "corn-rice" },
       { name: "Glutinous Rice", url: "glutinous-rice" },
     ],
   },
   {
-    name: "Fruits",
-    url: "fruits",
+    categoryId: 1,
+    categoryName: "Fruits",
+    categoryUrl: "fruits",
     items: [
       { name: "Marang", url: "marang" },
       { name: "Mangoes", url: "mangoes" },
@@ -133,8 +152,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Legumes",
-    url: "legumes",
+    categoryId: 1,
+    categoryName: "Legumes",
+    categoryUrl: "legumes",
     items: [
       { name: "Peanuts", url: "peanuts" },
       { name: "Mongo", url: "mongo-beans" },
@@ -142,8 +162,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Green Leafy Vegetables",
-    url: "green-leafy-vegetables",
+    categoryId: 1,
+    categoryName: "Green Leafy Vegetables",
+    categoryUrl: "green-leafy-vegetables",
     items: [
       { name: "Alugbate", url: "alugbate" },
       { name: "Kangkong", url: "kangkong" },
@@ -154,8 +175,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Livestocks",
-    url: "livestocks",
+    categoryId: 1,
+    categoryName: "Livestocks",
+    categoryUrl: "livestocks",
     items: [
       { name: "Bisaya Chickens", url: "chickens" },
       { name: "45 days Chicken", url: "45days-chicken" },
@@ -165,8 +187,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Farm Tools",
-    url: "farm-tools",
+    categoryId: 1,
+    categoryName: "Farm Tools",
+    categoryUrl: "farm-tools",
     items: [
       { name: "Hand Tracktor - rotavator", url: "rotavator" },
       { name: "Deep Plows", url: "deep-plows" },
@@ -177,8 +200,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Vegetables",
-    url: "vegetables",
+    categoryId: 1,
+    categoryName: "Vegetables",
+    categoryUrl: "vegetables",
     items: [
       { name: "Sponge gourd/Patola", url: "patola" },
       { name: "Banana heart", url: "banana-heart" },
@@ -191,8 +215,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Herbs and Spices",
-    url: "herbs-and-spices",
+    categoryId: 1,
+    categoryName: "Herbs and Spices",
+    categoryUrl: "herbs-and-spices",
     items: [
       { name: "Oregano", url: "oregano" },
       { name: "Basil", url: "basil" },
@@ -202,8 +227,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Firewood",
-    url: "firewood",
+    categoryId: 1,
+    categoryName: "Firewood",
+    categoryUrl: "firewood",
     items: [
       { name: "Hardwood", url: "hardwood" },
       { name: "Softwood", url: "softwood" },
@@ -212,8 +238,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Tubers and Roots",
-    url: "tubers-and-roots",
+    categoryId: 1,
+    categoryName: "Tubers and Roots",
+    categoryUrl: "tubers-and-roots",
     items: [
       { name: "Sweet Potatoes", url: "sweet-potatoes" },
       { name: "Cassava", url: "cassava" },
@@ -222,8 +249,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Process Products",
-    url: "process-product",
+    categoryId: 1,
+    categoryName: "Process Products",
+    categoryUrl: "process-product",
     items: [
       { name: "Peanut butter", url: "peanut-butter" },
       { name: "Cassava Cake", url: "cassava-cake" },
@@ -235,7 +263,7 @@ const categories: Category[] = [
 const combinedProducts: (Category & { items: (CategoryItem & Product)[] })[] =
   categories.map((category) => ({
     ...category,
-    items: category.items.map((item) => {
+    items: category?.items?.map((item) => {
       const matchingProduct = products.find(
         (product) => product.url === item.url,
       );

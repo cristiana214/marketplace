@@ -100,7 +100,7 @@ export default function ItemPage() {
       <GridItemFour>
         <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
         <p className="mb-4 text-2xl font-semibold">
-          P{product.price.toFixed(2)} / {product.unit}
+          P{product.price.toFixed(2)} / {product.unitDisplayName}
         </p>
         <p className="mb-4">{product.description}</p>
         <div className="mb-4 flex items-center gap-4">

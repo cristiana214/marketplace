@@ -22,12 +22,13 @@ import { useCartStore } from "@/lib/store/useCartStore";
 // import { products } from "@/lib/data/farm";
 import CartTotal from "@/components/cart-total";
 import { useProducts } from "@/hooks/query/useProducts";
+import { Badge } from "@/components/ui/badge";
 
 export default function FarmMarketplace() {
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
   const { setProducts, addToCart } = useCartStore();
   const { data, isLoading, error } = useProducts({});
-
+  // todo create loading states
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
 
@@ -100,6 +101,13 @@ export default function FarmMarketplace() {
               <p className="text-sm text-gray-500">
                 {product.description} id={product.productId}
               </p>
+
+              <Link href={`/sub-category/${product.typeUrl}/`}>
+                <Badge variant="secondary">{product.typeName}</Badge>
+              </Link>
+              <Link href={`/category/${product.categoryUrl}/`}>
+                <Badge variant="outline">{product.categoryName}</Badge>
+              </Link>
             </CardContent>
             <CardFooter>
               <Button
