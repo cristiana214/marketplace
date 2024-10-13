@@ -43,16 +43,22 @@ export const productUnitTb = mysqlTable("product_unit", {
 export const productsTb = mysqlTable("products", {
   product_id: serial("product_id").primaryKey(),
   name: varchar("name", "255").notNull(),
+  // url: varchar("url", "255").notNull(),
   description: varchar("description", "255").notNull(),
   type_id: int("type_id").references(() => categoryTypesTb.type_id),
   unit_type_id: int("unit_type_id").references(
     () => productUnitTb.unit_type_id,
   ),
   price: int("price").notNull(),
+  quantity_available: int("quantity_available").notNull(),
   date_added: timestamp("date_added").default(sql`CURRENT_TIMESTAMP`),
   date_updated: timestamp("date_updated").default(
     sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`,
   ),
+});
+export const productImagesTb = mysqlTable("product_image", {
+  product_id: int("product_id").references(() => productsTb.product_id),
+  image: varchar("image", "255").notNull(),
 });
 
 export const userTb = mysqlTable("user", {

@@ -13,7 +13,7 @@ type CartState = {
   /**
    * products array of Product objects, representing the available products in the store
    */
-  products: Product[];
+  products?: Product[];
   /**
    * function to add a product to the cary
    */
@@ -83,7 +83,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   // pass products array as an argument
   cartTotal: () =>
     get().cart.reduce((total, item) => {
-      const product = get().products.find(
+      const product = get().products?.find(
         (p) => p.productId === item.productId,
       );
       return total + (product ? product.price * item.quantity : 0);

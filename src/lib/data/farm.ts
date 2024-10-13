@@ -16,10 +16,19 @@ const images = [
   "https://images.theconversation.com/files/142716/original/image-20161021-1763-13xoceb.jpg?ixlib=rb-4.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
 ];
 
+const extraInfo = {
+  typeName: "Fruits",
+  typeUrl: "fruits",
+  categoryId: 1,
+  typeId: 1,
+  categoryName: "Fruits",
+  categoryUrl: "dfsdf",
+};
+
 const products: Products = [
   {
     productId: 1,
-    title: "Rice",
+    name: "Rice",
     url: "rice",
     description:
       "Premiums quality rice harvested from the finest fields. Available in different varieties such as Jasmine, Sinandomeng, and Dinorado. Perfect for daily meals or special occasions, known for its fluffy texture and delicious taste.",
@@ -27,12 +36,14 @@ const products: Products = [
       "https://images.immediate.co.uk/production/volatile/sites/30/2013/05/rice-a941d59.jpg?resize=1200%2C630",
     price: 78,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
+
     images,
+    ...extraInfo,
   },
   {
     productId: 2,
-    title: "Coconut",
+    name: "Coconut",
     url: "coconut",
     description:
       "Fresh coconuts, perfect for making coconut milk, oil, or coconut water. These coconuts are organically grown, and each one is handpicked to ensure quality. Ideal for both home consumption and commercial use.",
@@ -40,12 +51,13 @@ const products: Products = [
       "https://images.squarespace-cdn.com/content/v1/5c1074accc8fed6a4251da8f/4882b78a-b5d4-47a1-a9a0-d05a4fdbd724/shutterstock_490174816.jpg",
     price: 345,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 3,
-    title: "Bananas (Cavendish)",
+    name: "Bananas (Cavendish)",
     url: "bananas",
     description:
       "Top-grade Cavendish bananas, known for their sweet, firm texture and rich potassium content. Great for snacks, smoothies, or baking. Available in different sizes and packaging options for export and local markets.",
@@ -53,12 +65,13 @@ const products: Products = [
       "https://images.theconversation.com/files/142716/original/image-20161021-1763-13xoceb.jpg?ixlib=rb-4.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
     price: 23,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 4,
-    title: "Sweet Corn",
+    name: "Sweet Corn",
     url: "sweet-corn",
     description:
       "High-quality yellow and white corn, versatile for various uses: from human consumption to livestock feed. Ideal for corn meals, snacks, or flour production. Available in bulk or small quantities.",
@@ -66,12 +79,13 @@ const products: Products = [
       "https://www.allthatgrows.in/cdn/shop/articles/Optimized-Feat_image-Sweetcorn_1100x1100.jpg?v=1680067377",
     price: 23,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 5,
-    title: "Sugarcane",
+    name: "Sugarcane",
     url: "sugarcane",
     description:
       "Fresh sugarcane, ideal for sugar production, molasses, or raw consumption. Harvested at peak sweetness, ensuring high sugar yield for industrial or artisanal processing.",
@@ -79,48 +93,53 @@ const products: Products = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTgTGoqQ6dgpPwy_6e6MOovFw61H8KouS_Yg&s",
     price: 23,
     quantity: 24,
-    unit: "kl",
+    unitDisplayName: "kl",
     images,
+    ...extraInfo,
   },
   {
     productId: 6,
-    title: "Mango (Carabao)",
+    name: "Mango (Carabao)",
     url: "mango",
     description:
       "Known for its distinct sweetness, Carabao mangoes are perfect for fresh consumption, desserts, or dried products. Available in bulk for both local and export markets. Each mango is handpicked to guarantee superior quality and ripeness.",
     imageUrl:
       "https://www.shutterstock.com/image-photo/ripe-native-carabao-mangoes-known-600nw-2052644825.jpg",
     price: 23,
-    unit: "kl",
+    unitDisplayName: "kl",
     quantity: 24,
     images,
+    ...extraInfo,
   },
   {
     productId: 7,
-    title: "Pineapple",
+    name: "Pineapple",
     url: "pineapple",
     description:
       "Sweet, juicy pineapples ideal for fresh consumption or canning, with a naturally vibrant flavor. Available in bulk for both domestic and international buyers. Perfect for salads, juices, or as a snack.",
     imageUrl: "https://cdn.britannica.com/54/119354-050-FA32210A/pineapple.jpg",
     price: 23,
-    unit: "kl",
+    unitDisplayName: "kl",
     quantity: 24,
     images,
+    ...extraInfo,
   },
 ];
 
 const categories: Category[] = [
   {
-    name: "Rice",
-    url: "rice",
+    categoryId: 1,
+    categoryName: "Rice",
+    categoryUrl: "rice",
     items: [
       { name: "Corn Rice", url: "corn-rice" },
       { name: "Glutinous Rice", url: "glutinous-rice" },
     ],
   },
   {
-    name: "Fruits",
-    url: "fruits",
+    categoryId: 1,
+    categoryName: "Fruits",
+    categoryUrl: "fruits",
     items: [
       { name: "Marang", url: "marang" },
       { name: "Mangoes", url: "mangoes" },
@@ -133,8 +152,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Legumes",
-    url: "legumes",
+    categoryId: 1,
+    categoryName: "Legumes",
+    categoryUrl: "legumes",
     items: [
       { name: "Peanuts", url: "peanuts" },
       { name: "Mongo", url: "mongo-beans" },
@@ -142,8 +162,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Green Leafy Vegetables",
-    url: "green-leafy-vegetables",
+    categoryId: 1,
+    categoryName: "Green Leafy Vegetables",
+    categoryUrl: "green-leafy-vegetables",
     items: [
       { name: "Alugbate", url: "alugbate" },
       { name: "Kangkong", url: "kangkong" },
@@ -154,8 +175,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Livestocks",
-    url: "livestocks",
+    categoryId: 1,
+    categoryName: "Livestocks",
+    categoryUrl: "livestocks",
     items: [
       { name: "Bisaya Chickens", url: "chickens" },
       { name: "45 days Chicken", url: "45days-chicken" },
@@ -165,8 +187,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Farm Tools",
-    url: "farm-tools",
+    categoryId: 1,
+    categoryName: "Farm Tools",
+    categoryUrl: "farm-tools",
     items: [
       { name: "Hand Tracktor - rotavator", url: "rotavator" },
       { name: "Deep Plows", url: "deep-plows" },
@@ -177,8 +200,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Vegetables",
-    url: "vegetables",
+    categoryId: 1,
+    categoryName: "Vegetables",
+    categoryUrl: "vegetables",
     items: [
       { name: "Sponge gourd/Patola", url: "patola" },
       { name: "Banana heart", url: "banana-heart" },
@@ -191,8 +215,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Herbs and Spices",
-    url: "herbs-and-spices",
+    categoryId: 1,
+    categoryName: "Herbs and Spices",
+    categoryUrl: "herbs-and-spices",
     items: [
       { name: "Oregano", url: "oregano" },
       { name: "Basil", url: "basil" },
@@ -202,8 +227,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Firewood",
-    url: "firewood",
+    categoryId: 1,
+    categoryName: "Firewood",
+    categoryUrl: "firewood",
     items: [
       { name: "Hardwood", url: "hardwood" },
       { name: "Softwood", url: "softwood" },
@@ -212,8 +238,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Tubers and Roots",
-    url: "tubers-and-roots",
+    categoryId: 1,
+    categoryName: "Tubers and Roots",
+    categoryUrl: "tubers-and-roots",
     items: [
       { name: "Sweet Potatoes", url: "sweet-potatoes" },
       { name: "Cassava", url: "cassava" },
@@ -222,8 +249,9 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Process Products",
-    url: "process-product",
+    categoryId: 1,
+    categoryName: "Process Products",
+    categoryUrl: "process-product",
     items: [
       { name: "Peanut butter", url: "peanut-butter" },
       { name: "Cassava Cake", url: "cassava-cake" },
@@ -235,7 +263,7 @@ const categories: Category[] = [
 const combinedProducts: (Category & { items: (CategoryItem & Product)[] })[] =
   categories.map((category) => ({
     ...category,
-    items: category.items.map((item) => {
+    items: category?.items?.map((item) => {
       const matchingProduct = products.find(
         (product) => product.url === item.url,
       );
