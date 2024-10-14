@@ -68,15 +68,17 @@ git push
 - prettier
 - husky
 
+
   node 20.14
   npm 10.8
 
-  todo
   - zustand - Small, fast and scalable bearbones state-management solution using simplified flux principle  https://github.com/pmndrs/zustand
   - react-query -  State management for fetching, auto-managed queries and mutations, revalidation https://tanstack.com/query/latest
   - next-auth
-  - shadcn ui reusable components
+  - shadcn ui reusable components 
   - zod validation
+  - mysql or postgresSQL
+  - drizzle typeORM
 
   CONFIG example
   to generate secret use `$ openssl rand -base64 32`
