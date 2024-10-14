@@ -32,14 +32,14 @@ export default function CategoryPage({
   );
 
   return (
-    <GridLayout>
-      <GridItemTwelve>
+    <div className="container mx-auto p-4">
+      <div className="mb-8 flex items-center justify-between">
         <h1 className="mb-8 text-4xl font-bold">
           {specificCategory?.categoryName}
         </h1>
-        <ListCategoryTypes url={params?.categoryURL} />
-        <ListProducts url={params?.categoryURL} />
-      </GridItemTwelve>
-    </GridLayout>
+      </div>
+      <ListCategoryTypes url={params?.categoryURL} />
+      <ListProducts url={params?.categoryURL} />
+    </div>
   );
 }
