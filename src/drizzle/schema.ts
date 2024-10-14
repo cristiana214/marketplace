@@ -12,6 +12,21 @@ import {
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
 
+export const userTb = mysqlTable("user", {
+  user_id: serial("user_id").primaryKey(),
+  display_name: varchar("display_name", { length: 255 }).notNull(),
+  username: varchar("username", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  birthday: date("birthday").notNull(),
+  contact: varchar("contact", { length: 20 }).notNull(), // Manual input for phone number
+  about: text("about"), // Optional, can be NULL
+  email: varchar("email", { length: 255 }).notNull(),
+  active: boolean("active").default(true), // Default is active
+  blocked: boolean("blocked").default(false), // Default is not blocked
+  user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
+  date_added: timestamp("date_added").defaultNow().notNull(),
+  date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
+});
 export const categoriesTb = mysqlTable("categories", {
   category_id: serial("category_id").primaryKey(),
   name: varchar("name", "255").notNull(),
@@ -46,6 +61,7 @@ export const productsTb = mysqlTable("products", {
   // url: varchar("url", "255").notNull(),
   description: varchar("description", "255").notNull(),
   type_id: int("type_id").references(() => categoryTypesTb.type_id),
+  seller_id: int("seller_id").references(() => userTb.user_id),
   unit_type_id: int("unit_type_id").references(
     () => productUnitTb.unit_type_id,
   ),
@@ -59,22 +75,6 @@ export const productsTb = mysqlTable("products", {
 export const productImagesTb = mysqlTable("product_image", {
   product_id: int("product_id").references(() => productsTb.product_id),
   image: varchar("image", "255").notNull(),
-});
-
-export const userTb = mysqlTable("user", {
-  user_id: serial("user_id").primaryKey(),
-  display_name: varchar("display_name", { length: 255 }).notNull(),
-  username: varchar("username", { length: 255 }).notNull(),
-  name: varchar("name", { length: 255 }).notNull(),
-  birthday: date("birthday").notNull(),
-  contact: varchar("contact", { length: 20 }).notNull(), // Manual input for phone number
-  about: text("about"), // Optional, can be NULL
-  email: varchar("email", { length: 255 }).notNull(),
-  active: boolean("active").default(true), // Default is active
-  blocked: boolean("blocked").default(false), // Default is not blocked
-  user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
-  date_added: timestamp("date_added").defaultNow().notNull(),
-  date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
 });
 
 export const userAddressesTb = mysqlTable("user_addresses", {
