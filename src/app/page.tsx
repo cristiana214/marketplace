@@ -5,15 +5,25 @@ import { Button } from "@/components/ui/button";
 
 import ListCard from "@/components/list-card";
 import ListCategories from "@/components/list-categories";
+import ListProducts from "@/components/list-products";
+import CartTotal from "@/components/cart-total";
+
+import DropdownCategory from "@/components/dropdown-category";
 
 export default function IndexPage() {
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-bold  tracking-tighter sm:text-4xl ">
-          Fresh Farm Produce - Direct from local Farm
-          <br className="hidden sm:inline" />
-        </h1>
+      <div className="mb-8  flex w-full flex-col gap-2">
+        <div className="flex w-full items-start justify-between">
+          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+            Fresh Farm Produce - Direct from local Farm
+            <br className="hidden sm:inline" />
+          </h1>
+          <div className="flex items-center space-x-4">
+            <DropdownCategory />
+            <CartTotal />
+          </div>
+        </div>
         <p className="max-w-[700px] text-lg text-muted-foreground">
           {siteConfig.description}
         </p>
@@ -23,6 +33,7 @@ export default function IndexPage() {
         Shop now and support our local farm while enjoying healthy, fresh, and
         organic produce!
       </h2>
+
       <div className="flex flex-wrap gap-4">
         <Link href="/category/fruits/">
           <Button className="bg-green-400 hover:font-semibold" rel="noreferrer">
@@ -47,6 +58,7 @@ export default function IndexPage() {
         </Link>
       </div>
       <ListCategories />
+      <ListProducts />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <ListCard />
       </div>

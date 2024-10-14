@@ -18,7 +18,7 @@ const CartTotal = () => {
   const total = cartTotal();
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex w-28 items-center space-x-4">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline">
