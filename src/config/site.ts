@@ -15,8 +15,8 @@ export const siteConfig = {
     },
 
     {
-      title: "Vegetables",
-      href: "/category/vegetables/",
+      title: "Products",
+      href: "/products/",
     },
     {
       title: "Fruits",
