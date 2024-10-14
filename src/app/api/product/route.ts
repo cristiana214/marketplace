@@ -1,11 +1,12 @@
 import { db } from "@/drizzle/db";
-import { eq } from "drizzle-orm";
+import { eq, or, sql } from "drizzle-orm";
 import {
   categoriesTb,
   categoryTypesTb,
   productImagesTb,
   productsTb,
   productUnitTb,
+  userTb,
 } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -27,7 +28,14 @@ const getBaseQuery = () =>
       categoryUrl: categoriesTb.url,
       typeUrl: categoryTypesTb.url,
       imageUrl: productImagesTb.image,
-      // images: productImagesTb.image,
+      seller: {
+        userId: userTb.user_id,
+        name: userTb.name,
+        email: userTb.email,
+        about: userTb.about,
+        displayName: userTb.display_name,
+      },
+      images: sql`GROUP_CONCAT(${productImagesTb.image})`,
     })
     .from(productsTb)
     .innerJoin(categoryTypesTb, eq(productsTb.type_id, categoryTypesTb.type_id))
@@ -39,6 +47,7 @@ const getBaseQuery = () =>
       productUnitTb,
       eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
     )
+    .innerJoin(userTb, eq(userTb.user_id, productsTb.seller_id))
     .leftJoin(
       productImagesTb,
       eq(productsTb.product_id, productImagesTb.product_id),
@@ -51,7 +60,12 @@ export async function GET(req: NextRequest) {
     if (productId) {
       // get all products by category_url
       productQuery = getBaseQuery()
-        .where(eq(productsTb.product_id, Number(productId)))
+        .where(
+          or(
+            eq(productsTb.product_id, Number(productId)),
+            eq(userTb.user_type, 2),
+          ),
+        )
         .groupBy(productsTb.product_id);
     } else {
       return NextResponse.json({
