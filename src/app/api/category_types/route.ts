@@ -41,8 +41,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ categoryTypes });
   } catch (error) {
     return NextResponse.json({
-      message: "Error fetching category types",
-      error,
+      message: "Error fetching category types", // If an error occurs, send an error message.
+      error, // Include the error details in the response.
     });
   }
 }
