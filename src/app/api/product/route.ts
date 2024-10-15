@@ -1,5 +1,5 @@
 import { db } from "@/drizzle/db";
-import { eq, or, sql } from "drizzle-orm";
+import { and, eq, or, sql } from "drizzle-orm";
 import {
   categoriesTb,
   categoryTypesTb,
@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
       // get all products by category_url
       productQuery = getBaseQuery()
         .where(
-          or(
+          and(
             eq(productsTb.product_id, Number(productId)),
             eq(userTb.user_type, 2),
           ),
