@@ -10,17 +10,32 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Plus, Minus } from "lucide-react";
 import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
-import { productFarmer as product, productFarmer } from "@/lib/data/product";
+// import { productFarmer as product, productFarmer } from "@/lib/data/product";
 // import { comments } from "@/lib/data/comments";
 import Cards from "@/components/reusable/cards";
+import { productFarmer } from "@/lib/data/product";
+import { useProduct } from "@/hooks/query/useProduct";
 
-export default function ItemPage() {
+export default function ProductPage({
+  params,
+}: {
+  params: { productURL: string };
+}) {
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [newComment, setNewComment] = useState("");
+  const { data, isLoading, error } = useProduct({
+    productId: params.productURL,
+  });
+  // const searchParams = useSearchParams()
+  // const search = searchParams.get('search');
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading product</div>;
+  const product = data?.product;
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${product.name} to cart`);
+    console.log(`Added ${quantity} ${product?.name} to cart`);
   };
 
   const handleSubmitComment = (e: React.FormEvent) => {
@@ -32,32 +47,39 @@ export default function ItemPage() {
     <GridLayout>
       <GridItemEight>
         <div className="relative mb-4 aspect-square">
-          <Image
-            src={product?.images[activeImage]}
-            alt={product.name}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
-          />
+          {product?.images.length ? (
+            <Image
+              src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product?.images[activeImage]}`}
+              alt={product?.name}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          ) : null}
         </div>
         <div className="flex gap-4 overflow-x-auto">
-          {product?.images.map((image, index) => (
-            <button
-              type="button"
-              key={index}
-              onClick={() => setActiveImage(index)}
-              className={`relative size-24 overflow-hidden rounded-md ${
-                index === activeImage ? "ring-2 ring-primary" : ""
-              }`}
-            >
-              <Image
-                src={image}
-                alt={`${productFarmer.name} thumbnail ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
-              />
-            </button>
-          ))}
+          {product?.images?.length
+            ? product?.images
+                .toString()
+                ?.split(",")
+                .map((image, index) => (
+                  <button
+                    type="button"
+                    key={index}
+                    onClick={() => setActiveImage(index)}
+                    className={`relative size-24 overflow-hidden rounded-md ${
+                      index === activeImage ? "ring-2 ring-primary" : ""
+                    }`}
+                  >
+                    <Image
+                      src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${image}`}
+                      alt={`${product.name} thumbnail ${index + 1}`}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </button>
+                ))
+            : null}
         </div>
 
         <div className="mt-12">
@@ -98,11 +120,11 @@ export default function ItemPage() {
         </div>
       </GridItemEight>
       <GridItemFour>
-        <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
+        <h1 className="mb-4 text-3xl font-bold">{product?.name}</h1>
         <p className="mb-4 text-2xl font-semibold">
-          P{product.price.toFixed(2)} / {product.unitDisplayName}
+          P{product?.price.toFixed(2)} / {product?.unitDisplayName}
         </p>
-        <p className="mb-4">{product.description}</p>
+        <p className="mb-4">{product?.description}</p>
         <div className="mb-4 flex items-center gap-4">
           <Button
             variant="outline"
@@ -128,7 +150,7 @@ export default function ItemPage() {
           </TabsList>
           <TabsContent value="more-info">
             <Cards title="Description">
-              <>
+              {/* <>
                 <p>Serving Size: {product.nutritionFacts.servingSize}</p>
                 <p>Calories: {product.nutritionFacts.calories}</p>
                 <p>Total Fat: {product.nutritionFacts.totalFat}</p>
@@ -137,29 +159,26 @@ export default function ItemPage() {
                   Total Carbohydrate: {product.nutritionFacts.totalCarbohydrate}
                 </p>
                 <p>Protein: {product.nutritionFacts.protein}</p>
-              </>
+              </> */}
             </Cards>
           </TabsContent>
           <TabsContent value="farmer">
-            <Cards title={product.farmer.name}>
+            <Cards title={product?.seller.name}>
               <div className="mb-4 flex items-center gap-4">
                 <Avatar className="size-16">
                   <AvatarImage
-                    src={product.farmer.image}
-                    alt={product.farmer.name}
+                    src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product?.seller.image}`}
+                    alt={product?.seller.name}
                   />
-                  <AvatarFallback>
-                    {product.farmer.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </AvatarFallback>
+                  <AvatarFallback>{product?.seller.name}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <Link href={`/farm/${product.farmer.url}/`}>
-                    <h3 className="font-semibold">{product.farmer.farmName}</h3>{" "}
+                  <Link href={`/farm/${product?.seller.url}/`}>
+                    <h3 className="font-semibold">
+                      {product?.seller.displayName}
+                    </h3>{" "}
                   </Link>
-                  <p>{product.farmer.bio}</p>
+                  <p>{product?.seller?.bio}</p>
                 </div>
               </div>
             </Cards>
