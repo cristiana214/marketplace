@@ -6,6 +6,9 @@ export type ProductsQueryParams = {
   pageNum?: number;
   limit?: number;
 };
+export type ProductQueryParams = {
+  productId: number;
+};
 export type CategoryTypesQueryParams = {
   categoryUrl?: string;
 };
@@ -15,6 +18,9 @@ export type ProductsApiResponse = {
   products: Product[];
   totalCount?: number;
   totalPages?: number;
+};
+export type ProductApiResponse = {
+  product: Product;
 };
 export type CategoryTypesApiResponse = {
   categoryTypes: CategoryType[];
