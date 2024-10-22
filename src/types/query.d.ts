@@ -7,7 +7,7 @@ export type ProductsQueryParams = {
   limit?: number;
 };
 export type ProductQueryParams = {
-  productId: number;
+  productId?: string;
 };
 export type CategoryTypesQueryParams = {
   categoryUrl?: string;
@@ -27,7 +27,7 @@ export type CategoriesApiResponse = {
   categories: Category[];
 };
 export type ProductApiResponse = {
-  product: Product & { seller: User };
+  product: Product;
 };
 
 // product: Product & { seller: User };

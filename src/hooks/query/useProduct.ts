@@ -19,13 +19,14 @@ const fetchProduct = async (
   queryParams: ProductQueryParams, // accepts query parameters of type ProductQueryParams
 ): Promise<ProductApiResponse> => {
   // Ensure return type is ProductApiResponse
-  const { data } = await axios.get(`/api/product/`, {
+  const response = await axios.get(`/api/product/`, {
     // axios GET request to fetch products
     params: {
       productId: queryParams?.productId, // productId filter
     },
   });
-  return data;
+  console.log(response);
+  return response;
   // Make sure you're returning data, not the whole response object
 };
 

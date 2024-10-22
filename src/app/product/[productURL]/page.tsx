@@ -19,13 +19,13 @@ import { useProduct } from "@/hooks/query/useProduct";
 export default function ProductPage({
   params,
 }: {
-  params: { productURL: string };
+  params: { productURL?: string };
 }) {
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [newComment, setNewComment] = useState("");
   const { data, isLoading, error } = useProduct({
-    productId: params.productURL,
+    productId: params?.productURL,
   });
   // const searchParams = useSearchParams()
   // const search = searchParams.get('search');
