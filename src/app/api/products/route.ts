@@ -27,6 +27,7 @@ const getBaseQuery = () =>
       categoryUrl: categoriesTb.url,
       typeUrl: categoryTypesTb.url,
       imageUrl: productImagesTb.image,
+      images: productImagesTb.image,
     })
     .from(productsTb)
     .innerJoin(categoryTypesTb, eq(productsTb.type_id, categoryTypesTb.type_id))

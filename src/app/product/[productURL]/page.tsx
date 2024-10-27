@@ -13,7 +13,7 @@ import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 // import { productFarmer as product, productFarmer } from "@/lib/data/product";
 // import { comments } from "@/lib/data/comments";
 import Cards from "@/components/reusable/cards";
-import { productFarmer } from "@/lib/data/product";
+// import { productFarmer } from "@/lib/data/product";
 import { useProduct } from "@/hooks/query/useProduct";
 
 export default function ProductPage({
