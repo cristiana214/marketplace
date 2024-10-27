@@ -23,23 +23,23 @@ export function SiteHeaderLogin() {
               <Avatar>
                 <AvatarImage
                   className="size-10 rounded-full"
-                  src={user?.imageUrl}
+                  src={
+                    user?.imageUrl ||
+                    "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
+                  }
                   alt={user?.name || ""}
                 />
-                {/* <AvatarFallback>
-                    {user?.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </AvatarFallback> */}
+                <AvatarFallback>
+                  {/* https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg */}
+                </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuItem className="font-medium">
-              {user?.name}
+              <Link href="/user/"> {user?.name}</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>{user?.email}</DropdownMenuItem>
+            <DropdownMenuItem>My Orders</DropdownMenuItem>
             <DropdownMenuItem onClick={() => signOut()}>
               Sign out
             </DropdownMenuItem>

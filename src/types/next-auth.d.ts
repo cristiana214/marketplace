@@ -14,6 +14,7 @@ declare module "next-auth" {
   interface User extends DefaultUser {
     /** The user's database ID */
     userId: number;
+    imageUrl?: string;
   }
 }
 
@@ -21,5 +22,6 @@ declare module "next-auth/jwt" {
   interface JWT {
     /** The user's database ID */
     userId: number;
+    imageUrl?: string;
   }
 }
