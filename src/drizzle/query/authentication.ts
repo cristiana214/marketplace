@@ -38,7 +38,7 @@ export const checkUserExist = async ({
 
     return {
       isSuccess: !!userExist?.length,
-      userExist: userExist?.[0],
+      userExist,
     };
   } catch (error) {
     console.log(error);
