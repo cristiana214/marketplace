@@ -30,7 +30,7 @@ export const userTb = mysqlTable("user", {
 });
 
 export const userAuthTb = mysqlTable("user_auth", {
-  auth_id: int("auth_id").primaryKey(), // Primary key, varchar(100)
+  auth_id: varchar("auth_id", { length: 200 }).primaryKey(), // Primary key, varchar(100)
   user_id: serial("user_id").references(() => userTb.user_id),
   type_id: int("type_id")
     .notNull()

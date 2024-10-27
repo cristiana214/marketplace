@@ -10,7 +10,6 @@ import type { NextAuthOptions } from "next-auth";
 // https://next-auth.js.org/configuration/callbacks
 
 import CredentialsProvider from "next-auth/providers/credentials";
-import email from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import { isAlphanumeric, blacklist } from "validator";
 
@@ -57,7 +56,7 @@ export const authConfig: NextAuthOptions = {
           const profileImage = user.image?.replace("=s96", "=s200");
           const authEmail = profile?.email;
           const { userExist } = await checkUserExist({
-            authId: parseInt(user.id, 10) || 0,
+            authId: user?.id,
           });
 
           if (!userExist?.length) {
@@ -81,7 +80,7 @@ export const authConfig: NextAuthOptions = {
                 ?.replace(/\s/g, "")
                 ?.trim(),
               displayName: profile?.name?.trim() || "",
-              authId: profile?.sub ? parseInt(profile?.sub, 10) : 0,
+              authId: profile?.sub,
               authToken: account.access_token || " ", // we will save the token that googleapis provides to the user
               authTypeId: 1, // user_type 1 means from google authentication
               authEmail,
@@ -90,7 +89,7 @@ export const authConfig: NextAuthOptions = {
 
             await insertNewAuthUser(userData);
             const { isSuccess, userDb } = await getAuthUser({
-              authId: parseInt(user.id, 10) || 0,
+              authId: user.id,
             });
             // Pass the user information to the `jwt` callback
             if (isSuccess) {
@@ -101,7 +100,7 @@ export const authConfig: NextAuthOptions = {
             return !!isSuccess;
           }
           const { isSuccess, userDb } = await getAuthUser({
-            authId: parseInt(user.id, 10) || 0,
+            authId: user.id,
           });
 
           // pass the user information to the `jwt` callback
@@ -144,7 +143,7 @@ export const authConfig: NextAuthOptions = {
         accessToken: token.accessToken,
         authId: token.authId,
         name: token.name,
-        imageUrl: String(token.imageUrl),
+        imageUrl: token.imageUrl,
         email: token.email,
         emailVerified: token.emailVerified,
       };

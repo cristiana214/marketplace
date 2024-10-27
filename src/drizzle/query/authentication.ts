@@ -4,7 +4,7 @@ import { db } from "@/drizzle/db";
 import { userAuthTb, userImageTb, userTb } from "@/drizzle/schema";
 
 type CheckUserExist = {
-  authId: number;
+  authId: string;
 };
 
 // Define the user data type
@@ -68,7 +68,7 @@ export const getAuthUser = async ({ authId }: CheckUserExist) => {
         and(
           eq(userTb.active, Boolean(1)),
           eq(userTb.blocked, Boolean(0)),
-          eq(userAuthTb.auth_id, Number(authId)),
+          eq(userAuthTb.auth_id, authId),
           eq(userTb.user_type, 1),
         ),
       )
@@ -82,7 +82,7 @@ export const getAuthUser = async ({ authId }: CheckUserExist) => {
 };
 // userDB
 type InsertNewAuthUser = {
-  authId: number;
+  authId?: string;
   username?: string;
   displayName: string;
   authEmail?: string;
@@ -95,7 +95,7 @@ export const insertNewAuthUser = async (userDB: InsertNewAuthUser) => {
     username,
     displayName,
     authEmail,
-    authId,
+    authId = 0,
     authTypeId,
     authToken,
     imageUrl,
@@ -123,7 +123,7 @@ export const insertNewAuthUser = async (userDB: InsertNewAuthUser) => {
     await db.insert(userAuthTb).values({
       type_id: Number(authTypeId), // auth type id
       user_id: Number(insertId),
-      auth_id: authId,
+      auth_id: String(authId),
       auth_email: String(authEmail),
       auth_token: String(authToken),
       auth_username: String(username),
