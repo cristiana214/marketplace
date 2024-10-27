@@ -1,4 +1,4 @@
-import type { Product, Category, CategoryType } from "@/types/data";
+import type { Product, Category, CategoryType, User } from "@/types/data";
 // QueryParams
 export type ProductsQueryParams = {
   categoryUrl?: string;

@@ -9,23 +9,56 @@ import {
   boolean,
   date,
   decimal,
+  smallint,
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
 
 export const userTb = mysqlTable("user", {
-  user_id: serial("user_id").primaryKey(),
+  user_id: serial("user_id").primaryKey().autoincrement(),
   display_name: varchar("display_name", { length: 255 }).notNull(),
   username: varchar("username", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
-  birthday: date("birthday").notNull(),
-  contact: varchar("contact", { length: 20 }).notNull(), // Manual input for phone number
+  birthday: date("birthday"),
+  contact: varchar("contact", { length: 20 }), // Manual input for phone number
   about: text("about"), // Optional, can be NULL
-  email: varchar("email", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }),
   active: boolean("active").default(true), // Default is active
   blocked: boolean("blocked").default(false), // Default is not blocked
   user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
   date_added: timestamp("date_added").defaultNow().notNull(),
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
+});
+
+export const userAuthTb = mysqlTable("user_auth", {
+  auth_id: int("auth_id").primaryKey(), // Primary key, varchar(100)
+  user_id: serial("user_id").references(() => userTb.user_id),
+  type_id: int("type_id")
+    .notNull()
+    .default(sql`1`), // smallint(2), not null, indexed
+  auth_email: varchar("auth_email", { length: 70 }).notNull(), // varchar(70), not null
+  auth_token: varchar("auth_token", { length: 400 }), // varchar(400), no default value
+  auth_username: varchar("auth_username", { length: 30 }).notNull(), // varchar(30), not null
+  auth_user_birth_date: date("auth_user_birth_date")
+    .notNull()
+    .default(sql`1879-01-01`), // date, default 1879-01-0
+  date_added: timestamp("date_added")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP
+  date_updated: timestamp("date_updated")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+});
+export const userImageTb = mysqlTable("user_image", {
+  image_id: serial("image_id").primaryKey().autoincrement(), // Primary key, varchar(100)
+  user_id: int("user_id").references(() => userTb.user_id),
+  image_url: varchar("image_url", { length: 500 }).notNull(), // varchar(500 ), not null
+  image_type_id: smallint("image_type_id"), // 1= profile image, 2= gallery, 3=banner
+  date_added: timestamp("date_added")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP
+  date_updated: timestamp("date_updated")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
 });
 export const categoriesTb = mysqlTable("categories", {
   category_id: serial("category_id").primaryKey(),

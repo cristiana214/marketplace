@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,7 +13,7 @@ import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 // import { productFarmer as product, productFarmer } from "@/lib/data/product";
 // import { comments } from "@/lib/data/comments";
 import Cards from "@/components/reusable/cards";
-import { productFarmer } from "@/lib/data/product";
+// import { productFarmer } from "@/lib/data/product";
 import { useProduct } from "@/hooks/query/useProduct";
 
 export default function ProductPage({
@@ -22,17 +22,25 @@ export default function ProductPage({
   params: { productURL?: string };
 }) {
   const [quantity, setQuantity] = useState(1);
+  // handling the current active images on slide
   const [activeImage, setActiveImage] = useState(0);
+
+  // set images from array string separated by comma
+  const [images, setImages] = useState<string[]>([]);
   const [newComment, setNewComment] = useState("");
+
   const { data, isLoading, error } = useProduct({
     productId: params?.productURL,
   });
   // const searchParams = useSearchParams()
   // const search = searchParams.get('search');
+  const product = data?.product;
+  useEffect(() => {
+    setImages(product?.images?.toString()?.split(",") || []);
+  }, [product?.images]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading product</div>;
-  const product = data?.product;
 
   const handleAddToCart = () => {
     console.log(`Added ${quantity} ${product?.name} to cart`);
@@ -43,13 +51,14 @@ export default function ProductPage({
     console.log("New comment:", newComment);
     setNewComment("");
   };
+
   return (
     <GridLayout>
       <GridItemEight>
         <div className="relative mb-4 aspect-square">
-          {product?.images.length ? (
+          {product?.images?.length ? (
             <Image
-              src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product?.images[activeImage]}`}
+              src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${images[activeImage]}`}
               alt={product?.name}
               layout="fill"
               objectFit="cover"
@@ -58,27 +67,24 @@ export default function ProductPage({
           ) : null}
         </div>
         <div className="flex gap-4 overflow-x-auto">
-          {product?.images?.length
-            ? product?.images
-                .toString()
-                ?.split(",")
-                .map((image, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    onClick={() => setActiveImage(index)}
-                    className={`relative size-24 overflow-hidden rounded-md ${
-                      index === activeImage ? "ring-2 ring-primary" : ""
-                    }`}
-                  >
-                    <Image
-                      src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${image}`}
-                      alt={`${product.name} thumbnail ${index + 1}`}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </button>
-                ))
+          {images?.length
+            ? images.map((image, index) => (
+                <button
+                  type="button"
+                  key={index}
+                  onClick={() => setActiveImage(index)}
+                  className={`relative size-24 overflow-hidden rounded-md ${
+                    index === activeImage ? "ring-2 ring-primary" : ""
+                  }`}
+                >
+                  <Image
+                    src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${image}`}
+                    alt={`${product?.name} thumbnail ${index + 1}`}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </button>
+              ))
             : null}
         </div>
 

@@ -1,11 +1,9 @@
+// https://tanstack.com/query/v5/docs/framework/react/typescript#type-inference
+
 // import necessary dependencies from React Query and custom modules
 import { useQuery } from "@tanstack/react-query";
 import { axios } from "@/lib/axios"; // custom axios instance
-import type {
-  ProductQueryParams,
-  ProductApiResponse,
-  ProductsQueryParams, // Make sure this is the correct type
-} from "@/types/query"; // importing types for query parameters and API response
+import type { ProductQueryParams, ProductApiResponse } from "@/types/query"; // importing types for query parameters and API response
 
 /**
  * function to fetch products data from API.
@@ -13,21 +11,19 @@ import type {
  * returns a promise that resolves to products API response.
  *
  * @param queryParams -  parameters to be used in the query (e.g., categoryUrl, limit
- * @returns Promise<ProductApiResponse> -  response from the API with products data.
+ * @returns Promise<ProductsApiResponse> -  response from the API with products data.
  */
 const fetchProduct = async (
-  queryParams: ProductQueryParams, // accepts query parameters of type ProductQueryParams
+  queryParams: ProductQueryParams, // accepts query parameters of type ProductsQueryParams
 ): Promise<ProductApiResponse> => {
-  // Ensure return type is ProductApiResponse
-  const response = await axios.get(`/api/product/`, {
-    // axios GET request to fetch products
+  // Returns a Promise of type ProductsApiResponse
+  const response: ProductApiResponse = await axios.get(`/api/product/`, {
+    // axios GET request to fetch product
     params: {
       productId: queryParams?.productId, // productId filter
     },
   });
-  console.log(response);
   return response;
-  // Make sure you're returning data, not the whole response object
 };
 
 /**

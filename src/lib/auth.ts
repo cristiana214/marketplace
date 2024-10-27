@@ -1,9 +1,18 @@
+/* eslint-disable no-param-reassign */
+
+import {
+  checkUserExist,
+  getAuthUser,
+  insertNewAuthUser,
+} from "@/drizzle/query/authentication";
 import type { NextAuthOptions } from "next-auth";
 
 // https://next-auth.js.org/configuration/callbacks
 
 import CredentialsProvider from "next-auth/providers/credentials";
+import email from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
+import { isAlphanumeric, blacklist } from "validator";
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -43,9 +52,113 @@ export const authConfig: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, credentials }) {
       if (account?.provider === "google") {
-        return !!profile?.email?.endsWith("@gmail.com");
+        try {
+          // todo user validation needs to be in new separate function
+          const profileImage = user.image?.replace("=s96", "=s200");
+          const authEmail = profile?.email;
+          const { userExist } = await checkUserExist({
+            authId: parseInt(user.id, 10) || 0,
+          });
+
+          if (!userExist?.length) {
+            // insert new  auth user
+            // validate username use email if username is invalid
+            let validatedUsername = profile?.name;
+            if (
+              !isAlphanumeric(blacklist(`${validatedUsername}`, ",._-")) &&
+              authEmail
+            ) {
+              validatedUsername = blacklist(
+                `${authEmail.split("@")[0]}`,
+                ",._-",
+              );
+            }
+
+            const userData = {
+              username: validatedUsername
+                ?.toLowerCase()
+                ?.replace(/[.*+?^${}()|[\]\\]/g, "")
+                ?.replace(/\s/g, "")
+                ?.trim(),
+              displayName: profile?.name?.trim() || "",
+              authId: profile?.sub ? parseInt(profile?.sub, 10) : 0,
+              authToken: account.access_token || " ", // we will save the token that googleapis provides to the user
+              authTypeId: 1, // user_type 1 means from google authentication
+              authEmail,
+              imageUrl: profileImage,
+            };
+
+            await insertNewAuthUser(userData);
+            const { isSuccess, userDb } = await getAuthUser({
+              authId: parseInt(user.id, 10) || 0,
+            });
+            // Pass the user information to the `jwt` callback
+            if (isSuccess) {
+              // Save the DB ID to pass it later
+              user.userId = userDb?.[0]?.userId || 0;
+              user.imageUrl = userDb?.[0]?.imageUrl || "";
+            }
+            return !!isSuccess;
+          }
+          const { isSuccess, userDb } = await getAuthUser({
+            authId: parseInt(user.id, 10) || 0,
+          });
+
+          // pass the user information to the `jwt` callback
+          if (isSuccess) {
+            user.userId = userDb?.[0]?.userId || 0;
+            user.imageUrl = userDb?.[0]?.imageUrl || "";
+          }
+          return true;
+        } catch (e) {
+          console.log(e);
+          return false;
+        }
       }
-      return true; // Do different verification for other providers that don't have `email_verified`
+      // login only using google
+      return true;
+      // Do different verification for other providers that don't have `email_verified`
+    },
+    async jwt({ token, user, account, profile }) {
+      if (account && user) {
+        // Store Google accessToken and idToken in the JWT
+        token.userId = user?.userId;
+        token.accessToken = account.access_token;
+        token.idToken = account.id_token;
+        token.name = user.name;
+
+        // Include additional profile info (if needed)
+        token.authId = profile?.sub;
+        token.email = user?.email;
+        token.imageUrl = user?.imageUrl;
+        // token.emailVerified = profile?.email_verified;
+      }
+
+      return token;
+    },
+
+    async session({ session, token, user }) {
+      // Pass additional properties to the session
+      const userData = {
+        userId: user?.userId,
+        accessToken: token.accessToken,
+        authId: token.authId,
+        name: token.name,
+        imageUrl: String(token.imageUrl),
+        email: token.email,
+        emailVerified: token.emailVerified,
+      };
+      if (userData) {
+        session.user = userData;
+      }
+
+      return session;
     },
   },
+  session: {
+    strategy: "jwt", // Using JWT for session management
+  },
+
+  // Secret for signing tokens
+  secret: process.env.NEXTAUTH_SECRET,
 };

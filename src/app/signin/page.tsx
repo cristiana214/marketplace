@@ -1,8 +1,13 @@
-import { ReausableDialog } from "@/components/reusable/dialog";
+"use client";
+
 import { FormCredentials } from "@/components/form-credentials";
 import { GoogleSignInButton } from "@/components/button-auth";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function SigninPage() {
+  const { data: session, status } = useSession();
+  if (session?.user) redirect("/user");
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10 ">
       <div className="flex w-full flex-col items-center justify-center py-2">
@@ -11,7 +16,6 @@ export default function SigninPage() {
           <GoogleSignInButton />
           <FormCredentials />
         </div>
-        <ReausableDialog />
       </div>
     </section>
   );
