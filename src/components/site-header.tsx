@@ -1,9 +1,7 @@
-import Link from "next/link";
-
 import { siteConfig } from "@/config/site";
-import { Button } from "@/components/ui/button";
 import { MainNav } from "@/components/main-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteHeaderLogin } from "./site-header-login";
 
 export function SiteHeader() {
   return (
@@ -13,11 +11,12 @@ export function SiteHeader() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
             <ThemeToggle />
-            <Link href="/signin">
+            <SiteHeaderLogin />
+            {/* <Link href="/signin">
               <Button className="px-2 py-1 text-sm md:px-4 md:py-2 md:text-base">
                 Login
               </Button>
-            </Link>
+            </Link> */}
           </nav>
         </div>
       </div>
