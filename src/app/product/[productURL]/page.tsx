@@ -19,7 +19,7 @@ import { useProduct } from "@/hooks/query/useProduct";
 export default function ProductPage({
   params,
 }: {
-  params: { productURL: string };
+  params: { productURL?: string };
 }) {
   const [quantity, setQuantity] = useState(1);
   // handling the current active images on slide
@@ -30,7 +30,7 @@ export default function ProductPage({
   const [newComment, setNewComment] = useState("");
 
   const { data, isLoading, error } = useProduct({
-    productId: params.productURL,
+    productId: params?.productURL,
   });
   // const searchParams = useSearchParams()
   // const search = searchParams.get('search');

@@ -19,6 +19,7 @@ export type ProductsApiResponse = {
   totalCount?: number;
   totalPages?: number;
 };
+
 export type CategoryTypesApiResponse = {
   categoryTypes: CategoryType[];
 };
@@ -26,5 +27,7 @@ export type CategoriesApiResponse = {
   categories: Category[];
 };
 export type ProductApiResponse = {
-  product: Product & { seller: User };
+  product: Product;
 };
+
+// product: Product & { seller: User };
