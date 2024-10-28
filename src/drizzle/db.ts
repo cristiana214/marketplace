@@ -9,4 +9,4 @@ const pool = mysql.createPool({
   database: process.env.DATABASE_NAME,
 });
 // { logger: true }
-export const db = drizzle(pool);
+export const db = drizzle(pool, { logger: true });

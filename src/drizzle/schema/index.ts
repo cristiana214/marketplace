@@ -22,8 +22,8 @@ export const userTb = mysqlTable("user", {
   contact: varchar("contact", { length: 20 }), // Manual input for phone number
   about: text("about"), // Optional, can be NULL
   email: varchar("email", { length: 255 }),
-  active: boolean("active").default(true), // Default is active
-  blocked: boolean("blocked").default(false), // Default is not blocked
+  active: int("active").default(1), // Default is active
+  blocked: int("blocked").default(0), // Default is not blocked
   user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
   date_added: timestamp("date_added").defaultNow().notNull(),
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
