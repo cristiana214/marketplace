@@ -9,6 +9,9 @@ export type ProductsQueryParams = {
 export type ProductQueryParams = {
   productId?: string;
 };
+export type SellerQueryParams = {
+  userUrl?: string;
+};
 export type CategoryTypesQueryParams = {
   categoryUrl?: string;
 };
@@ -28,6 +31,9 @@ export type CategoriesApiResponse = {
 };
 export type ProductApiResponse = {
   product: Product;
+};
+export type SellerApiResponse = {
+  user: User;
 };
 
 // product: Product & { seller: User };

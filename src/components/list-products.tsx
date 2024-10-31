@@ -1,6 +1,7 @@
 "use client";
 
 import { useProducts } from "@/hooks/query/useProducts";
+import { generateUrl } from "@/lib/helper/generate-url";
 import { useCartStore } from "@/lib/store/useCartStore";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
@@ -52,7 +53,7 @@ const ListProducts = ({ url }: ListProductsProps) => {
           <CardContent>
             <Link href={`/product/${product.productId}/`}>
               <img
-                src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product.imageUrl}`}
+                src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${generateUrl(product.imageUrl)}`}
                 alt={product.name}
                 className="mb-4 h-72 w-full rounded-md object-cover"
               />

@@ -39,7 +39,7 @@ const getBaseQuery = () =>
       productUnitTb,
       eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
     )
-    .leftJoin(
+    .innerJoin(
       productImagesTb,
       eq(productsTb.product_id, productImagesTb.product_id),
     );

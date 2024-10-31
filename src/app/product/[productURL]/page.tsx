@@ -15,6 +15,7 @@ import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
 import Cards from "@/components/reusable/cards";
 // import { productFarmer } from "@/lib/data/product";
 import { useProduct } from "@/hooks/query/useProduct";
+import { generateUrl } from "@/lib/helper/generate-url";
 
 export default function ProductPage({
   params,
@@ -58,7 +59,7 @@ export default function ProductPage({
         <div className="relative mb-4 aspect-square">
           {product?.images?.length ? (
             <Image
-              src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${images[activeImage]}`}
+              src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${generateUrl(images[activeImage])}`}
               alt={product?.name}
               layout="fill"
               objectFit="cover"
@@ -79,7 +80,7 @@ export default function ProductPage({
                 >
                   <Image
                     src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${image}`}
-                    alt={`${product?.name} thumbnail ${index + 1}`}
+                    alt={`${generateUrl(product?.name || "")} thumbnail ${index + 1}`}
                     layout="fill"
                     objectFit="cover"
                   />
