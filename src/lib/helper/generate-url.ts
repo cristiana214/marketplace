@@ -1,2 +1,2 @@
 export const generateUrl = (name: string): string =>
-  name.toLowerCase().replace(/\s+/g, "-");
+  name?.toLowerCase()?.replace(/\s+/g, "-");
