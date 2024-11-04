@@ -9,6 +9,8 @@ import ListCategoryTypes from "@/components/list-category-types";
 import { useCategoryType } from "@/hooks/query/useCategoryType";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { Metadata } from "next";
 
 export default function SubCategory({
   params,
@@ -23,15 +25,15 @@ export default function SubCategory({
   return (
     <div className="container mx-auto p-4">
       <div className="mb-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center">
           <h1 className="text-3xl font-bold">{categoryType?.typeName}</h1>
+          <Link href={`/category/${categoryType?.categoryUrl}/`}>
+            <Badge variant="outline">{categoryType?.categoryName}</Badge>
+          </Link>
         </div>
-        <h2 className="mt-2 text-xl font-normal leading-tight tracking-tighter">
+        <h2 className="text-1xl mt-2 font-normal leading-tight tracking-tighter">
           {categoryType?.typeDescription}
         </h2>
-        <Link href={`/category/${categoryType?.categoryUrl}/`}>
-          <Badge variant="outline">{categoryType?.categoryName}</Badge>
-        </Link>
       </div>
       <ListCategoryTypes url={params.typeURL} />
       <ListProducts type="categoryTypeUrl" url={params.typeURL} />

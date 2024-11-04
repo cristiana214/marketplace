@@ -2,6 +2,7 @@ export type Category = {
   categoryId: number;
   categoryName: string;
   categoryUrl: string;
+  categoryDescription?: string;
   items?: CategoryItem[]; // array of category items
 };
 type CategoryType = {
