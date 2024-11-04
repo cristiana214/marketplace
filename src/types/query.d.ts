@@ -3,6 +3,7 @@ import type { Product, Category, CategoryType, User } from "@/types/data";
 export type ProductsQueryParams = {
   categoryUrl?: string;
   categoryTypeUrl?: string;
+  userUrl?: string; // sellerUrl
   pageNum?: number;
   limit?: number;
 };

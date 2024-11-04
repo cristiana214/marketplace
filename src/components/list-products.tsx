@@ -16,7 +16,7 @@ import {
 } from "./ui/card";
 
 type ListProductsProps = {
-  type: "home" | "categoryUrl" | "categoryTypeUrl" | "sellerUrl";
+  type: "home" | "categoryUrl" | "categoryTypeUrl" | "userUrl";
   url?: string;
 };
 const ListProducts = ({ type, url }: ListProductsProps) => {
