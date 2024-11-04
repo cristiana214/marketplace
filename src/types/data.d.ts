@@ -8,6 +8,9 @@ type CategoryType = {
   typeId: number;
   typeName: string;
   typeUrl: string;
+  typeDescription?: string;
+  categoryName?: string;
+  categoryUrl?: string;
 };
 
 // one product
