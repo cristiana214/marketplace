@@ -23,13 +23,12 @@ export default function SubCategory({
         <h1 className="text-3xl font-bold" />
         <div className="flex items-center space-x-4">
           <DropdownCategory />
-          <CartTotal />
         </div>
       </div>
-      {/* <ListCategoryTypes url={params.typeURL} /> */}
-      <ListCategories />
+      <ListCategoryTypes url={params.typeURL} />
+      {/* <ListCategories /> */}
       {/* todo pass type url */}
-      <ListProducts />
+      <ListProducts type="categoryTypeUrl" url={params.typeURL} />
     </div>
   );
 }

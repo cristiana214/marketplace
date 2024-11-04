@@ -128,6 +128,7 @@ export default function ProductPage({
       </GridItemEight>
       <GridItemFour>
         <h1 className="mb-4 text-3xl font-bold">{product?.name}</h1>
+
         <p className="mb-4 text-2xl font-semibold">
           P{product?.price.toFixed(2)} / {product?.unitDisplayName}
         </p>

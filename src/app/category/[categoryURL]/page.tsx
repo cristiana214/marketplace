@@ -39,7 +39,7 @@ export default function CategoryPage({
         </h1>
       </div>
       <ListCategoryTypes url={params?.categoryURL} />
-      <ListProducts url={params?.categoryURL} />
+      <ListProducts type="categoryUrl" url={params?.categoryURL} />
     </div>
   );
 }

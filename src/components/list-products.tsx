@@ -16,12 +16,13 @@ import {
 } from "./ui/card";
 
 type ListProductsProps = {
+  type: "home" | "categoryUrl" | "categoryTypeUrl" | "sellerUrl";
   url?: string;
 };
-const ListProducts = ({ url }: ListProductsProps) => {
+const ListProducts = ({ type, url }: ListProductsProps) => {
   const { setProducts, addToCart } = useCartStore();
   const { data, isLoading, error } = useProducts({
-    categoryUrl: url,
+    [type]: url,
   });
   // const searchParams = useSearchParams()
   // const search = searchParams.get('search');
