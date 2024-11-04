@@ -16,6 +16,12 @@ export type SellerQueryParams = {
 export type CategoryTypesQueryParams = {
   categoryUrl?: string;
 };
+export type CategoryQueryParams = {
+  categoryUrl?: string;
+};
+export type CategoryTypeQueryParams = {
+  categoryTypeUrl?: string;
+};
 
 // ApiResponse
 export type ProductsApiResponse = {
@@ -29,6 +35,12 @@ export type CategoryTypesApiResponse = {
 };
 export type CategoriesApiResponse = {
   categories: Category[];
+};
+export type CategoryApiResponse = {
+  category: Category;
+};
+export type CategoryTypeApiResponse = {
+  categoryType: CategoryType;
 };
 export type ProductApiResponse = {
   product: Product;
