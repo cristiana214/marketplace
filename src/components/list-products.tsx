@@ -3,6 +3,7 @@
 import { useProducts } from "@/hooks/query/useProducts";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { useCartStore } from "@/lib/store/useCartStore";
+import clsx from "clsx";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -18,8 +19,9 @@ import {
 type ListProductsProps = {
   type: "home" | "categoryUrl" | "categoryTypeUrl" | "userUrl";
   url?: string;
+  className?: string;
 };
-const ListProducts = ({ type, url }: ListProductsProps) => {
+const ListProducts = ({ type, url, className }: ListProductsProps) => {
   const { setProducts, addToCart } = useCartStore();
   const { data, isLoading, error } = useProducts({
     [type]: url,
@@ -41,7 +43,12 @@ const ListProducts = ({ type, url }: ListProductsProps) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={clsx(
+        "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3",
+        className,
+      )}
+    >
       {filteredProducts?.map((product) => (
         <Card key={product.productId}>
           <CardHeader>

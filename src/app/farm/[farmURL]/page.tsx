@@ -14,6 +14,7 @@ import FarmRecentOrders from "@/components/farm-recent-orders";
 import FarmUpdates from "@/components/farm-updates";
 import ContactForm from "@/components/contact-form";
 import Cards from "@/components/reusable/cards";
+import ListProducts from "@/components/list-products";
 
 export default function FarmerPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<string>("products");
@@ -69,28 +70,11 @@ export default function FarmerPage(): JSX.Element {
               <TabsTrigger value="gallery">Gallery</TabsTrigger>
             </TabsList>
             <TabsContent value="products">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {products?.map((product) => (
-                  <Card key={product.productId}>
-                    <CardContent className="p-4">
-                      <Image
-                        src={product.imageUrl}
-                        alt={product.name}
-                        width={400}
-                        height={200}
-                        className="mb-2 rounded-md"
-                      />
-                      <h3 className="font-semibold">{product.name}</h3>
-                      <p className="text-sm text-gray-600">
-                        {product?.description || ""}
-                      </p>
-                      <p className="font-medium">
-                        P{product.price.toFixed(2)} / {product.unitDisplayName}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              <ListProducts
+                type="userUrl"
+                url={farmer.url}
+                className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2"
+              />
             </TabsContent>
             <TabsContent value="harvests">
               <Cards title="Upcoming Harvests">
