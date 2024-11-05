@@ -61,7 +61,7 @@ const ListProducts = ({ type, url, className }: ListProductsProps) => {
           <CardContent>
             <Link href={`/product/${product.productId}/`}>
               <img
-                src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${generateUrl(product.imageUrl)}`}
+                src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${generateUrl(product.imageUrl) || `https://img-farm.s3.us-west-2.amazonaws.com/product/image.png`}`}
                 alt={product.name}
                 className="mb-4 h-72 w-full rounded-md object-cover"
               />
@@ -69,9 +69,7 @@ const ListProducts = ({ type, url, className }: ListProductsProps) => {
             <p className="text-lg font-semibold">
               P{product?.price?.toFixed(2)}/{product.unitDisplayName}
             </p>
-            <p className="text-sm text-gray-500">
-              {product.description} id={product.productId}
-            </p>
+            <p className="text-sm text-gray-500">{product.description}</p>
 
             <Link href={`/sub-category/${product.typeUrl}/`}>
               <Badge variant="secondary">{product.typeName}</Badge>

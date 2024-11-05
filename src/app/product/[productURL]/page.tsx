@@ -157,36 +157,32 @@ export default function ProductPage({
             <TabsTrigger value="more-info">Description</TabsTrigger>
           </TabsList>
           <TabsContent value="more-info">
-            <Cards title="Description">
-              {/* <>
-                <p>Serving Size: {product.nutritionFacts.servingSize}</p>
-                <p>Calories: {product.nutritionFacts.calories}</p>
-                <p>Total Fat: {product.nutritionFacts.totalFat}</p>
-                <p>Sodium: {product.nutritionFacts.sodium}</p>
-                <p>
-                  Total Carbohydrate: {product.nutritionFacts.totalCarbohydrate}
-                </p>
-                <p>Protein: {product.nutritionFacts.protein}</p>
-              </> */}
-            </Cards>
+            <Cards title="Description">{product?.description}</Cards>
           </TabsContent>
           <TabsContent value="farmer">
-            <Cards title={product?.seller.name}>
+            <Cards title={product?.seller?.name}>
               <div className="mb-4 flex items-center gap-4">
                 <Avatar className="size-16">
                   <AvatarImage
-                    src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${product?.seller.image}`}
-                    alt={product?.seller.name}
+                    src={
+                      product?.seller?.image
+                        ? `https://img-farm.s3.us-west-2.amazonaws.com/product/${product.seller.image}`
+                        : "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
+                    }
+                    alt={product?.seller?.name}
                   />
-                  <AvatarFallback>{product?.seller.name}</AvatarFallback>
+                  <AvatarFallback>{product?.seller?.name}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <Link href={`/farm/${product?.seller.url}/`}>
+                  <Link href={`/farm/${product?.seller?.username}/`}>
                     <h3 className="font-semibold">
-                      {product?.seller.displayName}
+                      {product?.seller?.displayName}
                     </h3>{" "}
                   </Link>
-                  <p>{product?.seller?.bio}</p>
+                  <p>
+                    {product?.seller?.about?.split(" ").slice(0, 25).join(" ")}
+                    ...
+                  </p>
                 </div>
               </div>
             </Cards>

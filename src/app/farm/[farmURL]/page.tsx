@@ -15,40 +15,56 @@ import FarmUpdates from "@/components/farm-updates";
 import ContactForm from "@/components/contact-form";
 import Cards from "@/components/reusable/cards";
 import ListProducts from "@/components/list-products";
+import { useSeller } from "@/hooks/query/useSeller";
 
-export default function FarmerPage(): JSX.Element {
+export default function FarmerPage({
+  params,
+}: {
+  params: { farmURL: string };
+}) {
+  const { data, isLoading, error } = useSeller({
+    userUrl: params?.farmURL,
+  });
+  const user = data?.user;
   const [activeTab, setActiveTab] = useState<string>("products");
   return (
     <div className="container mx-auto p-4">
       <div className="mb-8 grid gap-8 md:grid-cols-3">
         <div className="md:col-span-1">
           <Image
-            src={farmer.image}
-            alt={farmer.name}
+            src={
+              user?.image ||
+              "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
+            }
+            alt={user?.name}
             width={300}
             height={300}
             className="mx-auto mb-4 rounded-full"
           />
-          <h1 className="mb-2 text-center text-3xl font-bold">{farmer.name}</h1>
+          <h1 className="mb-2 text-center text-3xl font-bold">{user?.name}</h1>
           <h2 className="mb-4 text-center text-xl text-gray-600">
-            {farmer.farmName}
+            {user?.displayName}
           </h2>
-          <p className="mb-6 text-center">{farmer.bio}</p>
+          <p className="mb-6 text-center">{user?.about}</p>
           <div className="mb-6 space-y-2">
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <MapIcon className="mr-2 size-5" />
               <span>{farmer.address}</span>
-            </div>
-            <div className="flex items-center">
-              <Phone className="mr-2 size-5" />
-              <span>{farmer.phone}</span>
-            </div>
+            </div> */}
+            {user?.contact ? (
+              <div className="flex items-center">
+                <Phone className="mr-2 size-5" />
+                <span>{user?.contact}</span>
+              </div>
+            ) : (
+              false
+            )}
             <div className="flex items-center">
               <Mail className="mr-2 size-5" />
-              <span>{farmer.email}</span>
+              <span>{user?.email}</span>
             </div>
           </div>
-          <div className="mb-6 flex justify-center space-x-4">
+          {/* <div className="mb-6 flex justify-center space-x-4">
             <a
               href={farmer.socialMedia.facebook}
               target="_blank"
@@ -57,7 +73,7 @@ export default function FarmerPage(): JSX.Element {
             >
               <Facebook className="size-6" />
             </a>
-          </div>
+          </div> */}
         </div>
         <div className="md:col-span-2">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -72,7 +88,7 @@ export default function FarmerPage(): JSX.Element {
             <TabsContent value="products">
               <ListProducts
                 type="userUrl"
-                url={farmer.url}
+                url={user?.username}
                 className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2"
               />
             </TabsContent>
