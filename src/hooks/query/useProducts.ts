@@ -22,6 +22,8 @@ const fetchProducts = async (
     params: {
       categoryUrl: queryParams?.categoryUrl, // Category URL filter
       categoryTypeUrl: queryParams?.categoryTypeUrl, // Category type URL filter
+      userUrl: queryParams?.userUrl, // userUrl filter
+
       pageNum: queryParams?.pageNum, // Page number for pagination
       limit: queryParams?.limit, // Limit of results per page
     },

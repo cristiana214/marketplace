@@ -31,6 +31,7 @@ const getBaseQuery = () =>
       seller: {
         userId: userTb.user_id,
         name: userTb.name,
+        username: userTb.username,
         email: userTb.email,
         about: userTb.about,
         displayName: userTb.display_name,

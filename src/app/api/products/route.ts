@@ -6,6 +6,7 @@ import {
   productImagesTb,
   productsTb,
   productUnitTb,
+  userTb,
 } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -39,6 +40,7 @@ const getBaseQuery = () =>
       productUnitTb,
       eq(productUnitTb.unit_type_id, productsTb.unit_type_id),
     )
+    .innerJoin(userTb, eq(userTb.user_id, productsTb.seller_id))
     .innerJoin(
       productImagesTb,
       eq(productsTb.product_id, productImagesTb.product_id),
@@ -47,6 +49,7 @@ export async function GET(req: NextRequest) {
   try {
     const categoryUrl = req.nextUrl.searchParams.get("categoryUrl");
     const categoryTypeUrl = req.nextUrl.searchParams.get("categoryTypeUrl");
+    const userUrl = req.nextUrl.searchParams.get("userUrl");
     let productsQuery;
     if (categoryUrl) {
       // get all products by category_url
@@ -57,6 +60,11 @@ export async function GET(req: NextRequest) {
       // get all products by type_url
       productsQuery = getBaseQuery()
         .where(eq(categoryTypesTb.url, String(categoryTypeUrl)))
+        .groupBy(productsTb.product_id);
+    } else if (userUrl) {
+      // get all products by type_url
+      productsQuery = getBaseQuery()
+        .where(eq(userTb.username, String(userUrl)))
         .groupBy(productsTb.product_id);
     } else {
       // get all products by type_url

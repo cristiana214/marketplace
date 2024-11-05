@@ -21,7 +21,6 @@ export default function IndexPage() {
           </h1>
           <div className="flex items-center space-x-4">
             <DropdownCategory />
-            <CartTotal />
           </div>
         </div>
         <p className="max-w-[700px] text-lg text-muted-foreground">
@@ -41,7 +40,7 @@ export default function IndexPage() {
           </Button>
         </Link>
 
-        <Link href="/category/vegetables/">
+        <Link href="/category/fruit-vegetables/">
           <Button className="bg-green-600 hover:font-semibold" rel="noreferrer">
             Vegetables
           </Button>
@@ -58,7 +57,7 @@ export default function IndexPage() {
         </Link>
       </div>
       <ListCategories />
-      <ListProducts />
+      <ListProducts type="home" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <ListCard />
       </div>
