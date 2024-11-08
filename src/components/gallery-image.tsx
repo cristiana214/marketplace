@@ -7,8 +7,11 @@ import { useSellerGallery } from "@/hooks/query/useSellerGallery";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { Button } from "./ui/button";
 
-const GalleryImage = () => {
-  const { data, isLoading, error } = useSellerGallery();
+type Props = { url: string };
+// also known as sub category?
+
+const GalleryImage = ({ url }: Props) => {
+  const { data, isLoading, error } = useSellerGallery({ userUrl: url });
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading product images</div>;
   const productImages = data?.productImages;

@@ -64,16 +64,6 @@ export default function FarmerPage({
               <span>{user?.email}</span>
             </div>
           </div>
-          {/* <div className="mb-6 flex justify-center space-x-4">
-            <a
-              href={farmer.socialMedia.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800"
-            >
-              <Facebook className="size-6" />
-            </a>
-          </div> */}
         </div>
         <div className="md:col-span-2">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -115,7 +105,7 @@ export default function FarmerPage({
             </TabsContent>
             <TabsContent value="gallery">
               <Cards title="Farm and Product Gallery">
-                <GalleryImage />
+                <GalleryImage url={user?.username} />
               </Cards>
             </TabsContent>
           </Tabs>

@@ -34,7 +34,7 @@ const fetchSellerGallery = async (
 
 /**
  * custom hook to fetch and manage the products data using React Query.
- * @param queryParams - query parameters (e.g., categoryUrl, pageNum) passed to the fetch function.
+ * @param queryParams - query parameters (e.g., userUrl) passed to the fetch function.
  * @returns UseQueryResult<ProductsApiResponse, Error> - React Query result containing either data or error.
  */
 export const useSellerGallery = (queryParams: ProductImagesQueryParams) =>
