@@ -30,6 +30,12 @@ export type Product = {
 } & Category &
   CategoryType;
 
+export type ProductImage = {
+  productId: number;
+  imageUrl: string;
+  name: string;
+};
+
 export type Products = Product[];
 
 // export type Farmer = {
