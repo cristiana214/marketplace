@@ -21,27 +21,17 @@ const getBaseQuery = () =>
     .leftJoin(userImageTb, eq(userTb.user_id, userImageTb.user_id));
 export async function GET(req: NextRequest) {
   try {
-    const userUrl = req.nextUrl.searchParams.get("userUrl");
+    const userQuery = getBaseQuery()
+      .where(eq(userTb.user_type, 2))
+      .groupBy(userTb.user_id);
 
-    let userQuery;
-    if (userUrl) {
-      userQuery = getBaseQuery()
-        .where(
-          and(eq(userTb.username, String(userUrl)), eq(userTb.user_type, 2)),
-        )
-        .groupBy(userTb.user_id);
-    } else {
-      return NextResponse.json({
-        message: "Error fetching seller",
-      });
-    }
     // Execute the query
-    const user = await userQuery;
-    if (user?.length) return NextResponse.json({ user: user[0] });
-    return NextResponse.json({ user: {} });
+    const users = await userQuery;
+    if (users?.length) return NextResponse.json({ users });
+    return NextResponse.json({ users: [] });
   } catch (error) {
     return NextResponse.json({
-      message: "Error fetching seller",
+      message: "Error fetching sellers",
       error,
     });
   }

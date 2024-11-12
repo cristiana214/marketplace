@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 
 type Props = { url: string };
-// also known as sub category
+// also known as sub category?
 const ListCategoryTypes = ({ url }: Props) => {
   const { data, isLoading, error } = useCategoryTypes({ categoryUrl: url });
   if (isLoading) return <div>Loading...</div>;

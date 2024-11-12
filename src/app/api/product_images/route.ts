@@ -1,12 +1,6 @@
 import { db } from "@/drizzle/db";
 import { eq } from "drizzle-orm";
-import {
-  categoriesTb,
-  categoryTypesTb,
-  productImagesTb,
-  productsTb,
-  userTb,
-} from "@/drizzle/schema";
+import { productImagesTb, productsTb, userTb } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

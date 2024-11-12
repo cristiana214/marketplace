@@ -22,6 +22,9 @@ export type ProductImagesQueryParams = {
 export type SellerQueryParams = {
   userUrl?: string;
 };
+export type SellersQueryParams = {
+  userUrl?: string;
+};
 export type CategoryTypesQueryParams = {
   categoryUrl?: string;
 };
@@ -56,6 +59,10 @@ export type ProductApiResponse = {
 };
 export type SellerApiResponse = {
   user: User;
+};
+
+export type SellersApiResponse = {
+  users: User[];
 };
 export type ProductImagesApiResponse = {
   productImages: ProductImage[];
