@@ -145,3 +145,21 @@ export const ordersTb = mysqlTable("orders", {
   date_added: timestamp("date_added").defaultNow().notNull(), // Date order was added (automatically set)
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(), // Tracks changes and updates automatically
 });
+
+
+
+export const orderProductsTb = mysqlTable('order_products', {
+  order_id: int('order_id').references(() => ordersTb.order_id)
+  .notNull(),
+  product_id: int('product_id').references(() => productsTb.product_id)
+  .notNull(),
+  user_id: int("seller_id")
+  .references(() => userTb.user_id)
+  .notNull(), // Foreign key to the user table
+  currentPrice: int('current_price').notNull(),
+  quantity: int('quantity').notNull(),
+  active: boolean('active').notNull().default(1),
+  dateAdded: timestamp('date_added').notNull().defaultNow(),
+  dateUpdated: timestamp('date_updated').notNull().defaultNow().onUpdateNow(),
+  totalPrice: decimal('total_price', { precision: 10, scale: 2 }).notNull(),
+});
