@@ -129,9 +129,7 @@ export const ordersTb = mysqlTable("orders", {
   message_for_seller: text("message_for_seller").default(""), // Message for seller (optional, default empty string)
   current_status: text("current_status").notNull(), // Current status of the order
   current_status_comments: text("current_status_comments").default(""), // Comments on current status (optional)
-  address_id: int("address_id")
-    .references(() => userAddressesTb.address_id)
-    .notNull(), // Foreign key to user's address table
+  address: text("address").notNull(),
   user_id: int("seller_id")
     .references(() => userTb.user_id)
     .notNull(), // Foreign key to the user table
@@ -146,20 +144,20 @@ export const ordersTb = mysqlTable("orders", {
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(), // Tracks changes and updates automatically
 });
 
-
-
-export const orderProductsTb = mysqlTable('order_products', {
-  order_id: int('order_id').references(() => ordersTb.order_id)
-  .notNull(),
-  product_id: int('product_id').references(() => productsTb.product_id)
-  .notNull(),
+export const orderProductsTb = mysqlTable("order_products", {
+  order_id: int("order_id")
+    .references(() => ordersTb.order_id)
+    .notNull(),
+  product_id: int("product_id")
+    .references(() => productsTb.product_id)
+    .notNull(),
   user_id: int("seller_id")
-  .references(() => userTb.user_id)
-  .notNull(), // Foreign key to the user table
-  currentPrice: int('current_price').notNull(),
-  quantity: int('quantity').notNull(),
-  active: boolean('active').notNull().default(1),
-  dateAdded: timestamp('date_added').notNull().defaultNow(),
-  dateUpdated: timestamp('date_updated').notNull().defaultNow().onUpdateNow(),
-  totalPrice: decimal('total_price', { precision: 10, scale: 2 }).notNull(),
+    .references(() => userTb.user_id)
+    .notNull(), // Foreign key to the user table
+  current_price: int("current_price").notNull(),
+  quantity: int("quantity").notNull(),
+  active: boolean("active").notNull().default(true),
+  date_added: timestamp("date_added").notNull().defaultNow(),
+  date_updated: timestamp("date_updated").notNull().defaultNow().onUpdateNow(),
+  total_price: decimal("total_price", { precision: 10, scale: 2 }).notNull(),
 });
