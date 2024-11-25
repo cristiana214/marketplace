@@ -22,8 +22,8 @@ export const userTb = mysqlTable("user", {
   contact: varchar("contact", { length: 20 }), // Manual input for phone number
   about: text("about"), // Optional, can be NULL
   email: varchar("email", { length: 255 }),
-  active: int("active").default(1), // Default is active
-  blocked: int("blocked").default(0), // Default is not blocked
+  active: boolean("active").default(true), // Default is active
+  blocked: boolean("blocked").default(false), // Default is not blocked
   user_type: int("user_type").notNull(), // 1 = customer, 2 = store/seller/farmer
   date_added: timestamp("date_added").defaultNow().notNull(),
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(),
@@ -53,6 +53,30 @@ export const userImageTb = mysqlTable("user_image", {
   user_id: int("user_id").references(() => userTb.user_id),
   image_url: varchar("image_url", { length: 500 }).notNull(), // varchar(500 ), not null
   image_type_id: smallint("image_type_id"), // 1= profile image, 2= gallery, 3=banner
+  date_added: timestamp("date_added")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP
+  date_updated: timestamp("date_updated")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const userEmailTb = mysqlTable("user_email", {
+  email_id: int("email_id").primaryKey().autoincrement(), // Primary key, int(11)
+  user_id: serial("user_id").references(() => userTb.user_id),
+  user_email: varchar("user_email", { length: 70 }).notNull(), // varchar(70), not null
+  date_added: timestamp("date_added")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP
+  date_updated: timestamp("date_updated")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+});
+export const userPasswordTb = mysqlTable("user_password", {
+  pass_id: int("pass_id").primaryKey().autoincrement(), // Primary key,
+  user_id: serial("user_id").references(() => userTb.user_id),
+  hash_password: varchar("hash_password", { length: 350 }).notNull(), // varchar(70), not null
+  is_primary: int("is_primary").notNull().default(1), // is_primary=1 current password,is_primary=2 means old password
   date_added: timestamp("date_added")
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP

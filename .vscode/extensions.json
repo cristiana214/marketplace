@@ -2,7 +2,6 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "csstools.postcss",
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-close-tag",
     "formulahendry.auto-complete-tag",
