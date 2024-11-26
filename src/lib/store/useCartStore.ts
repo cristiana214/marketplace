@@ -17,7 +17,7 @@ type CartState = {
   /**
    * function to add a product to the cary
    */
-  addToCart: (productId: number) => void;
+  addToCart: (productId: number, product: Product) => void;
   /**
    * function to remove a product from the cart.
    */
@@ -34,12 +34,13 @@ export const useCartStore = create<CartState>((set, get) => ({
   cart: [],
   products: [], // you would typically fetch and populate this elsewhere
 
-  addToCart: (productId: number) => {
+  addToCart: (productId: number, product: Product) => {
     set((state) => {
       // checks if the product is already in the cart by using find to search through the cart.
       const existingItem = state.cart.find(
         (item) => item.productId === productId,
       );
+
       // if the product is found, the quantity of that product is increased by 1.
       if (existingItem) {
         return {
@@ -50,9 +51,17 @@ export const useCartStore = create<CartState>((set, get) => ({
           ),
         };
       }
-      // if the product is not already in the cart, it's added with an initial quantity of 1.
+
       return {
+        // if the product is not already in the cart, it's added with an initial quantity of 1
         cart: [...state.cart, { productId, quantity: 1 }],
+        // also add product object to products this will be used in cart total display later
+        products: state.products
+          ? [...state.products, product].filter(
+              (p, index, self) =>
+                index === self.findIndex((x) => x.productId === p.productId),
+            ) // prevent duplicates in the products array
+          : [product],
       };
     });
   },
