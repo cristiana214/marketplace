@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
         .where(
           and(
             eq(productsTb.product_id, Number(productId)),
-            eq(userTb.user_type, 2),
+            // eq(userTb.user_type, 2),
           ),
         )
         .groupBy(productsTb.product_id);
