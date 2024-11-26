@@ -67,5 +67,7 @@ export type SellersApiResponse = {
 export type ProductImagesApiResponse = {
   productImages: ProductImage[];
 };
-
+export type OrdersApiResponse = {
+  orders: orderId;
+};
 // product: Product & { seller: User };
