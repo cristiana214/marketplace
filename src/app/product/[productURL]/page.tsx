@@ -10,10 +10,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Plus, Minus } from "lucide-react";
 import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
-// import { productFarmer as product, productFarmer } from "@/lib/data/product";
+
 // import { comments } from "@/lib/data/comments";
 import Cards from "@/components/reusable/cards";
-// import { productFarmer } from "@/lib/data/product";
 import { useProduct } from "@/hooks/query/useProduct";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { useCartStore } from "@/lib/store/useCartStore";
@@ -140,7 +139,10 @@ export default function ProductPage({
           <Button
             variant="outline"
             size="icon"
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            onClick={() => {
+              setQuantity(Math.max(1, quantity - 1));
+              removeFromCart(product?.productId || 0);
+            }}
           >
             <Minus className="size-4" />
           </Button>
