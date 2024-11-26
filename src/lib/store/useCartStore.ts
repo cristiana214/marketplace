@@ -15,7 +15,7 @@ type CartState = {
    */
   products?: Product[];
   /**
-   * function to add a product to the cary
+   * function to add a product to the cart, each product object will be added to products array for cart total display iteration
    */
   addToCart: (productId: number, product: Product) => void;
   /**
