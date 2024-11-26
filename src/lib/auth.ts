@@ -1,16 +1,20 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 
 import {
+  checkEmailExist,
   checkUserExist,
   getAuthUser,
   insertNewAuthUser,
 } from "@/drizzle/query/authentication";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 
+import bcrypt from "bcrypt";
 // https://next-auth.js.org/configuration/callbacks
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { signIn } from "next-auth/react";
 import { isAlphanumeric, blacklist } from "validator";
 
 export const authConfig: NextAuthOptions = {
@@ -28,18 +32,49 @@ export const authConfig: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials || !credentials.email || !credentials.password)
           return null;
+        try {
+          const { email, password } = credentials as {
+            email: string;
+            password: string;
+          };
 
-        // add credentials.email checker, query if email is available
-        // query dbUser is exist where email is equal to credentials.email
+          console.log("credentials");
+          console.log(credentials);
+          const { isSuccess, userExist } = await checkEmailExist({
+            email,
+          });
+          if (!isSuccess) {
+            throw new Error("No user found with this email.");
+          }
+          console.log("userExist.userPassword", userExist.userPassword);
+          // Verify password
+          const isValidPassword = await bcrypt.compare(
+            password,
+            userExist.userPassword,
+          );
+          if (!isValidPassword) {
+            console.log("Invalid password.");
+            throw new Error("Invalid password.");
+          }
 
-        // Verify Password here
-        // We are going to use a simple === operator
-        // In production DB, passwords should be encrypted using something like bcrypt...
-        // if (dbUser && dbUser.password === credentials.password) {
-        //   const { password, createdAt, id, ...dbUserWithoutPassword } = dbUser;
-        //   return dbUserWithoutPassword as User;
-        // }
+          console.log("userExist");
+          console.log(userExist);
 
+          // add credentials.email checker, query if email is available
+          // query dbUser is exist where email is equal to credentials.email
+
+          // Verify Password here
+          // We are going to use a simple === operator
+          // In production DB, passwords should be encrypted using something like bcrypt...
+          // if()
+          // if (dbUser && dbUser.password === credentials.password) {
+          //   const { password, createdAt, id, ...dbUserWithoutPassword } =
+          //     dbUser;
+          //   return dbUserWithoutPassword as User;
+          // }
+        } catch (e) {
+          return null;
+        }
         return null;
       },
     }),

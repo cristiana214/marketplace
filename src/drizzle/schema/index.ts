@@ -63,7 +63,6 @@ export const userImageTb = mysqlTable("user_image", {
 
 export const userEmailTb = mysqlTable("user_email", {
   email_id: int("email_id").primaryKey().autoincrement(), // Primary key, int(11)
-  user_id: serial("user_id").references(() => userTb.user_id),
   user_email: varchar("user_email", { length: 70 }).notNull(), // varchar(70), not null
   date_added: timestamp("date_added")
     .notNull()
@@ -72,11 +71,25 @@ export const userEmailTb = mysqlTable("user_email", {
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
 });
+
 export const userPasswordTb = mysqlTable("user_password", {
   pass_id: int("pass_id").primaryKey().autoincrement(), // Primary key,
   user_id: serial("user_id").references(() => userTb.user_id),
   hash_password: varchar("hash_password", { length: 350 }).notNull(), // varchar(70), not null
   is_primary: int("is_primary").notNull().default(1), // is_primary=1 current password,is_primary=2 means old password
+  date_added: timestamp("date_added")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP
+  date_updated: timestamp("date_updated")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const userLoginTb = mysqlTable("user_login", {
+  login_id: int("login_id").primaryKey().autoincrement(), // Primary key, int(11)
+  user_id: serial("user_id").references(() => userTb.user_id), // varchar(70), not null
+  type_id: int("type_id").notNull(), // type_id(1 google 2=email)
+  is_signup: int("is_signup").notNull().default(1), // 1=login 2=signup
   date_added: timestamp("date_added")
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`), // timestamp, default CURRENT_TIMESTAMP
