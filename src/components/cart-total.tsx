@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+
 "use client";
 
-import { products } from "@/lib/data/farm";
 import { useCartStore } from "@/lib/store/useCartStore";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,9 +13,11 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { generateUrl } from "@/lib/helper/generate-url";
 
 const CartTotal = () => {
-  const { cart, cartTotal, addToCart, removeFromCart } = useCartStore();
+  const { cart, cartTotal, addToCart, removeFromCart, products } =
+    useCartStore();
   const total = cartTotal();
 
   return (
@@ -35,7 +38,7 @@ const CartTotal = () => {
           </SheetHeader>
           <div className="mt-8 space-y-4">
             {cart.map((item) => {
-              const product = products.find(
+              const product = products?.find(
                 (p) => p.productId === item.productId,
               );
               if (!product) return null;
@@ -46,7 +49,7 @@ const CartTotal = () => {
                 >
                   <div className="flex items-center space-x-4">
                     <img
-                      src={product.imageUrl}
+                      src={`https://img-farm.s3.us-west-2.amazonaws.com/product/${generateUrl(product.imageUrl) || `https://img-farm.s3.us-west-2.amazonaws.com/product/image.png`}`}
                       alt={product.name}
                       className="size-16 rounded object-cover"
                     />
