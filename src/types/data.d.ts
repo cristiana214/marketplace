@@ -20,6 +20,7 @@ export type Product = {
   name: string;
   url: string;
   price: number;
+  currentPrice?: number;
   unitDisplayName: string;
   quantity: number;
   description: string;
@@ -114,3 +115,10 @@ export type Order = {
   total: number;
   items: { name: string; quantity: number }[];
 };
+export type OrderProduct = {
+  productId: number;
+  name?: string;
+  quantity: number;
+  currentPrice: number;
+};
+export type OrderProducts = { orderProducts: OrderProduct[] };
