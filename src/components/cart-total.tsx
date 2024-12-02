@@ -5,6 +5,8 @@
 import { useCartStore } from "@/lib/store/useCartStore";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 import {
   Sheet,
   SheetTrigger,
@@ -86,7 +88,9 @@ const CartTotal = () => {
               <span className="font-semibold">Total:</span>
               <span className="font-semibold">P{total}</span>
             </div>
-            <Button className="w-full">Proceed to Checkout</Button>
+            <Link href="/checkout/">
+              <Button className="w-full">Proceed to Checkout</Button>
+            </Link>
           </div>
         </SheetContent>
       </Sheet>

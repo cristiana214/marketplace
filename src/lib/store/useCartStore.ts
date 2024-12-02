@@ -60,9 +60,6 @@ export const useCartStore = create<CartState>((set, get) => ({
 
       // Add product to cart with current price
       if (product) {
-        console.log("productssss");
-        console.log(product);
-        console.log(...state.cart);
         return {
           cart: [
             ...state.cart,
