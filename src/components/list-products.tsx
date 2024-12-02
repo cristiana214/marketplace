@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @next/next/no-img-element */
+
 "use client";
 
 import { useProducts } from "@/hooks/query/useProducts";
@@ -22,16 +25,18 @@ type ListProductsProps = {
   className?: string;
 };
 const ListProducts = ({ type, url, className }: ListProductsProps) => {
-  const { setProducts, addToCart } = useCartStore();
+  const { addToCart } = useCartStore();
   const { data, isLoading, error } = useProducts({
     [type]: url,
   });
+
   // const searchParams = useSearchParams()
   // const search = searchParams.get('search');
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
   const filteredProducts = data?.products;
+
   if (!filteredProducts?.length) {
     return (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -80,7 +85,7 @@ const ListProducts = ({ type, url, className }: ListProductsProps) => {
           </CardContent>
           <CardFooter>
             <Button
-              onClick={() => addToCart(product.productId)}
+              onClick={() => addToCart(product.productId, product)}
               className="w-full"
             >
               Add to Cart

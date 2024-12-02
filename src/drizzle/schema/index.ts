@@ -165,9 +165,9 @@ export const ordersTb = mysqlTable("orders", {
   order_id: serial("order_id").primaryKey(),
   message_for_seller: text("message_for_seller").default(""), // Message for seller (optional, default empty string)
   current_status: text("current_status").notNull(), // Current status of the order
-  current_status_comments: text("current_status_comments").default(""), // Comments on current status (optional)
+
   address: text("address").notNull(),
-  user_id: int("seller_id")
+  user_id: int("user_id")
     .references(() => userTb.user_id)
     .notNull(), // Foreign key to the user table
   seller_id: int("seller_id")
@@ -188,13 +188,9 @@ export const orderProductsTb = mysqlTable("order_products", {
   product_id: int("product_id")
     .references(() => productsTb.product_id)
     .notNull(),
-  user_id: int("seller_id")
-    .references(() => userTb.user_id)
-    .notNull(), // Foreign key to the user table
   current_price: int("current_price").notNull(),
   quantity: int("quantity").notNull(),
   active: boolean("active").notNull().default(true),
   date_added: timestamp("date_added").notNull().defaultNow(),
   date_updated: timestamp("date_updated").notNull().defaultNow().onUpdateNow(),
-  total_price: decimal("total_price", { precision: 10, scale: 2 }).notNull(),
 });

@@ -10,25 +10,26 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Plus, Minus } from "lucide-react";
 import { GridItemEight, GridItemFour, GridLayout } from "@/components/ui/grid";
-// import { productFarmer as product, productFarmer } from "@/lib/data/product";
+
 // import { comments } from "@/lib/data/comments";
 import Cards from "@/components/reusable/cards";
-// import { productFarmer } from "@/lib/data/product";
 import { useProduct } from "@/hooks/query/useProduct";
 import { generateUrl } from "@/lib/helper/generate-url";
+import { useCartStore } from "@/lib/store/useCartStore";
 
 export default function ProductPage({
   params,
 }: {
   params: { productURL?: string };
 }) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   // handling the current active images on slide
   const [activeImage, setActiveImage] = useState(0);
 
   // set images from array string separated by comma
   const [images, setImages] = useState<string[]>([]);
   const [newComment, setNewComment] = useState("");
+  const { addToCart, removeFromCart } = useCartStore();
 
   const { data, isLoading, error } = useProduct({
     productId: params?.productURL,
@@ -44,6 +45,7 @@ export default function ProductPage({
   if (error) return <div>Error loading product</div>;
 
   const handleAddToCart = () => {
+    if (product) addToCart(product?.productId, product);
     console.log(`Added ${quantity} ${product?.name} to cart`);
   };
 
@@ -137,7 +139,10 @@ export default function ProductPage({
           <Button
             variant="outline"
             size="icon"
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            onClick={() => {
+              setQuantity(Math.max(1, quantity - 1));
+              removeFromCart(product?.productId || 0);
+            }}
           >
             <Minus className="size-4" />
           </Button>
@@ -145,11 +150,22 @@ export default function ProductPage({
           <Button
             variant="outline"
             size="icon"
-            onClick={() => setQuantity(quantity + 1)}
+            onClick={() => {
+              setQuantity(quantity + 1);
+              handleAddToCart();
+            }}
           >
             <Plus className="size-4" />
           </Button>
-          <Button onClick={handleAddToCart}>Add to Cart</Button>
+
+          <Button
+            onClick={() => {
+              setQuantity(quantity + 1);
+              handleAddToCart();
+            }}
+          >
+            Add to Cart
+          </Button>
         </div>
         <Tabs defaultValue="farmer">
           <TabsList>
