@@ -126,7 +126,7 @@ export const authConfig: NextAuthOptions = {
             const { isSuccess, userDb } = await getAuthUser({
               authId: user.id,
             });
-            // Pass the user information to the `jwt` callback
+
             if (isSuccess) {
               // Save the DB ID to pass it later
               user.userId = userDb?.[0]?.userId || 0;
@@ -138,6 +138,8 @@ export const authConfig: NextAuthOptions = {
             authId: user.id,
           });
 
+          console.log(" signIn isSuccess,userDb");
+          console.log(isSuccess, userDb);
           // pass the user information to the `jwt` callback
           if (isSuccess) {
             user.userId = userDb?.[0]?.userId || 0;
@@ -156,7 +158,7 @@ export const authConfig: NextAuthOptions = {
     async jwt({ token, user, account, profile }) {
       if (account && user) {
         // Store Google accessToken and idToken in the JWT
-        token.userId = user?.userId;
+        token.userId = user.userId;
         token.accessToken = account.access_token;
         token.idToken = account.id_token;
         token.name = user.name;
@@ -165,7 +167,6 @@ export const authConfig: NextAuthOptions = {
         token.authId = profile?.sub;
         token.email = user?.email;
         token.imageUrl = user?.imageUrl;
-        // token.emailVerified = profile?.email_verified;
       }
 
       return token;
@@ -174,13 +175,12 @@ export const authConfig: NextAuthOptions = {
     async session({ session, token, user }) {
       // Pass additional properties to the session
       const userData = {
-        userId: user?.userId,
+        userId: token.userId,
         accessToken: token.accessToken,
         authId: token.authId,
         name: token.name,
         imageUrl: token.imageUrl,
         email: token.email,
-        emailVerified: token.emailVerified,
       };
       if (userData) {
         session.user = userData;
