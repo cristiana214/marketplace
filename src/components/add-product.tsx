@@ -22,7 +22,7 @@ interface Product {
   quantity: number;
 }
 
-export default function SellerProductsPage() {
+export default function AddProduct() {
   const [products, setProducts] = useState<Product[]>([]);
   const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
     name: "",
