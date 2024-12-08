@@ -81,7 +81,6 @@ export const getAuthUser = async ({ authId }: CheckUserExist) => {
         ),
       )
       .groupBy(userTb.user_id);
-
     return { isSuccess: true, userDb };
   } catch (error) {
     console.log(error);
