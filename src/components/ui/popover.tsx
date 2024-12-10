@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
