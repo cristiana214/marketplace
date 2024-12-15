@@ -43,6 +43,7 @@
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
+    "cmdk": "^1.0.4",
     "drizzle-orm": "^0.31.2",
     "lucide-react": "0.105.0-alpha.4",
     "mysql2": "^3.11.3",
