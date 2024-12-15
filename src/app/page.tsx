@@ -72,7 +72,7 @@ export default function IndexPage() {
             className="bg-skyblue-500 hover:font-semibold"
             rel="noreferrer"
           >
-            Twitter
+            Twitters
           </Button>
         </Link>
       </div>
