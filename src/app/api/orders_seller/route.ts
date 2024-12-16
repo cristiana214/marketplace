@@ -1,5 +1,5 @@
 import { db } from "@/drizzle/db";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, sql, desc } from "drizzle-orm";
 import {
   ordersTb,
   productsTb,
@@ -49,6 +49,7 @@ export async function GET(req: NextRequest) {
           eq(ordersTb.active, true),
         ),
       )
+      .orderBy(desc(ordersTb.date_added))
       .groupBy(ordersTb.order_id, orderProductsTb.product_id);
     const orders = await ordersQuery;
 
