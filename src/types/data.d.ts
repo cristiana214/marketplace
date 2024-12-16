@@ -23,6 +23,7 @@ export type User = {
   displayName?: string;
   image: string;
   images: string[];
+  location?: string;
 };
 
 // one product
