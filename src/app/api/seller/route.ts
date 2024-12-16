@@ -26,9 +26,7 @@ export async function GET(req: NextRequest) {
     let userQuery;
     if (userUrl) {
       userQuery = getBaseQuery()
-        .where(
-          and(eq(userTb.username, String(userUrl)), eq(userTb.user_type, 2)),
-        )
+        .where(and(eq(userTb.username, String(userUrl))))
         .groupBy(userTb.user_id);
     } else {
       return NextResponse.json({

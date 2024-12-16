@@ -13,6 +13,17 @@ type CategoryType = {
   categoryName?: string;
   categoryUrl?: string;
 };
+export type User = {
+  userId: number;
+  name: string;
+  username?: string;
+  email: string;
+  about: string;
+  contact: number;
+  displayName?: string;
+  image: string;
+  images: string[];
+};
 
 // one product
 export type Product = {
