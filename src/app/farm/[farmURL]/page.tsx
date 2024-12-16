@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MapIcon, Phone, Mail, TruckIcon, Facebook } from "lucide-react";
 import { farmer, products } from "@/lib/data/farm";
@@ -16,6 +16,7 @@ import ContactForm from "@/components/contact-form";
 import Cards from "@/components/reusable/cards";
 import ListProducts from "@/components/list-products";
 import { useSeller } from "@/hooks/query/useSeller";
+import ListOrders from "@/components/admin/list-seller-orders";
 
 export default function FarmerPage({
   params,
@@ -36,7 +37,7 @@ export default function FarmerPage({
               user?.image ||
               "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
             }
-            alt={user?.name}
+            alt={user?.name || ""}
             width={300}
             height={300}
             className="mx-auto mb-4 rounded-full"
@@ -94,7 +95,8 @@ export default function FarmerPage({
             </TabsContent>
             <TabsContent value="orders">
               <Cards title="Recent Successful Orders">
-                <FarmRecentOrders />
+                {/* <FarmRecentOrders /> */}
+                <ListOrders type="sellerId" id={user?.userId} />
               </Cards>
             </TabsContent>
 

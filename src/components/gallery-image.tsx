@@ -7,7 +7,7 @@ import { useSellerGallery } from "@/hooks/query/useSellerGallery";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { Button } from "./ui/button";
 
-type Props = { url: string };
+type Props = { url?: string };
 // also known as sub category?
 
 const GalleryImage = ({ url }: Props) => {
