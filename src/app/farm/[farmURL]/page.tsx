@@ -94,7 +94,7 @@ export default function FarmerPage({
               </Cards>
             </TabsContent>
             <TabsContent value="orders">
-              <Cards title="Recent Successful Orders">
+              <Cards title="Recent Orders">
                 {/* <FarmRecentOrders /> */}
                 <ListOrders type="sellerId" id={user?.userId} />
               </Cards>
