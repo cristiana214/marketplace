@@ -37,9 +37,10 @@ export function SiteHeaderLogin() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuItem className="font-medium">
-              <Link href="/user/"> {user?.name}</Link>
+              <Link href="/user/"> My Account</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>My Orders</DropdownMenuItem>
+            <DropdownMenuItem>Be a Seller</DropdownMenuItem>
             <DropdownMenuItem onClick={() => signOut()}>
               Sign out
             </DropdownMenuItem>
