@@ -176,7 +176,7 @@ export default function ProductPage({
             <Cards title="Description">{product?.description}</Cards>
           </TabsContent>
           <TabsContent value="farmer">
-            <Cards title={product?.seller?.name}>
+            <Cards title={product?.seller?.name || ""}>
               <div className="mb-4 flex items-center gap-4">
                 <Avatar className="size-16">
                   <AvatarImage
