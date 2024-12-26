@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Leaf, Users, Truck, Heart, Info } from "lucide-react";
-import Footer from "../footer/page";
-import WhyChooseUs from "../whychoose/page";
+// import Footer from "../footer/page";
+// import WhyChooseUs from "../whychoose/page";
 
 export default function About() {
   return (
@@ -45,8 +45,8 @@ export default function About() {
           </div>
         </div>
       </div>
-      <WhyChooseUs />
-      <Footer />
+      {/* <WhyChooseUs /> */}
+      {/* <Footer /> */}
     </section>
   );
 }
