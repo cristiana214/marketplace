@@ -9,23 +9,23 @@ import ListProducts from "@/components/list-products";
 import CartTotal from "@/components/cart-total";
 
 import DropdownCategory from "@/components/dropdown-category";
+import Footer from "@/components/footer";
 
 export default function IndexPage() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="mb-8  flex w-full flex-col gap-2">
-        <div className="flex w-full items-start justify-between">
+    <section className="container mx-auto grid w-full max-w-6xl items-center gap-6 pb-8 pt-6 md:py-10">
+      <div className="mx-auto max-w-6xl px-4 py-10">
+        <div className="flex w-full items-start justify-center">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Fresh Farm Produce - Direct from local Farm
             <br className="hidden sm:inline" />
           </h1>
-          <div className="flex items-center space-x-4">
-            <DropdownCategory />
-          </div>
+          <div className="flex items-center space-x-4" />
+
+          <p className="max-w-[700px] text-lg text-muted-foreground ">
+            {siteConfig.description}
+          </p>
         </div>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          {siteConfig.description}
-        </p>
       </div>
 
       <h2 className="mt-8 text-2xl font-semibold leading-tight tracking-tighter sm:text-3xl">
@@ -61,7 +61,8 @@ export default function IndexPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <ListCard />
       </div>
-      <div className="flex flex-wrap gap-4">
+
+      {/* <div className="flex flex-wrap gap-4">
         <Link href={siteConfig.links.facebook}>
           <Button className="bg-blue-700 hover:font-semibold" rel="noreferrer">
             Facebook
@@ -74,8 +75,8 @@ export default function IndexPage() {
           >
             Twitters
           </Button>
-        </Link>
-      </div>
+        </Link> */}
+      {/* </div> */}
     </section>
   );
 }

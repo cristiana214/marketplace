@@ -12,6 +12,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import ReactQueryProvider from "@/lib/providers/react-query-providers";
 import { NextAuthProvider } from "@/lib/providers/session-providers";
 import Script from "next/script";
+import Footer from "@/components/footer";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <TailwindIndicator />
         </ThemeProvider>
       </body>
+      <Footer />
     </html>
   );
 }

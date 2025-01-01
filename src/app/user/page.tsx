@@ -28,21 +28,11 @@ export default function UserPage() {
             {session?.user.name}
           </h1>
           <ReausableDialog />
-          <p className="mb-6 text-center">{JSON.stringify(session)}</p>
-          {/* <p className="mb-6 text-center">{session?.user?.about || ""}</p> */}
-          <div className="mb-6 space-y-2">
-            {/* <div className="flex items-center">
-              <MapIcon className="mr-2 size-5" />
-              <span>{farmer.address}</span>
-            </div> */}
-            {/* <div className="flex items-center">
-              <Phone className="mr-2 size-5" />
-              <span>{session?.user?.contact}</span>
-            </div> */}
-            <div className="flex items-center">
-              <Mail className="mr-2 size-5" />
-              <span>{session?.user?.email}</span>
-            </div>
+          <p className="mb-6 text-center" />
+
+          <div className="flex items-center">
+            <Mail className="mr-2 size-5" />
+            <span>{session?.user?.email}</span>
           </div>
         </div>
       </div>
