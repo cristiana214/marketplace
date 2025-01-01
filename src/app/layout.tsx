@@ -75,8 +75,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </ReactQueryProvider>
           <TailwindIndicator />
         </ThemeProvider>
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }

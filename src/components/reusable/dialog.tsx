@@ -23,10 +23,8 @@ export function ReausableDialog() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis
-            est doloremque voluptatum, error suscipit accusamus libero officiis
-          </DialogDescription>
+          Manage and protect your account
+          <DialogDescription />
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -35,7 +33,7 @@ export function ReausableDialog() {
             </Label>
             <Input
               id="name"
-              defaultValue="Cristiana Chavez"
+              defaultValue="IC Marie Chavez"
               className="col-span-3"
             />
           </div>
@@ -45,7 +43,17 @@ export function ReausableDialog() {
             </Label>
             <Input
               id="username"
-              defaultValue="@cristiana214"
+              defaultValue="@icmarie"
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Email
+            </Label>
+            <Input
+              id="email"
+              defaultValue="icitsice@gmail.com"
               className="col-span-3"
             />
           </div>
