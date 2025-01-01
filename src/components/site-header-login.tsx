@@ -39,8 +39,12 @@ export function SiteHeaderLogin() {
             <DropdownMenuItem className="font-medium">
               <Link href="/user/"> My Account</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>My Orders</DropdownMenuItem>
-            <DropdownMenuItem>Be a Seller</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/user/orders">My Orders</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/seller-signup"> Be a Seller</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => signOut()}>
               Sign out
             </DropdownMenuItem>
