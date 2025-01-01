@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Facebook, Twitter, Instagram, Linkedin, Send } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -26,24 +28,37 @@ export default function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="transition-colors hover:text-green-300">
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-green-300"
+                >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="transition-colors hover:text-green-300">
+                <Link
+                  href="/products/"
+                  className="transition-colors hover:text-green-300"
+                >
                   Products
-                </a>
+                </Link>
               </li>
+
               <li>
-                <a href="#" className="transition-colors hover:text-green-300">
+                <a
+                  href="/about/"
+                  className="transition-colors hover:text-green-300"
+                >
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="transition-colors hover:text-green-300">
+                <Link
+                  href="/farms/"
+                  className="transition-colors hover:text-green-300"
+                >
                   Farmers
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

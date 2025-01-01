@@ -9,7 +9,7 @@ import ListProducts from "@/components/list-products";
 import CartTotal from "@/components/cart-total";
 
 import DropdownCategory from "@/components/dropdown-category";
-import Footer from "./footer/page";
+import Footer from "@/components/footer";
 
 export default function IndexPage() {
   return (
@@ -62,11 +62,7 @@ export default function IndexPage() {
         <ListCard />
       </div>
 
-
-      <div>
-        <Footer />
-
-      <div className="flex flex-wrap gap-4">
+      {/* <div className="flex flex-wrap gap-4">
         <Link href={siteConfig.links.facebook}>
           <Button className="bg-blue-700 hover:font-semibold" rel="noreferrer">
             Facebook
@@ -79,9 +75,8 @@ export default function IndexPage() {
           >
             Twitters
           </Button>
-        </Link>
-
-      </div>
+        </Link> */}
+      {/* </div> */}
     </section>
   );
 }
