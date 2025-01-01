@@ -8,15 +8,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { submitSellerApplication } from "../actions/submit-seller-application";
+// import { submitSellerApplication } from "../actions/submit-seller-application";
 
 export function SellerApplicationForm() {
-  const [state, formAction] = useFormState(submitSellerApplication, null);
+  // const [state, formAction] = useFormState(submitSellerApplication, null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (formData: FormData) => {
     setIsSubmitting(true);
-    formAction(formData);
+    // formAction(formData);
   };
 
   return (
@@ -107,7 +107,7 @@ export function SellerApplicationForm() {
         </Label>
       </div>
 
-      {state?.success && (
+      {/* {state?.success && (
         <div className="flex items-center space-x-2 text-green-600">
           <CheckCircle2 className="size-5" />
           <span>{state.message}</span>
@@ -119,7 +119,7 @@ export function SellerApplicationForm() {
           <AlertCircle className="size-5" />
           <span>An error occurred. Please try again.</span>
         </div>
-      )}
+      )} */}
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Submit Application"}
