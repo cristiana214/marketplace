@@ -23,8 +23,8 @@ const ListSellers = () => {
               <Avatar className="size-12">
                 <AvatarImage
                   src={
-                    seller?.imageUrl
-                      ? `https://img-farm.s3.us-west-2.amazonaws.com/user/${seller.imageUrl}`
+                    seller?.image
+                      ? `https://img-farm.s3.us-west-2.amazonaws.com/user/${seller.image}`
                       : "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
                   }
                   alt={seller.displayName}
@@ -66,7 +66,7 @@ const ListSellers = () => {
                 false
               )}
             </div>
-            <Link href={`/farm/${generateUrl(seller.username)}`}>
+            <Link href={`/farm/${generateUrl(seller.username || "")}`}>
               <Button className="w-full" variant="outline">
                 View Products
               </Button>

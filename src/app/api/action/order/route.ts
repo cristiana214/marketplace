@@ -16,8 +16,19 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const currentUserId = session?.user?.userId;
+    if (!currentUserId) {
+      return NextResponse.json({
+        success: false,
+        message: "403 authentication required",
+      });
+    }
+
     const body = await req.json();
-    const { order, orderProducts } = body;
+    const { order } = body;
+    const { orderProducts } = body;
+    // set currentUserId to buyer
+    order.user_id = currentUserId;
 
     // insert order into the database
     const insertOrderResult = await db.insert(ordersTb).values(order);

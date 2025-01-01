@@ -2,8 +2,8 @@ import type {
   Product,
   Category,
   CategoryType,
-  User,
   ProductImage,
+  User,
 } from "@/types/data";
 // QueryParams
 export type ProductsQueryParams = {
@@ -55,7 +55,7 @@ export type CategoryTypeApiResponse = {
   categoryType: CategoryType;
 };
 export type ProductApiResponse = {
-  product: Product;
+  product: Product & { seller: User };
 };
 export type SellerApiResponse = {
   user: User;
@@ -71,3 +71,9 @@ export type OrdersApiResponse = {
   orders: orderId;
 };
 // product: Product & { seller: User };
+export type OrdersQueryParams = {
+  sellerId?: sellerId;
+  userUrl?: string;
+  pageNum?: number;
+  limit?: number;
+};

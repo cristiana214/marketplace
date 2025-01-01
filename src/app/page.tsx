@@ -62,8 +62,25 @@ export default function IndexPage() {
         <ListCard />
       </div>
 
+
       <div>
         <Footer />
+
+      <div className="flex flex-wrap gap-4">
+        <Link href={siteConfig.links.facebook}>
+          <Button className="bg-blue-700 hover:font-semibold" rel="noreferrer">
+            Facebook
+          </Button>
+        </Link>
+        <Link href={siteConfig.links.twitter}>
+          <Button
+            className="bg-skyblue-500 hover:font-semibold"
+            rel="noreferrer"
+          >
+            Twitters
+          </Button>
+        </Link>
+
       </div>
     </section>
   );
