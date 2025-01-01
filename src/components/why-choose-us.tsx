@@ -31,7 +31,7 @@ export default function WhyChooseUs() {
       </h2>
       <div className="mx-auto flex w-full max-w-6xl">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((reason, index) => (
+          {reasons?.map((reason, index) => (
             <div key={index} className="text-center">
               <reason.icon className="mx-auto mb-4 size-12 text-green-600" />
               <h3 className="mb-2 text-xl font-semibold">{reason.title}</h3>
