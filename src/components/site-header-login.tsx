@@ -35,16 +35,21 @@ export function SiteHeaderLogin() {
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
-            <DropdownMenuItem className="font-medium">
-              <Link href="/user/"> My Account</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href="/user/orders">My Orders</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href="/seller-signup"> Be a Seller</Link>
-            </DropdownMenuItem>
+          <DropdownMenuContent className="w-56 " align="end" forceMount>
+            <Link href="/user/">
+              <DropdownMenuItem className="font-medium">
+                My Account
+              </DropdownMenuItem>
+            </Link>
+
+            <Link href="/user/orders">
+              <DropdownMenuItem className="w-full">My Orders</DropdownMenuItem>
+            </Link>
+
+            <Link href="/seller-signup">
+              <DropdownMenuItem>Be a Seller</DropdownMenuItem>
+            </Link>
+
             <DropdownMenuItem onClick={() => signOut()}>
               Sign out
             </DropdownMenuItem>
