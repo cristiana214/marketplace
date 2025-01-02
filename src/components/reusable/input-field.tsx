@@ -1,7 +1,6 @@
-import { Label } from "@radix-ui/react-select";
+import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
-import type { FormInput } from "../order-step1-checkout-form";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 
 const InputField = ({
   name,
@@ -10,7 +9,7 @@ const InputField = ({
   type = "text",
   error,
 }: {
-  name: keyof FormInput;
+  name: string;
   label: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
@@ -18,7 +17,7 @@ const InputField = ({
   error?: string;
 }) => (
   <div>
-    <Label>{label}</Label>
+    {label ? <Label>{label}</Label> : false}
     <Controller
       name={name}
       control={control}

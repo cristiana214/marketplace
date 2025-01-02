@@ -1,7 +1,6 @@
-import { Label } from "@radix-ui/react-select";
+import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
-import type { FormInput } from "../order-step1-checkout-form";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 
 const TextareaField = ({
   name,
@@ -9,7 +8,7 @@ const TextareaField = ({
   control,
   error,
 }: {
-  name: keyof FormInput;
+  name: string;
   label: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
