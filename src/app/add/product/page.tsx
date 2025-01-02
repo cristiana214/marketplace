@@ -1,4 +1,4 @@
-import AddProduct from "@/components/add-product";
+import AddProduct from "@/components/admin/add-product";
 
 export default function AddProductPage() {
   return <AddProduct />;

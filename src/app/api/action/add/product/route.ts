@@ -1,9 +1,10 @@
 import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
 import { productImagesTb, productsTb } from "@/drizzle/schema"; // Import table definitions
 import { db } from "@/drizzle/db"; // import your DB instance
 import { authConfig } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+/* eslint-disable @typescript-eslint/naming-convention */
+import { NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,8 +28,6 @@ export async function POST(req: NextRequest) {
     const { name, description, typeId, unitTypeId, price, quantityAvailable } =
       body;
     const { images } = body;
-    console.log("body");
-    console.log(body);
 
     const product = {
       name,
