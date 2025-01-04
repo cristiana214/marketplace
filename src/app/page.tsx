@@ -56,11 +56,6 @@ export default function IndexPage() {
           </Button>
         </Link>
       </div>
-      <ListCategories />
-      <ListProducts type="home" />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <ListCard />
-      </div>
 
       {/* <div className="flex flex-wrap gap-4">
         <Link href={siteConfig.links.facebook}>
