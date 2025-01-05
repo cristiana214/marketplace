@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import TextareaField from "@/components/reusable/textarea-field";
 import InputField from "@/components/reusable/input-field";
 import type { ComboboxItem } from "@/lib/data/unitTypes";
+import { Label } from "@/components/ui/label";
 import ComboCategories from "../combo-categories";
 import ComboCategoryTypes from "../combo-category-types";
 import ComboUnitTypes from "../combo-unit-types";
@@ -106,7 +107,7 @@ const AddProduct = () => {
 
   return (
     <div className="container mx-auto mb-5">
-      <h1 className="text-xl font-bold">Add Products</h1>
+      <h1 className="mb-4 text-2xl  font-bold">Add Products</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <InputField
           name="name"
@@ -121,9 +122,10 @@ const AddProduct = () => {
           control={form.control}
           error={form.formState.errors.description?.message}
         />
-
         <div>
-          <div>Category: {selectedCategoryItems[0]?.name}</div>
+          <Label htmlFor="category_id">
+            Category: {selectedCategoryItems[0]?.name}
+          </Label>
           <Controller
             name="category_id"
             control={form.control}
@@ -142,8 +144,9 @@ const AddProduct = () => {
               {form.formState.errors.type_id.message}
             </p>
           )}
-
-          <div> Category types: {selectedCategoryTypeItems[0]?.name}</div>
+          <Label htmlFor="type_id">
+            Category Type: {selectedCategoryTypeItems[0]?.name}
+          </Label>
           <Controller
             name="type_id"
             control={form.control}
@@ -167,7 +170,9 @@ const AddProduct = () => {
 
         {/* Unit Type Combobox */}
         <div>
-          <div>Unit Type: {selectedUnitTypeItems[0]?.name}</div>
+          <Label htmlFor="type_id">
+            Unit Type: {selectedUnitTypeItems[0]?.name}
+          </Label>
           <Controller
             name="unit_type_id"
             control={form.control}
@@ -202,6 +207,7 @@ const AddProduct = () => {
           type="number"
           error={form.formState.errors.quantity_available?.message}
         />
+
         <div>
           <Controller
             name="images"
