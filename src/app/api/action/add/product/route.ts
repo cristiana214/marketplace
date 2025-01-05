@@ -25,18 +25,24 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { name, description, typeId, unitTypeId, price, quantityAvailable } =
-      body;
+    const {
+      product_name,
+      description,
+      type_id,
+      unit_type_id,
+      price,
+      quantity_available,
+    } = body;
     const { images } = body;
 
     const product = {
-      name,
+      name: product_name,
       description,
-      type_id: typeId,
+      type_id,
       seller_id: 0,
-      unit_type_id: unitTypeId,
+      unit_type_id,
       price,
-      quantity_available: quantityAvailable,
+      quantity_available,
     };
     // set currentUserId to buyer
     product.seller_id = currentUserId;
