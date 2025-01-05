@@ -27,7 +27,7 @@ const ComboUnitTypes = ({ selectedItems, onSelect }: ComboUnitsProps) => {
           selectedItems={selectedItems}
           onSelect={handleSelect}
           isMultiSelect={false} // Set to false for single select
-          placeholder="Select Unit..."
+          placeholder="Select Unit"
         />
       </div>
     );

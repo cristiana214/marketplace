@@ -40,7 +40,7 @@ const ComboCategoryTypes = ({
           selectedItems={selectedItems}
           onSelect={handleSelect}
           isMultiSelect={false} // Set to false for single select
-          placeholder="Select Types..."
+          placeholder="Select Types"
         />
       </div>
     );
