@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import ComboCategories from "../combo-categories";
 import ComboCategoryTypes from "../combo-category-types";
 import ComboUnitTypes from "../combo-unit-types";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 // import FileUploadField from "@/component/reusable/file-upload-field";
 
 const schema = z.object({
@@ -107,109 +108,114 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="container mx-auto mb-5">
-      <h1 className="mb-4 text-2xl  font-bold">Add Products</h1>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <InputField
-          name="name"
-          label="name"
-          control={form.control}
-          type="text"
-          error={form.formState.errors?.product_name?.message}
-        />
-        <TextareaField
-          name="description"
-          label="Description"
-          control={form.control}
-          error={form.formState.errors.description?.message}
-        />
-        <div>
-          <Label htmlFor="category_id">
-            Category: {selectedCategoryItems[0]?.name}
-          </Label>
-          <Controller
-            name="category_id"
+    <Card>
+      <CardHeader>
+        <CardTitle>Add New Product</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <InputField
+              name="name"
+              label="Product Name"
+              control={form.control}
+              type="text"
+              error={form.formState.errors?.product_name?.message}
+            />
+          </div>
+          <TextareaField
+            name="description"
+            label="Description"
             control={form.control}
-            render={({ field }) => (
-              <ComboCategories
-                selectedItems={selectedCategoryItems} // Pass the state
-                onSelect={(selected) => {
-                  setSelectedCategoryItems(selected); // Update state
-                  field.onChange(selected[0]?.id); // Update form value
-                }}
-              />
-            )}
+            error={form.formState.errors.description?.message}
           />
-          {form.formState.errors.type_id && (
-            <p className="text-sm text-red-500">
-              {form.formState.errors.type_id.message}
-            </p>
-          )}
-          <Label htmlFor="type_id">
-            Category Type: {selectedCategoryTypeItems[0]?.name}
-          </Label>
-          <Controller
-            name="type_id"
+          <div className="flex items-center space-y-2 ">
+            <Label htmlFor="category_id" className="mr-4">
+              Category:
+            </Label>
+            <Controller
+              name="category_id"
+              control={form.control}
+              render={({ field }) => (
+                <ComboCategories
+                  selectedItems={selectedCategoryItems} // Pass the state
+                  onSelect={(selected) => {
+                    setSelectedCategoryItems(selected); // Update state
+                    field.onChange(selected[0]?.id); // Update form value
+                    form.setValue("type_id", 0); // reset category type when category changes
+                    setSelectedCategoryTypeItems([]);
+                  }}
+                />
+              )}
+            />
+            {form.formState.errors.type_id && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.type_id.message}
+              </p>
+            )}
+          </div>
+          <div className="flex items-center space-y-2 ">
+            <Label htmlFor="type_id">Category Type: </Label>
+            <Controller
+              name="type_id"
+              control={form.control}
+              render={({ field }) => (
+                <ComboCategoryTypes
+                  selectedItems={selectedCategoryTypeItems} // Pass the state
+                  onSelect={(selected) => {
+                    setSelectedCategoryTypeItems(selected); // Update state
+                    field.onChange(selected[0]?.id); // Update form value
+                  }}
+                  categoryUrl={selectedCategoryItems[0]?.url || ""}
+                />
+              )}
+            />
+            {form.formState.errors.type_id && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.type_id.message}
+              </p>
+            )}
+          </div>
+
+          {/* Unit Type Combobox */}
+          <div className="flex items-center space-y-2 ">
+            <Label htmlFor="type_id">Unit Type: </Label>
+            <Controller
+              name="unit_type_id"
+              control={form.control}
+              render={({ field }) => (
+                <ComboUnitTypes
+                  selectedItems={selectedUnitTypeItems}
+                  onSelect={(selected) => {
+                    setSelectedUnitTypeItems(selected); // Update state
+                    field.onChange(selected[0]?.id); // Update form value
+                  }}
+                />
+              )}
+            />
+            {form.formState.errors.unit_type_id && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.unit_type_id.message}
+              </p>
+            )}
+          </div>
+
+          <InputField
+            name="price"
+            label="Price"
             control={form.control}
-            render={({ field }) => (
-              <ComboCategoryTypes
-                selectedItems={selectedCategoryTypeItems} // Pass the state
-                onSelect={(selected) => {
-                  setSelectedCategoryTypeItems(selected); // Update state
-                  field.onChange(selected[0]?.id); // Update form value
-                }}
-                categoryUrl={selectedCategoryItems[0]?.url || ""}
-              />
-            )}
+            type="number"
+            error={form.formState.errors.price?.message}
           />
-          {form.formState.errors.type_id && (
-            <p className="text-sm text-red-500">
-              {form.formState.errors.type_id.message}
-            </p>
-          )}
-        </div>
-
-        {/* Unit Type Combobox */}
-        <div>
-          <Label htmlFor="type_id">
-            Unit Type: {selectedUnitTypeItems[0]?.name}
-          </Label>
-          <Controller
-            name="unit_type_id"
+          <InputField
+            name="quantity_available"
+            label="Quantity Available"
             control={form.control}
-            render={({ field }) => (
-              <ComboUnitTypes
-                selectedItems={selectedUnitTypeItems}
-                onSelect={(selected) => {
-                  setSelectedUnitTypeItems(selected); // Update state
-                  field.onChange(selected[0]?.id); // Update form value
-                }}
-              />
-            )}
+            type="number"
+            error={form.formState.errors.quantity_available?.message}
           />
-          {form.formState.errors.unit_type_id && (
-            <p className="text-sm text-red-500">
-              {form.formState.errors.unit_type_id.message}
-            </p>
-          )}
-        </div>
 
-        <InputField
-          name="price"
-          label="Price"
-          control={form.control}
-          type="number"
-          error={form.formState.errors.price?.message}
-        />
-        <InputField
-          name="quantity_available"
-          label="Quantity Available"
-          control={form.control}
-          type="number"
-          error={form.formState.errors.quantity_available?.message}
-        />
-
-        {/* <div>
+          {/* <div>
           <Controller
             name="images"
             control={form.control}
@@ -230,11 +236,12 @@ const AddProduct = () => {
             </p>
           )}
         </div> */}
-        <Button type="submit" className="mb-7 ">
-          {uploading ? "Uploading..." : "Add Product"}
-        </Button>
-      </form>
-    </div>
+          <Button type="submit" className="mb-7 ">
+            {uploading ? "Uploading..." : "Add Product"}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 
