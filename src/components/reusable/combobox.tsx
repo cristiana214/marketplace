@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 export type ComboboxItem = {
   id: string | number;
   name: string;
+  url?: string;
 };
 
 type ComboboxProps = {

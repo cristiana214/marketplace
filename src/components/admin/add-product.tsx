@@ -82,7 +82,7 @@ const AddProduct = () => {
   const uploadImages = async (files: File[]): Promise<string[]> => {
     const uploadedUrls: string[] = [];
     for (const file of files) {
-      const { data } = await axios.post("/api/action/add/product", {
+      const { data } = await axios.post("/api/action/add/product-images", {
         name: file.name,
       });
       await axios.put(data.url, file);
