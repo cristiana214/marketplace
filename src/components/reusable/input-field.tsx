@@ -8,6 +8,7 @@ const InputField = ({
   control,
   type = "text",
   error,
+  className,
 }: {
   name: string;
   label: string;
@@ -15,6 +16,7 @@ const InputField = ({
   control: any;
   type?: string;
   error?: string;
+  className?: string;
 }) => (
   <div>
     {label ? <Label>{label}</Label> : false}
@@ -25,7 +27,7 @@ const InputField = ({
         <Input
           {...field}
           type={type}
-          className="mt-1"
+          className={` mt-1 ${className}`}
           onChange={(e) => {
             const value =
               type === "number" ? Number(e.target.value) : e.target.value;
