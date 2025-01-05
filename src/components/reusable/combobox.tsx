@@ -6,12 +6,7 @@
 import { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { cn } from "@/lib/utils";
-
-export type ComboboxItem = {
-  id: string | number;
-  name: string;
-  url?: string;
-};
+import type { ComboboxItem } from "@/lib/data/unitTypes";
 
 type ComboboxProps = {
   items: ComboboxItem[];
