@@ -6,6 +6,7 @@ import { Mail } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { ReausableDialog } from "@/components/reusable/dialog";
+import { ProductsList } from "@/components/admin/product-list";
 
 export default function UserPage() {
   const { data: session, status } = useSession();
@@ -28,13 +29,15 @@ export default function UserPage() {
             {session?.user.name}
           </h1>
           <ReausableDialog />
-          <p className="mb-6 text-center" />
 
           <div className="flex items-center">
             <Mail className="mr-2 size-5" />
             <span>{session?.user?.email}</span>
           </div>
         </div>
+      </div>
+      <div className="container mx-auto px-4 py-8">
+        <ProductsList />
       </div>
     </div>
   );
