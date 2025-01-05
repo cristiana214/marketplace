@@ -6,22 +6,23 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TextareaField from "@/components/reusable/textarea-field";
 import InputField from "@/components/reusable/input-field";
-import { useCategoryTypes } from "@/hooks/query/useCategoryTypes";
-import { useCategories } from "@/hooks/query/useCategories";
+import type { ComboboxItem } from "@/lib/data/unitTypes";
 import ComboCategories from "../combo-categories";
-import Combobox from "../reusable/combobox";
+import ComboCategoryTypes from "../combo-category-types";
+import ComboUnitTypes from "../combo-unit-types";
 // import FileUploadField from "@/component/reusable/file-upload-field";
 
 const schema = z.object({
   product_name: z.string().min(1, " Name is required"),
   description: z.string().min(1, "Description is required"),
   type_id: z.number().int().min(1, "Category Type is required"),
+  category_id: z.number().int().min(1, "Category id is required"),
   unit_type_id: z.number().int().min(1, "Unit Type is required"),
   price: z.number().positive("Price must be positive"),
   quantity_available: z.number().positive("Quantity must be positive"),
@@ -33,6 +34,15 @@ type FormInput = z.infer<typeof schema>;
 const AddProduct = () => {
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState(false);
+  const [selectedCategoryItems, setSelectedCategoryItems] = useState<
+    ComboboxItem[]
+  >([]);
+  const [selectedCategoryTypeItems, setSelectedCategoryTypeItems] = useState<
+    ComboboxItem[]
+  >([]);
+  const [selectedUnitTypeItems, setSelectedUnitTypeItems] = useState<
+    ComboboxItem[]
+  >([]);
   // const categoryTypes = useCategoryTypes();
 
   const form = useForm<FormInput>({
@@ -40,6 +50,7 @@ const AddProduct = () => {
     defaultValues: {
       product_name: "",
       description: "",
+      category_id: undefined,
       type_id: undefined,
       unit_type_id: undefined,
       price: 0,
@@ -47,17 +58,6 @@ const AddProduct = () => {
       images: [],
     },
   });
-
-  // Fetch options for combobox
-  // const { data: unitTypes } = useQuery(["unitTypes"], async () => {
-  //   const response = await axios.get("/api/unit-types");
-  //   return response.data;
-  // });
-
-  // const { data: categoryTypes } = useQuery(["categoryTypes"], async () => {
-  //   const response = await axios.get("/api/category-types");
-  //   return response.data;
-  // });
 
   const saveProduct = useMutation({
     mutationFn: async (data: any) => {
@@ -123,18 +123,39 @@ const AddProduct = () => {
         />
 
         <div>
+          <div>Category: {selectedCategoryItems[0]?.name}</div>
+          <Controller
+            name="category_id"
+            control={form.control}
+            render={({ field }) => (
+              <ComboCategories
+                selectedItems={selectedCategoryItems} // Pass the state
+                onSelect={(selected) => {
+                  setSelectedCategoryItems(selected); // Update state
+                  field.onChange(selected[0]?.id); // Update form value
+                }}
+              />
+            )}
+          />
+          {form.formState.errors.type_id && (
+            <p className="text-sm text-red-500">
+              {form.formState.errors.type_id.message}
+            </p>
+          )}
+
+          <div> Category types: {selectedCategoryTypeItems[0]?.name}</div>
           <Controller
             name="type_id"
             control={form.control}
             render={({ field }) => (
-              // <Combobox
-              //   items={categoryTypes || []}
-              //   selectedItems={field?.value}
-              //   onSelect={(value) => field.onChange(value)}
-              //   placeholder="Select Category Type"
-              //   label="Category Type"
-              // />
-              <ComboCategories />
+              <ComboCategoryTypes
+                selectedItems={selectedCategoryTypeItems} // Pass the state
+                onSelect={(selected) => {
+                  setSelectedCategoryTypeItems(selected); // Update state
+                  field.onChange(selected[0]?.id); // Update form value
+                }}
+                categoryUrl={selectedCategoryItems[0]?.url || ""}
+              />
             )}
           />
           {form.formState.errors.type_id && (
@@ -146,24 +167,25 @@ const AddProduct = () => {
 
         {/* Unit Type Combobox */}
         <div>
-          {/* <Controller
+          <div>Unit Type: {selectedUnitTypeItems[0]?.name}</div>
+          <Controller
             name="unit_type_id"
             control={form.control}
             render={({ field }) => (
-              <Combobox
-                options={unitTypes || []}
-                value={field.value}
-                onChange={(value) => field.onChange(value)}
-                placeholder="Select Unit Type"
-                label="Unit Type"
+              <ComboUnitTypes
+                selectedItems={selectedUnitTypeItems}
+                onSelect={(selected) => {
+                  setSelectedUnitTypeItems(selected); // Update state
+                  field.onChange(selected[0]?.id); // Update form value
+                }}
               />
             )}
-          /> */}
-          {/* {form.formState.errors.unit_type_id && (
+          />
+          {form.formState.errors.unit_type_id && (
             <p className="text-sm text-red-500">
               {form.formState.errors.unit_type_id.message}
             </p>
-          )} */}
+          )}
         </div>
 
         <InputField
