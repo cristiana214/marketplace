@@ -2,7 +2,19 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
-export function ProductCard({ product, onEdit, onDelete }) {
+interface Product {
+  image: string;
+  name: string;
+  price: number;
+}
+
+interface ProductCardProps {
+  product: Product;
+  onEdit: () => void;
+  onDelete: () => void;
+}
+
+export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
   return (
     <Card>
       <CardContent className="p-4">

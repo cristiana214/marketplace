@@ -1,19 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function AddEditProductForm({ product, onSubmit, onCancel }) {
+interface Product {
+  name: string;
+  price: string;
+  image: string;
+}
+
+interface AddEditProductFormProps {
+  product?: Product;
+  onSubmit: (product: Product) => void;
+  onCancel: () => void;
+}
+
+export function AddEditProductForm({
+  product,
+  onSubmit,
+  onCancel,
+}: AddEditProductFormProps) {
   const [formData, setFormData] = useState(
     product || { name: "", price: "", image: "" },
   );
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     onSubmit(formData);
   };

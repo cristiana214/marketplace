@@ -22,21 +22,35 @@ export function ProductsList() {
     },
   ]);
   const [isAdding, setIsAdding] = useState(false);
-  const [editingProduct, setEditingProduct] = useState(null);
+  const [editingProduct, setEditingProduct] = useState<{
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+  } | null>(null);
 
-  const handleAddProduct = (newProduct) => {
+  const handleAddProduct = (newProduct: {
+    name: string;
+    price: number;
+    image: string;
+  }) => {
     setProducts([...products, { ...newProduct, id: Date.now() }]);
     setIsAdding(false);
   };
 
-  const handleEditProduct = (updatedProduct) => {
+  const handleEditProduct = (updatedProduct: {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+  }) => {
     setProducts(
       products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p)),
     );
     setEditingProduct(null);
   };
 
-  const handleDeleteProduct = (productId) => {
+  const handleDeleteProduct = (productId: number) => {
     setProducts(products.filter((p) => p.id !== productId));
   };
 
@@ -56,16 +70,16 @@ export function ProductsList() {
           />
         ))}
       </div>
-      {(isAdding || editingProduct) && (
+      {/* {(isAdding || editingProduct) && (
         <AddEditProductForm
-          product={editingProduct}
+          product={editingProduct || undefined}
           onSubmit={editingProduct ? handleEditProduct : handleAddProduct}
           onCancel={() => {
             setIsAdding(false);
             setEditingProduct(null);
           }}
         />
-      )}
+      )} */}
     </Card>
   );
 }
