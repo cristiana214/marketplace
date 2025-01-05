@@ -27,18 +27,17 @@ const ComboCategories = ({ selectedItems, onSelect }: ComboCategoriesProps) => {
     onSelect(selected);
   };
 
-  if (comboboxItems?.length)
-    return (
-      <div className="flex w-28 items-center space-x-4">
-        <Combobox
-          items={comboboxItems}
-          selectedItems={selectedItems}
-          onSelect={handleSelect}
-          isMultiSelect={false} // Set to false for single select
-          placeholder="Select Category..."
-        />
-      </div>
-    );
-  return false;
+  if (!comboboxItems?.length) return null;
+  return (
+    <div className="flex w-28 items-center space-x-4">
+      <Combobox
+        items={comboboxItems}
+        selectedItems={selectedItems}
+        onSelect={handleSelect}
+        isMultiSelect={false} // Set to false for single select
+        placeholder="Select Category"
+      />
+    </div>
+  );
 };
 export default ComboCategories;

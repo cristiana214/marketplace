@@ -19,18 +19,17 @@ const ComboUnitTypes = ({ selectedItems, onSelect }: ComboUnitsProps) => {
     onSelect(selected);
   };
 
-  if (unitTypes?.length)
-    return (
-      <div className="flex w-28 items-center space-x-4">
-        <Combobox
-          items={unitTypes}
-          selectedItems={selectedItems}
-          onSelect={handleSelect}
-          isMultiSelect={false} // Set to false for single select
-          placeholder="Select Unit"
-        />
-      </div>
-    );
-  return false;
+  if (!unitTypes?.length) return null;
+  return (
+    <div className="flex w-28 items-center space-x-4">
+      <Combobox
+        items={unitTypes}
+        selectedItems={selectedItems}
+        onSelect={handleSelect}
+        isMultiSelect={false} // Set to false for single select
+        placeholder="Select Unit"
+      />
+    </div>
+  );
 };
 export default ComboUnitTypes;
