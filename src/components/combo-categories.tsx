@@ -1,40 +1,44 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
 
-import { useState } from "react";
+import { useCategories } from "@/hooks/query/useCategories";
 import type { ComboboxItem } from "./reusable/combobox";
 import Combobox from "./reusable/combobox";
 
-const ComboCategories = () => {
-  const categories = [
-    { categoryId: 1, categoryName: "Rice", categoryUrl: "rice" },
-    { categoryId: 2, categoryName: "Wheat", categoryUrl: "wheat" },
-    { categoryId: 3, categoryName: "Corn", categoryUrl: "corn" },
-  ];
+interface ComboCategoriesProps {
+  selectedItems: ComboboxItem[] | undefined;
+  onSelect: (selected: ComboboxItem[]) => void;
+}
+const ComboCategories = ({ selectedItems, onSelect }: ComboCategoriesProps) => {
+  const { data, isLoading, error } = useCategories();
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading categories</div>;
+  const categories = data?.categories;
 
-  const comboboxItems: ComboboxItem[] = categories.map((category) => ({
+  const comboboxItems = categories?.map((category) => ({
     id: category.categoryId,
     name: category.categoryName,
+    url: category.categoryUrl,
   }));
 
-  const [selectedItems, setSelectedItems] = useState<ComboboxItem[]>([]);
-
   const handleSelect = (selected: ComboboxItem[]) => {
-    setSelectedItems(selected);
-    console.log("Selected Items:", selected);
+    onSelect(selected);
   };
 
-  return (
-    <div className="flex w-28 items-center space-x-4">
-      <Combobox
-        items={comboboxItems}
-        selectedItems={selectedItems}
-        onSelect={handleSelect}
-        isMultiSelect // Set to false for single select
-        placeholder="Select Category..."
-      />
-    </div>
-  );
+  if (comboboxItems?.length)
+    return (
+      <div className="flex w-28 items-center space-x-4">
+        <Combobox
+          items={comboboxItems}
+          selectedItems={selectedItems}
+          onSelect={handleSelect}
+          isMultiSelect={false} // Set to false for single select
+          placeholder="Select Category..."
+        />
+      </div>
+    );
+  return false;
 };
 export default ComboCategories;
