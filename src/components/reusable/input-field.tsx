@@ -13,7 +13,7 @@ const InputField = ({
   label: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
-  type: string;
+  type?: string;
   error?: string;
 }) => (
   <div>
@@ -21,7 +21,18 @@ const InputField = ({
     <Controller
       name={name}
       control={control}
-      render={({ field }) => <Input {...field} type={type} className="mt-1" />}
+      render={({ field }) => (
+        <Input
+          {...field}
+          type={type}
+          className="mt-1"
+          onChange={(e) => {
+            const value =
+              type === "number" ? Number(e.target.value) : e.target.value;
+            field.onChange(value);
+          }}
+        />
+      )}
     />
     {error && <p className="text-sm text-red-500">{error}</p>}
   </div>
