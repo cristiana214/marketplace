@@ -1,5 +1,9 @@
 import AddProduct from "@/components/admin/add-product";
 
 export default function AddProductPage() {
-  return <AddProduct />;
+  return (
+    <div className="flex justify-center bg-zinc-100">
+      <AddProduct />
+    </div>
+  );
 }

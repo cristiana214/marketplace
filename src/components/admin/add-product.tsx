@@ -108,7 +108,7 @@ const AddProduct = () => {
   };
 
   return (
-    <Card>
+    <Card className="my-8 w-6/12">
       <CardHeader>
         <CardTitle>Add New Product</CardTitle>
       </CardHeader>
@@ -116,7 +116,7 @@ const AddProduct = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <InputField
-              name="name"
+              name="product_name"
               label="Product Name"
               control={form.control}
               type="text"
