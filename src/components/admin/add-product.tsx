@@ -153,9 +153,10 @@ const AddProduct = () => {
                 {form.formState.errors.type_id.message}
               </p>
             )}
-          </div>
-          <div className="flex items-center space-y-2 ">
-            <Label htmlFor="type_id">Category Type: </Label>
+
+            <Label htmlFor="type_id" className="ml-8 mr-4">
+              Category Type:{" "}
+            </Label>
             <Controller
               name="type_id"
               control={form.control}
@@ -179,7 +180,9 @@ const AddProduct = () => {
 
           {/* Unit Type Combobox */}
           <div className="flex items-center space-y-2 ">
-            <Label htmlFor="type_id">Unit Type: </Label>
+            <Label htmlFor="type_id" className=" mr-4">
+              Unit Type:{" "}
+            </Label>
             <Controller
               name="unit_type_id"
               control={form.control}
@@ -199,21 +202,23 @@ const AddProduct = () => {
               </p>
             )}
           </div>
-
-          <InputField
-            name="price"
-            label="Price"
-            control={form.control}
-            type="number"
-            error={form.formState.errors.price?.message}
-          />
-          <InputField
-            name="quantity_available"
-            label="Quantity Available"
-            control={form.control}
-            type="number"
-            error={form.formState.errors.quantity_available?.message}
-          />
+          <div className="flex items-center ">
+            <InputField
+              name="price"
+              label="Price"
+              control={form.control}
+              type="number"
+              error={form.formState.errors.price?.message}
+            />
+            <InputField
+              className="ml-6 mr-4"
+              name="quantity_available"
+              label="Quantity Available"
+              control={form.control}
+              type="number"
+              error={form.formState.errors.quantity_available?.message}
+            />
+          </div>
 
           {/* <div>
           <Controller
