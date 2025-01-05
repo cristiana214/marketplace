@@ -4,7 +4,7 @@
 "use client";
 
 import { useCategories } from "@/hooks/query/useCategories";
-import type { ComboboxItem } from "./reusable/combobox";
+import type { ComboboxItem } from "@/lib/data/unitTypes";
 import Combobox from "./reusable/combobox";
 
 interface ComboCategoriesProps {

@@ -3,11 +3,8 @@
 
 "use client";
 
-import { useState } from "react";
-import { useCategories } from "@/hooks/query/useCategories";
 import { useCategoryTypes } from "@/hooks/query/useCategoryTypes";
-import { categories } from "@/lib/data/farm";
-import type { ComboboxItem } from "./reusable/combobox";
+import type { ComboboxItem } from "@/lib/data/unitTypes";
 import Combobox from "./reusable/combobox";
 
 interface ComboCategoriesProps {
@@ -25,7 +22,6 @@ const ComboCategoryTypes = ({
   if (error) return <div>Error loading categories</div>;
   const categoryTypes = data?.categoryTypes;
 
-  console.log("Categories types: ", categoryTypes);
   const comboboxItems = categoryTypes?.map((categoryType) => ({
     id: categoryType.typeId,
     name: categoryType.typeName,
@@ -34,7 +30,6 @@ const ComboCategoryTypes = ({
 
   const handleSelect = (selected: ComboboxItem[]) => {
     onSelect(selected);
-    console.log("Selected Items:", selected);
   };
 
   if (comboboxItems?.length)
