@@ -27,7 +27,7 @@ const schema = z.object({
   unit_type_id: z.number().int().min(1, "Unit Type is required"),
   price: z.number().positive("Price must be positive"),
   quantity_available: z.number().positive("Quantity must be positive"),
-  images: z.array(z.instanceof(File)), // Image files
+  // images: z.array(z.instanceof(File)), // Image files
 });
 
 type FormInput = z.infer<typeof schema>;
@@ -56,12 +56,12 @@ const AddProduct = () => {
       unit_type_id: undefined,
       price: 0,
       quantity_available: 0,
-      images: [],
+      // images: [],
     },
   });
 
   const saveProduct = useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: FormInput) => {
       const response = await fetch("/api/action/add/product/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -95,8 +95,9 @@ const AddProduct = () => {
   const onSubmit = async (formData: FormInput) => {
     setUploading(true);
     try {
-      const uploadedUrls = await uploadImages(formData.images);
-      const productData = { ...formData, images: uploadedUrls };
+      // const uploadedUrls = await uploadImages(formData.images);
+      // const productData = { ...formData, images: uploadedUrls };
+      const productData = { ...formData };
       saveProduct.mutate(productData);
     } catch (error) {
       console.error("Error uploading images or saving product:", error);
@@ -208,7 +209,7 @@ const AddProduct = () => {
           error={form.formState.errors.quantity_available?.message}
         />
 
-        <div>
+        {/* <div>
           <Controller
             name="images"
             control={form.control}
@@ -228,7 +229,7 @@ const AddProduct = () => {
               {form.formState.errors.images.message}
             </p>
           )}
-        </div>
+        </div> */}
         <Button type="submit" className="mb-7 ">
           {uploading ? "Uploading..." : "Add Product"}
         </Button>
