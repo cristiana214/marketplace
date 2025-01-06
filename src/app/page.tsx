@@ -56,6 +56,7 @@ export default function IndexPage() {
           </Button>
         </Link>
       </div>
+      <ListProducts type="home" />
 
       {/* <div className="flex flex-wrap gap-4">
         <Link href={siteConfig.links.facebook}>
