@@ -1,7 +1,6 @@
-import { Label } from "@radix-ui/react-select";
+import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
-import type { FormInput } from "../order-step1-checkout-form";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 
 const InputField = ({
   name,
@@ -9,20 +8,33 @@ const InputField = ({
   control,
   type = "text",
   error,
+  className,
 }: {
-  name: keyof FormInput;
+  name: string;
   label: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
-  type: string;
+  type?: string;
   error?: string;
+  className?: string;
 }) => (
   <div>
-    <Label>{label}</Label>
+    {label ? <Label>{label}</Label> : false}
     <Controller
       name={name}
       control={control}
-      render={({ field }) => <Input {...field} type={type} className="mt-1" />}
+      render={({ field }) => (
+        <Input
+          {...field}
+          type={type}
+          className={` mt-1 ${className}`}
+          onChange={(e) => {
+            const value =
+              type === "number" ? Number(e.target.value) : e.target.value;
+            field.onChange(value);
+          }}
+        />
+      )}
     />
     {error && <p className="text-sm text-red-500">{error}</p>}
   </div>
