@@ -1,12 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
+
 "use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import MyOrders from "../../components/sellerprofile/my-orders";
-import CompletedOrders from "../../components/sellerprofile/completed-orders";
-import InProgressOrders from "../../components/sellerprofile/in-progress-orders";
+import InProgressOrders from "@/components/sellerprofile/in-progress-orders";
+import MyOrders from "@/components/sellerprofile/my-orders";
+import CompletedOrders from "@/components/sellerprofile/completed-orders";
+import { useSession } from "next-auth/react";
 
 const SellerProfile = () => {
+  const { data: session } = useSession();
+  const user = session?.user;
   const [activeTab, setActiveTab] = useState("myOrders");
 
   return (
@@ -15,13 +20,13 @@ const SellerProfile = () => {
       <div className="rounded-lg bg-white p-6 shadow-md">
         <div className="mb-6 flex items-center">
           <img
-            src="/placeholder.svg?height=100&width=100"
+            src="https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
             alt="Seller Avatar"
             className="mr-6 size-24 rounded-full"
           />
           <div>
-            <h2 className="text-2xl font-semibold">John Farmer</h2>
-            <p className="text-gray-600">Organic Vegetable Specialist</p>
+            <h2 className="text-2xl font-semibold">{user?.name}</h2>
+            <p className="text-gray-600">{user?.email}</p>
           </div>
         </div>
         <div className="mb-6 flex space-x-4">
