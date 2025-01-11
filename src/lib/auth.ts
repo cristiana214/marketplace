@@ -149,6 +149,7 @@ export const authConfig: NextAuthOptions = {
             user.userId = userDb?.[0]?.userId || 0;
             user.imageUrl = userDb?.[0]?.imageUrl || "";
             user.userType = userDb?.[0]?.userType || 1;
+            user.username = userDb?.[0]?.username || "1";
           }
           return true;
         } catch (e) {
@@ -172,6 +173,7 @@ export const authConfig: NextAuthOptions = {
         token.authId = profile?.sub;
         token.email = user?.email;
         token.imageUrl = user?.imageUrl;
+        token.username = user?.username;
       }
 
       return token;
@@ -186,6 +188,7 @@ export const authConfig: NextAuthOptions = {
         name: token.name,
         imageUrl: token.imageUrl,
         email: token.email,
+        username: token.username,
       };
       if (userData) {
         session.user = userData;
