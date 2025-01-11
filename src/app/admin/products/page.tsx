@@ -14,9 +14,8 @@ const SellerProducts = () => {
   const user = session?.user;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold">My Products</h1>
-
+    <div className="container mx-auto px-4 ">
+      <h3 className="mb-4 text-xl font-semibold">My Products</h3>
       <ProductsList>
         <Button
           onClick={() => {

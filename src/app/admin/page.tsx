@@ -3,8 +3,8 @@ import { BarChart3, Users, Sprout, ShoppingCart } from "lucide-react";
 
 export default function AdminDashboard() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+    <div className="container mx-auto px-4">
+      <h3 className="mb-4 text-xl font-semibold">Admin Dashboard</h3>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
