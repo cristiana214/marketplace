@@ -7,7 +7,7 @@ import {
   getAuthUser,
   insertNewAuthUser,
 } from "@/drizzle/query/authentication";
-import type { NextAuthOptions, User } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 
 import bcrypt from "bcrypt";
 // https://next-auth.js.org/configuration/callbacks
@@ -16,7 +16,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { signIn } from "next-auth/react";
 import { isAlphanumeric, blacklist } from "validator";
-
+/**
+ * Note:
+ * to update the user types needs to update the next-auth.d.ts file
+ */
 export const authConfig: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -141,9 +144,11 @@ export const authConfig: NextAuthOptions = {
           console.log(" signIn isSuccess,userDb");
           console.log(isSuccess, userDb);
           // pass the user information to the `jwt` callback
+
           if (isSuccess) {
             user.userId = userDb?.[0]?.userId || 0;
             user.imageUrl = userDb?.[0]?.imageUrl || "";
+            user.userType = userDb?.[0]?.userType || 1;
           }
           return true;
         } catch (e) {
@@ -162,7 +167,7 @@ export const authConfig: NextAuthOptions = {
         token.accessToken = account.access_token;
         token.idToken = account.id_token;
         token.name = user.name;
-
+        token.userType = user.userType;
         // Include additional profile info (if needed)
         token.authId = profile?.sub;
         token.email = user?.email;
