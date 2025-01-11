@@ -29,7 +29,7 @@ export default function FarmerPage({
   const user = data?.user;
   const [activeTab, setActiveTab] = useState<string>("products");
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto w-10/12 p-4">
       <div className="mb-8 grid gap-8 md:grid-cols-3">
         <div className="md:col-span-1">
           <Image

@@ -38,6 +38,7 @@ export const checkUserExist = async ({
         about: userTb.about,
         authId: userAuthTb.auth_id,
         authEmail: userAuthTb.auth_email,
+        userType: userTb.user_type,
       })
       .from(userTb)
       .innerJoin(userAuthTb, eq(userAuthTb.user_id, userTb.user_id))
@@ -68,6 +69,7 @@ export const getAuthUser = async ({ authId }: CheckUserExist) => {
         about: userTb.about,
         contact: userTb.contact,
         email: userTb.email,
+        userType: userTb.user_type,
       })
       .from(userTb)
       .innerJoin(userAuthTb, eq(userAuthTb.user_id, userTb.user_id))
@@ -77,13 +79,11 @@ export const getAuthUser = async ({ authId }: CheckUserExist) => {
           eq(userTb.active, Boolean(1)),
           eq(userTb.blocked, Boolean(0)),
           eq(userAuthTb.auth_id, authId),
-          eq(userTb.user_type, 1),
         ),
       )
       .groupBy(userTb.user_id);
     return { isSuccess: true, userDb };
   } catch (error) {
-    console.log(error);
     return { isSuccess: false, error };
   }
 };

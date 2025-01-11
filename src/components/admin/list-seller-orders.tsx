@@ -9,7 +9,6 @@ import moment from "moment";
 
 import { useOrders } from "@/hooks/query/useOrders";
 import { Hash, Calendar, User, DollarSign } from "lucide-react";
-import { index } from "drizzle-orm/pg-core";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 
 type ListOrdersProps = {

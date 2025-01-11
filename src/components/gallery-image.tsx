@@ -15,6 +15,8 @@ const GalleryImage = ({ url }: Props) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading product images</div>;
   const productImages = data?.productImages;
+  if (data?.productImages.length === 0)
+    return <div className="mb-4 text-sm">No images available yet.</div>;
 
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
