@@ -30,7 +30,7 @@ export default function UserPage() {
           </h1>
           <ReausableDialog />
 
-          <div className="mt-4 flex items-center">
+          <div className="flex items-center">
             <Mail className="mr-2 size-5" />
             <span>{session?.user?.email}</span>
           </div>
