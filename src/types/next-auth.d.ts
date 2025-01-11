@@ -8,6 +8,7 @@ declare module "next-auth" {
       /** The user's database ID */
       userId: number;
       imageUrl?: string;
+      userType?: number;
     } & DefaultSession["user"];
   }
 
@@ -15,6 +16,7 @@ declare module "next-auth" {
     /** The user's database ID */
     userId: number;
     imageUrl?: string;
+    userType?: number;
   }
 }
 
@@ -23,5 +25,6 @@ declare module "next-auth/jwt" {
     /** The user's database ID */
     userId: number;
     imageUrl?: string;
+    userType?: number;
   }
 }
