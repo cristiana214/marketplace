@@ -3,7 +3,7 @@ import { BarChart3, Users, Sprout, ShoppingCart } from "lucide-react";
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-6">
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold">Admin Dashboard</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -18,16 +18,6 @@ export default function AdminDashboard() {
             <p className="text-xs text-muted-foreground">
               +10% from last month
             </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <Users className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">5,678</div>
-            <p className="text-xs text-muted-foreground">+5% from last month</p>
           </CardContent>
         </Card>
         <Card>
