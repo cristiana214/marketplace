@@ -7,7 +7,7 @@ export const siteConfig = {
   mainNav: [
     {
       title: "Farms",
-      href: "/farm/nanay-nitz-fresh-veggies-farm/",
+      href: "/farms/",
     },
     {
       title: "Vegetables",
