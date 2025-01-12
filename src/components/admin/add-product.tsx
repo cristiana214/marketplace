@@ -242,7 +242,7 @@ const AddProduct = () => {
             </p>
           )}
         </div> */}
-          <ImageUploader />
+          <ImageUploader id="56" />
           <Button type="submit" className="mb-7 ">
             {uploading ? "Uploading..." : "Add Product"}
           </Button>

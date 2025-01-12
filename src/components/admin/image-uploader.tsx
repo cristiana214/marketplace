@@ -15,7 +15,10 @@ const ALLOWED_TYPES = ["image/jpeg", "image/png"]; // allowed file types: JPEG a
  * - validates file size and type.
  * - provides functionality to remove files and error messages dynamically.
  */
-const ImageUploader = () => {
+type ImageUploaderProps = {
+  id: string;
+};
+const ImageUploader = ({ id }: ImageUploaderProps) => {
   // state to store valid files
   const [files, setFiles] = useState<File[]>([]);
 
@@ -86,9 +89,11 @@ const ImageUploader = () => {
       // upload each file asynchronously
       const uploadPromises = files.map(async (file) => {
         // request a signed URL from the server
-        const { data } = await axios.post("/api/upload-images", {
+        const { data } = await axios.post("/api/action/upload_image", {
           name: file.name,
           type: file.type,
+          size: file.size,
+          id,
         });
 
         // use the signed URL to upload the file directly to S3
