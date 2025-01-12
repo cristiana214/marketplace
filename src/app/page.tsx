@@ -15,7 +15,10 @@ export default function IndexPage() {
   return (
     <section className="container mx-auto grid w-full max-w-6xl items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="mx-auto max-w-6xl px-4 py-10">
-        <div className="flex w-full items-start justify-center">
+        <div
+          className="items-s tart flex
+        w-full justify-center"
+        >
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Fresh Farm Produce - Direct from local Farm
             <br className="hidden sm:inline" />
