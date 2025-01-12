@@ -18,6 +18,7 @@ import ComboCategories from "../combo-categories";
 import ComboCategoryTypes from "../combo-category-types";
 import ComboUnitTypes from "../combo-unit-types";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+import ImageUploader from "./image-uploader";
 // import FileUploadField from "@/component/reusable/file-upload-field";
 
 const schema = z.object({
@@ -241,6 +242,7 @@ const AddProduct = () => {
             </p>
           )}
         </div> */}
+          <ImageUploader />
           <Button type="submit" className="mb-7 ">
             {uploading ? "Uploading..." : "Add Product"}
           </Button>
