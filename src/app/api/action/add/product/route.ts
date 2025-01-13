@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       price,
       quantity_available,
     } = body;
-    const { images } = body;
+    const { images }: { images: string[] } = body;
 
     const product = {
       name: product_name,
@@ -50,20 +50,18 @@ export async function POST(req: NextRequest) {
     const insertProductResult = await db.insert(productsTb).values(product);
     const productId = insertProductResult?.[0]?.insertId;
 
-    // await Promise.all(
-    //   images.map((url) =>
-    //     db
-    //       .insert(productImagesTb)
-    //       .values({ product_id: productId, image: url }),
-    //   ),
-    // );
-
-    // res
-    //   .status(200)
-    //   .json({ success: true, message: "Product added successfully" });
+    // save images
+    await Promise.all(
+      images?.map((url: string) =>
+        db
+          .insert(productImagesTb)
+          .values({ product_id: productId, image: url }),
+      ),
+    );
 
     return NextResponse.json({
       success: true,
+      message: "Product added successfully",
       productId,
     });
   } catch (error) {
