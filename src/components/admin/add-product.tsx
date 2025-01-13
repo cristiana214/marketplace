@@ -16,9 +16,10 @@ import type { ComboboxItem } from "@/lib/data/unitTypes";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 import ImageUploader from "@/components/reusable/image-uploader";
-import ComboCategories from "../combo-categories";
-import ComboCategoryTypes from "../combo-category-types";
-import ComboUnitTypes from "../combo-unit-types";
+import { redirect } from "next/navigation";
+import ComboUnitTypes from "@/components/combo-unit-types";
+import ComboCategories from "@/components/combo-categories";
+import ComboCategoryTypes from "@/components/combo-category-types";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 
 const schema = z.object({
@@ -77,9 +78,10 @@ const AddProduct = () => {
       // queryClient.invalidateQueries(["products"]);
       form.reset(); // clear the form
       toast.success("Product added successfully!!");
+      redirect("/admin/products/");
     },
     onError: () => {
-      toast.error("Error adding product");
+      console.error("Error adding product");
     },
   });
 
