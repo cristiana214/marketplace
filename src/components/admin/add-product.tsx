@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-await-in-loop */
 
@@ -7,19 +8,18 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TextareaField from "@/components/reusable/textarea-field";
 import InputField from "@/components/reusable/input-field";
 import type { ComboboxItem } from "@/lib/data/unitTypes";
 import { Label } from "@/components/ui/label";
+import toast from "react-hot-toast";
+import ImageUploader from "@/components/reusable/image-uploader";
 import ComboCategories from "../combo-categories";
 import ComboCategoryTypes from "../combo-category-types";
 import ComboUnitTypes from "../combo-unit-types";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import ImageUploader from "./image-uploader";
-// import FileUploadField from "@/component/reusable/file-upload-field";
 
 const schema = z.object({
   product_name: z.string().min(1, " Name is required"),
@@ -75,11 +75,11 @@ const AddProduct = () => {
     },
     onSuccess: () => {
       // queryClient.invalidateQueries(["products"]);
-      form.reset(); // Clear the form
-      console.log("Product added successfully!");
+      form.reset(); // clear the form
+      toast.success("Product added successfully!!");
     },
     onError: () => {
-      console.log("Error adding product");
+      toast.error("Error adding product");
     },
   });
 
@@ -127,10 +127,10 @@ const AddProduct = () => {
               control={form.control}
               render={({ field }) => (
                 <ComboCategories
-                  selectedItems={selectedCategoryItems} // Pass the state
+                  selectedItems={selectedCategoryItems} // pass the state
                   onSelect={(selected) => {
-                    setSelectedCategoryItems(selected); // Update state
-                    field.onChange(selected[0]?.id); // Update form value
+                    setSelectedCategoryItems(selected); // update state
+                    field.onChange(selected[0]?.id); // update form value
                     form.setValue("type_id", 0); // reset category type when category changes
                     setSelectedCategoryTypeItems([]);
                   }}
@@ -151,10 +151,10 @@ const AddProduct = () => {
               control={form.control}
               render={({ field }) => (
                 <ComboCategoryTypes
-                  selectedItems={selectedCategoryTypeItems} // Pass the state
+                  selectedItems={selectedCategoryTypeItems} // pass the state
                   onSelect={(selected) => {
-                    setSelectedCategoryTypeItems(selected); // Update state
-                    field.onChange(selected[0]?.id); // Update form value
+                    setSelectedCategoryTypeItems(selected); // update state
+                    field.onChange(selected[0]?.id); // update form value
                   }}
                   categoryUrl={selectedCategoryItems[0]?.url || ""}
                 />
@@ -179,8 +179,8 @@ const AddProduct = () => {
                 <ComboUnitTypes
                   selectedItems={selectedUnitTypeItems}
                   onSelect={(selected) => {
-                    setSelectedUnitTypeItems(selected); // Update state
-                    field.onChange(selected[0]?.id); // Update form value
+                    setSelectedUnitTypeItems(selected); // update state
+                    field.onChange(selected[0]?.id); // update form value
                   }}
                 />
               )}
@@ -208,7 +208,7 @@ const AddProduct = () => {
               error={form.formState.errors.quantity_available?.message}
             />
           </div>
-          <ImageUploader setImages={setImages} />
+          <ImageUploader setImages={setImages} images={images} />
           <Button
             type="submit"
             className="mb-7 "

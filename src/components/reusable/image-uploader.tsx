@@ -2,16 +2,18 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 
 type ImageUploaderProps = {
   id?: string;
+  images: string[];
   setImages: (filenames: string[]) => void;
 };
 
-const ImageUploader = ({ id, setImages }: ImageUploaderProps) => {
+const ImageUploader = ({ id, setImages, images }: ImageUploaderProps) => {
   const [files, setFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -70,6 +72,7 @@ const ImageUploader = ({ id, setImages }: ImageUploaderProps) => {
       }
 
       const data = await response.json();
+      toast.success("All images uploaded successfully!");
       setImages(data.files); // handle success response
       setFiles([]); // clear files after successful upload
     } catch (error) {
@@ -92,7 +95,8 @@ const ImageUploader = ({ id, setImages }: ImageUploaderProps) => {
         </p>
       </div>
 
-      <h3 className="mt-4 text-lg font-medium">Files to Upload:</h3>
+      <h4 className="mt-4 text-lg font-medium">Images to Upload:</h4>
+      <span className="text-sm">{images}</span>
       <ul className="mt-2">
         {files.map((file, idx) => (
           <li
