@@ -13,6 +13,7 @@ import ReactQueryProvider from "@/lib/providers/react-query-providers";
 import { NextAuthProvider } from "@/lib/providers/session-providers";
 import Script from "next/script";
 import Footer from "@/components/footer";
+import { Toaster } from "react-hot-toast";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ReactQueryProvider>
             <NextAuthProvider>
+              <Toaster position="bottom-center" reverseOrder={false} />
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
                 <div className="flex-1">{children}</div>

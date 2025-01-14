@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-await-in-loop */
 
@@ -7,18 +8,19 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TextareaField from "@/components/reusable/textarea-field";
 import InputField from "@/components/reusable/input-field";
 import type { ComboboxItem } from "@/lib/data/unitTypes";
 import { Label } from "@/components/ui/label";
-import ComboCategories from "../combo-categories";
-import ComboCategoryTypes from "../combo-category-types";
-import ComboUnitTypes from "../combo-unit-types";
+import toast from "react-hot-toast";
+import ImageUploader from "@/components/reusable/image-uploader";
+import { redirect } from "next/navigation";
+import ComboUnitTypes from "@/components/combo-unit-types";
+import ComboCategories from "@/components/combo-categories";
+import ComboCategoryTypes from "@/components/combo-category-types";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-// import FileUploadField from "@/component/reusable/file-upload-field";
 
 const schema = z.object({
   product_name: z.string().min(1, " Name is required"),
@@ -36,6 +38,7 @@ type FormInput = z.infer<typeof schema>;
 const AddProduct = () => {
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState(false);
+  const [images, setImages] = useState<string[]>([]);
   const [selectedCategoryItems, setSelectedCategoryItems] = useState<
     ComboboxItem[]
   >([]);
@@ -73,32 +76,20 @@ const AddProduct = () => {
     },
     onSuccess: () => {
       // queryClient.invalidateQueries(["products"]);
-      form.reset(); // Clear the form
-      console.log("Product added successfully!");
+      form.reset(); // clear the form
+      toast.success("Product added successfully!!");
+      redirect("/admin/products/");
     },
     onError: () => {
-      console.log("Error adding product");
+      console.error("Error adding product");
     },
   });
-
-  const uploadImages = async (files: File[]): Promise<string[]> => {
-    const uploadedUrls: string[] = [];
-    for (const file of files) {
-      const { data } = await axios.post("/api/action/add/product-images", {
-        name: file.name,
-      });
-      await axios.put(data.url, file);
-      uploadedUrls.push(data.key);
-    }
-    return uploadedUrls;
-  };
 
   const onSubmit = async (formData: FormInput) => {
     setUploading(true);
     try {
-      // const uploadedUrls = await uploadImages(formData.images);
       // const productData = { ...formData, images: uploadedUrls };
-      const productData = { ...formData };
+      const productData = { ...formData, images };
       saveProduct.mutate(productData);
     } catch (error) {
       console.error("Error uploading images or saving product:", error);
@@ -138,10 +129,10 @@ const AddProduct = () => {
               control={form.control}
               render={({ field }) => (
                 <ComboCategories
-                  selectedItems={selectedCategoryItems} // Pass the state
+                  selectedItems={selectedCategoryItems} // pass the state
                   onSelect={(selected) => {
-                    setSelectedCategoryItems(selected); // Update state
-                    field.onChange(selected[0]?.id); // Update form value
+                    setSelectedCategoryItems(selected); // update state
+                    field.onChange(selected[0]?.id); // update form value
                     form.setValue("type_id", 0); // reset category type when category changes
                     setSelectedCategoryTypeItems([]);
                   }}
@@ -162,10 +153,10 @@ const AddProduct = () => {
               control={form.control}
               render={({ field }) => (
                 <ComboCategoryTypes
-                  selectedItems={selectedCategoryTypeItems} // Pass the state
+                  selectedItems={selectedCategoryTypeItems} // pass the state
                   onSelect={(selected) => {
-                    setSelectedCategoryTypeItems(selected); // Update state
-                    field.onChange(selected[0]?.id); // Update form value
+                    setSelectedCategoryTypeItems(selected); // update state
+                    field.onChange(selected[0]?.id); // update form value
                   }}
                   categoryUrl={selectedCategoryItems[0]?.url || ""}
                 />
@@ -190,8 +181,8 @@ const AddProduct = () => {
                 <ComboUnitTypes
                   selectedItems={selectedUnitTypeItems}
                   onSelect={(selected) => {
-                    setSelectedUnitTypeItems(selected); // Update state
-                    field.onChange(selected[0]?.id); // Update form value
+                    setSelectedUnitTypeItems(selected); // update state
+                    field.onChange(selected[0]?.id); // update form value
                   }}
                 />
               )}
@@ -219,30 +210,13 @@ const AddProduct = () => {
               error={form.formState.errors.quantity_available?.message}
             />
           </div>
-
-          {/* <div>
-          <Controller
-            name="images"
-            control={form.control}
-            render={({ field }) => (
-              <input
-                type="file"
-                multiple
-                onChange={(e) =>
-                  field.onChange(Array.from(e.target.files || []))
-                }
-                className="mt-1"
-              />
-            )}
-          />
-          {form.formState.errors.images && (
-            <p className="text-sm text-red-500">
-              {form.formState.errors.images.message}
-            </p>
-          )}
-        </div> */}
-          <Button type="submit" className="mb-7 ">
-            {uploading ? "Uploading..." : "Add Product"}
+          <ImageUploader setImages={setImages} images={images} />
+          <Button
+            type="submit"
+            className="mb-7 "
+            disabled={images.length === 0}
+          >
+            {uploading ? "Saving..." : "Add Product"}
           </Button>
         </form>
       </CardContent>
