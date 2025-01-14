@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
     const files = formData.getAll("file") as File[];
     const id = formData.get("id") as string;
     const directory = formData.get("directory")?.toString() || "images";
+    console.log("Uploading files:", formData);
 
     if (!files || files.length === 0) {
       return NextResponse.json(
