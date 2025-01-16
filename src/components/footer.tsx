@@ -15,15 +15,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div>
-            <h2 className="mb-4 text-2xl font-bold">AgriCBR</h2>
+            <h2 className="mb-4 text-2xl font-bold" />
+            <img
+              src="/logo1.png?height=50&width=150"
+              alt="logo1"
+              className="h-12"
+            />
             <p className="mb-4">
               Your one-stop markertplace for the finest locally grown produce.
             </p>
-            <img
-              src="/agrilogo.png?height=50&width=150"
-              alt="agrilogo"
-              className="h-12"
-            />
           </div>
 
           {/* Quick Links */}
@@ -71,7 +71,7 @@ export default function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
             <p>Cabadbaran City, 8605</p>
             <p>Phone: (+63) 9466449212</p>
-            <p>Email: agricbr@gmail.com</p>
+            <p>Email: agricbr25@gmail.com</p>
           </div>
 
           {/* Newsletter Signup */}

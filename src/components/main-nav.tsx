@@ -5,7 +5,7 @@ import Image from "next/image";
 import type { NavItem } from "@/types/nav";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import logo from "@/public/agrilogo.png";
+import logo from "@/public/logo1.png";
 
 interface MainNavProps {
   items?: NavItem[];
