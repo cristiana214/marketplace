@@ -128,9 +128,21 @@ export type Order = {
   items: { name: string; quantity: number }[];
 };
 export type OrderProduct = {
-  productId: number;
-  name?: string;
-  quantity: number;
-  currentPrice: number;
+  sellerId: number | string; //  seller_id is a number or string
+  userId: number | string; //  user_id is a number or string
+  username: string; // username is a string
+  orderId: number | string; //  order_id is a number or string
+  messageForSeller: string | null; // message_for_seller is a string or null
+  currentStatus: string; // current_status is a string or specific enum type
+  address: string; //  address is a string
+  totalAmount: number; //  total_amount is a number
+  dateAdded: string; // date_added is a Date or string
+  dateCompleted: string | null; //  date_completed is a Date, string, or null
+  isCompleted: boolean; //  is_completed is a boolean
+  productName: string; //  name is a string
+  productId: number | string; //  product_id is a number or string
+  totalQuantity: number; //  quantity is a number
+  currentPrice: number; //  current_price is a number
+  totalPrice: number; //  field based on quantity * current_price
 };
 export type OrderProducts = { orderProducts: OrderProduct[] };

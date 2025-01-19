@@ -13,6 +13,7 @@ const fetchOrders = async (
       userUrl: queryParams?.userUrl, // userUrl filter
       pageNum: queryParams?.pageNum, // Page number for pagination
       limit: queryParams?.limit, // Limit of results per page
+      status: queryParams?.status, // Limit of results per page
     },
   });
   return response;

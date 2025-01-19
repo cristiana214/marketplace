@@ -11,7 +11,9 @@ const OrderInprogressPage = () => {
   const router = useRouter();
   const user = session?.user;
 
-  return <InProgressOrders />;
+  return (
+    <InProgressOrders type="sellerId" id={user?.userId} status="inprogress" />
+  );
 };
 
 export default OrderInprogressPage;
