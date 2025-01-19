@@ -127,6 +127,15 @@ export type Order = {
   total: number;
   items: { name: string; quantity: number }[];
 };
+
+export type AddOrderProduct = {
+  productId: number;
+  name?: string;
+  quantity: number;
+  currentPrice: number;
+};
+
+// /api/orders_seller
 export type OrderProduct = {
   sellerId: number | string; //  seller_id is a number or string
   userId: number | string; //  user_id is a number or string
@@ -145,4 +154,4 @@ export type OrderProduct = {
   currentPrice: number; //  current_price is a number
   totalPrice: number; //  field based on quantity * current_price
 };
-export type OrderProducts = { orderProducts: OrderProduct[] };
+export type OrderProducts = { orderProducts: AddOrderProduct[] };

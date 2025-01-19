@@ -4,7 +4,7 @@ import { ordersTb, orderProductsTb } from "@/drizzle/schema"; // Import table de
 import { db } from "@/drizzle/db"; // import your DB instance
 import { authConfig } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import type { OrderProduct } from "@/types/data";
+import type { AddOrderProduct, OrderProduct } from "@/types/data";
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     const insertOrderResult = await db.insert(ordersTb).values(order);
     const orderId = insertOrderResult?.[0]?.insertId;
     // insert associated order products
-    const productData = orderProducts.map((product: OrderProduct) => ({
+    const productData = orderProducts.map((product: AddOrderProduct) => ({
       order_id: orderId,
       product_id: product.productId,
       quantity: product.quantity,

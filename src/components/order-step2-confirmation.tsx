@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { OrderProduct, OrderProducts } from "@/types/data";
+import type { AddOrderProduct, OrderProducts } from "@/types/data";
 
 export default function OrderConfirmation({
   orderDetails,
@@ -21,7 +21,7 @@ export default function OrderConfirmation({
   onConfirm,
 }: {
   orderDetails: any;
-  orderProducts?: OrderProduct[];
+  orderProducts?: AddOrderProduct[];
   totalPrice: number;
   onEdit: () => void;
   onConfirm: () => void;
