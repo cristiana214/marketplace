@@ -1,5 +1,5 @@
 import { db } from "@/drizzle/db";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, or, sql } from "drizzle-orm";
 import { userImageTb, userTb } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -22,7 +22,16 @@ const getBaseQuery = () =>
 export async function GET(req: NextRequest) {
   try {
     const userQuery = getBaseQuery()
-      .where(eq(userTb.user_type, 2))
+      .where(
+        and(
+          eq(userTb.active, true),
+          or(
+            eq(userTb.user_type, 3),
+            eq(userTb.user_type, 2),
+            eq(userTb.user_type, 4),
+          ),
+        ),
+      )
       .groupBy(userTb.user_id);
 
     // Execute the query

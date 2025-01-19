@@ -13,22 +13,17 @@ import Footer from "@/components/footer";
 
 export default function IndexPage() {
   return (
-    <section className="container mx-auto grid w-full max-w-6xl items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        <div className="flex w-full items-start justify-center">
-          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-            Fresh Farm Produce - Direct from local Farm
-            <br className="hidden sm:inline" />
-          </h1>
-          <div className="flex items-center space-x-4" />
-
-          <p className="max-w-[700px] text-lg text-muted-foreground ">
-            {siteConfig.description}
-          </p>
-        </div>
+    <section className="container mx-auto grid w-full max-w-6xl  gap-6 pb-8 pt-6 ">
+      <div className="mx-auto w-full py-4">
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-4xl">
+          Fresh Farm Produce - Direct from local farm to your door
+        </h1>
+        <p className="mt-4 max-w-[700px] text-lg text-muted-foreground ">
+          {siteConfig.description}
+        </p>
       </div>
 
-      <h2 className="mt-8 text-2xl font-semibold leading-tight tracking-tighter sm:text-3xl">
+      <h2 className="text-1xl mt-8 font-semibold leading-tight tracking-tighter sm:text-3xl">
         Shop now and support our local farm while enjoying healthy, fresh, and
         organic produce!
       </h2>
@@ -56,6 +51,7 @@ export default function IndexPage() {
           </Button>
         </Link>
       </div>
+      <ListCategories />
       <ListProducts type="home" />
 
       {/* <div className="flex flex-wrap gap-4">

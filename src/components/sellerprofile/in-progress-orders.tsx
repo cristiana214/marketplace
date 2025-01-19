@@ -4,7 +4,7 @@ import OrderList from "./order-list";
 
 const InprogressOrders = ({ type, id, className }: ListOrdersProps) => {
   const { data, isLoading, error } = useOrders({
-    [type]: 10,
+    [type]: id,
   });
 
   if (isLoading) return <div>Loading orders...</div>;

@@ -23,7 +23,7 @@ export default function SubCategory({
   const categoryType = data?.categoryType;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto w-8/12 p-4">
       <div className="mb-8">
         <div className="flex items-center">
           <h1 className="text-3xl font-bold">{categoryType?.typeName}</h1>
