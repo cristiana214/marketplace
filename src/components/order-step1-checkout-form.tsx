@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import * as z from "zod";
-import type { OrderProduct } from "@/types/data";
+import type { AddOrderProduct } from "@/types/data";
 import { OrderProducts } from "@/types/data";
 import CartSummary from "./cart-summary";
 
@@ -40,7 +40,7 @@ export default function CheckoutForm({
   orderProducts,
 }: {
   onSubmit: (data: FormInput) => void;
-  orderProducts: OrderProduct[];
+  orderProducts: AddOrderProduct[];
 }) {
   const form = useForm<FormInput>({
     resolver: zodResolver(formSchema),

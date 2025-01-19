@@ -1,3 +1,4 @@
+/* eslint-disable import/no-self-import */
 import type {
   Product,
   Category,
@@ -5,6 +6,7 @@ import type {
   ProductImage,
   User,
 } from "@/types/data";
+
 // QueryParams
 export type ProductsQueryParams = {
   categoryUrl?: string;
@@ -68,7 +70,7 @@ export type ProductImagesApiResponse = {
   productImages: ProductImage[];
 };
 export type OrdersApiResponse = {
-  orders: orderId;
+  orders: OrderProduct;
 };
 // product: Product & { seller: User };
 export type OrdersQueryParams = {
@@ -76,4 +78,5 @@ export type OrdersQueryParams = {
   userUrl?: string;
   pageNum?: number;
   limit?: number;
+  status?: "all" | "completed" | "inprogress";
 };

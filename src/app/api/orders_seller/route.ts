@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { db } from "@/drizzle/db";
 import { and, eq, sql, desc } from "drizzle-orm";
 import {
@@ -41,25 +42,54 @@ const getBaseQuery = () =>
 export async function GET(req: NextRequest) {
   try {
     const sellerId = req.nextUrl.searchParams.get("sellerId");
-    // Execute the query
-    const ordersQuery = await getBaseQuery()
-      .where(
+    const status = req.nextUrl.searchParams.get("status");
+
+    if (!sellerId) {
+      return NextResponse.json(
+        { message: "Missing sellerId" },
+        { status: 400 },
+      );
+    }
+
+    const ordersQuery = getBaseQuery();
+
+    if (status === "inprogress") {
+      ordersQuery.where(
+        and(
+          eq(productsTb.seller_id, Number(sellerId)),
+          eq(ordersTb.active, true),
+          eq(ordersTb.is_completed, false),
+        ),
+      );
+    } else if (status === "completed") {
+      ordersQuery.where(
+        and(
+          eq(productsTb.seller_id, Number(sellerId)),
+          eq(ordersTb.active, true),
+          eq(ordersTb.is_completed, true),
+        ),
+      );
+    } else {
+      ordersQuery.where(
         and(
           eq(productsTb.seller_id, Number(sellerId)),
           eq(ordersTb.active, true),
         ),
-      )
+      );
+    }
+    ordersQuery
       .orderBy(desc(ordersTb.date_added))
       .groupBy(ordersTb.order_id, orderProductsTb.product_id);
+
     const orders = await ordersQuery;
 
     return NextResponse.json({ orders });
   } catch (error) {
     console.error("Error fetching orders:", error);
-    return NextResponse.json({
-      message: "Error fetching orders",
-      error,
-    });
+    return NextResponse.json(
+      { message: "Error fetching orders" },
+      { status: 500 },
+    );
   }
 }
 
