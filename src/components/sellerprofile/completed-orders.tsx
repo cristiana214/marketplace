@@ -4,7 +4,7 @@ import OrderList from "./order-list";
 
 const CompletedOrders = ({ type, id, status, className }: ListOrdersProps) => {
   const { data, isLoading, error } = useOrders({
-    [type]: 10,
+    [type]: id,
     status,
   });
 
