@@ -22,7 +22,7 @@ const getBaseQuery = () =>
 export async function GET(req: NextRequest) {
   try {
     const userQuery = getBaseQuery()
-      .where(eq(userTb.user_type, 2))
+      .where(and(eq(userTb.user_type, 2), eq(userTb.active, true)))
       .groupBy(userTb.user_id);
 
     // Execute the query
