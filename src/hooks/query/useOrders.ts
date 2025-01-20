@@ -1,16 +1,20 @@
 // https://tanstack.com/query/v5/docs/framework/react/typescript#type-inference
 import { useQuery } from "@tanstack/react-query";
 import { axios } from "@/lib/axios"; // custom axios instance
-import type { OrdersApiResponse, OrdersQueryParams } from "@/types/query"; // importing types for query parameters and API response
-
+import type { OrdersApiResponse, OrdersQueryParams } from "@/types/query";
+// importing types for query parameters and API response
+const getApiEndpoint = (queryParams: OrdersQueryParams) =>
+  queryParams?.userUrl ? "/api/orders_user/" : "/api/orders_seller/";
 const fetchOrders = async (
   queryParams: OrdersQueryParams,
 ): Promise<OrdersApiResponse> => {
-  const response: OrdersApiResponse = await axios.get(`/api/orders_seller/`, {
+  const URL = await getApiEndpoint(queryParams);
+
+  const response: OrdersApiResponse = await axios.get(URL, {
     // axios GET request to fetch products
     params: {
       sellerId: queryParams?.sellerId, // userUrl filter
-      userUrl: queryParams?.userUrl, // userUrl filter
+      userUrl: queryParams?.userUrl, // userId filter
       pageNum: queryParams?.pageNum, // Page number for pagination
       limit: queryParams?.limit, // Limit of results per page
       status: queryParams?.status, // Limit of results per page

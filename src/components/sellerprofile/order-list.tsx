@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import type { OrderProduct } from "@/types/data";
+import moment from "moment";
 
 interface OrderListProps {
   orders: OrderProduct[];
@@ -13,12 +14,13 @@ const OrderList = ({ orders, showStatus }: OrderListProps) => (
         <tr className="bg-gray-100 text-sm uppercase leading-normal text-gray-600">
           <th className="px-6 py-3 text-left">Order ID</th>
           <th className="px-6 py-3 text-left">Product</th>
-          <th className="px-6 py-3 text-left">Quantity</th>
+          <th className="px-2 py-3 text-left">Quantity</th>
           {showStatus && <th className="px-6 py-3 text-left">Status</th>}
           <th className="px-6 py-3 text-left">Price</th>
           <th className="px-6 py-3 text-left">Total</th>
           <th className="px-6 py-3 text-left">address</th>
           <th className="px-6 py-3 text-left">Date</th>
+          <th className="px-6 py-3 text-left">Customer</th>
           <th className="px-6 py-3 text-center">Actions</th>
         </tr>
       </thead>
@@ -32,7 +34,7 @@ const OrderList = ({ orders, showStatus }: OrderListProps) => (
               {order.orderId}
             </td>
             <td className="px-6 py-3 text-left">{order.productName}</td>
-            <td className="px-6 py-3 text-left">{order.totalQuantity}</td>
+            <td className="px-2 py-3 text-left">{order.totalQuantity}</td>
             {showStatus && (
               <td className="px-6 py-3 text-left">
                 <span
@@ -54,7 +56,11 @@ const OrderList = ({ orders, showStatus }: OrderListProps) => (
               {order.currentPrice * order.totalQuantity}
             </td>
             <td className="px-6 py-3 text-left">{order.address}</td>
-            <td className="px-6 py-3 text-left">{order?.dateAdded || ""}</td>
+            <td className="px-6 py-3 text-left">
+              {" "}
+              {moment(order.dateAdded).format("MMM DD, YYYY HH:mm:ss")}
+            </td>
+            <td className="px-2 py-3 text-left">{order?.username || ""}</td>
             <td className="px-6 py-3 text-center">
               <Button variant="outline" size="sm">
                 View Details

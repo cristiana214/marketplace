@@ -4,7 +4,7 @@ import ListSellers from "@/components/list-sellers";
 
 export default function FarmsPage() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+    <section className="container mx-auto grid w-10/12 max-w-6xl items-center gap-6 p-4 pb-8 pt-6 md:py-10">
       <div className="mb-8  flex w-full flex-col gap-2">
         <div className="flex w-full items-start justify-between">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">
