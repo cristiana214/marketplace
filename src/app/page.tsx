@@ -40,7 +40,7 @@ export default function IndexPage() {
             Vegetables
           </Button>
         </Link>
-        <Link href="/product/coconuts/">
+        <Link href="/category/coconuts/">
           <Button className="bg-green-700 hover:font-semibold" rel="noreferrer">
             Fresh Coconuts
           </Button>
