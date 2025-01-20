@@ -74,7 +74,7 @@ export type OrdersApiResponse = {
 };
 // product: Product & { seller: User };
 export type OrdersQueryParams = {
-  sellerId?: sellerId;
+  sellerId?: number;
   userUrl?: string;
   pageNum?: number;
   limit?: number;
