@@ -21,7 +21,7 @@ const ComboUnitTypes = ({ selectedItems, onSelect }: ComboUnitsProps) => {
 
   if (!unitTypes?.length) return null;
   return (
-    <div className="flex w-28 items-center space-x-4">
+    <div className="flex w-40 items-center space-x-4">
       <Combobox
         items={unitTypes}
         selectedItems={selectedItems}

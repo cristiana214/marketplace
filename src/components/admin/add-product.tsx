@@ -20,6 +20,7 @@ import { redirect } from "next/navigation";
 import ComboUnitTypes from "@/components/combo-unit-types";
 import ComboCategories from "@/components/combo-categories";
 import ComboCategoryTypes from "@/components/combo-category-types";
+import { useSession } from "next-auth/react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 
 const schema = z.object({
@@ -37,6 +38,8 @@ type FormInput = z.infer<typeof schema>;
 
 const AddProduct = () => {
   const queryClient = useQueryClient();
+  const { data: session } = useSession();
+  const user = session?.user;
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [selectedCategoryItems, setSelectedCategoryItems] = useState<
@@ -75,7 +78,10 @@ const AddProduct = () => {
       return response.json();
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries({
+        queryKey: ["products", { userUrl: user?.username || "" }],
+      });
+      // queryClient.invalidateQueries(["products", { userUrl: "chavez" }]);
       form.reset(); // clear the form
       toast.success("Product added successfully!!");
       redirect("/admin/products/");
@@ -99,7 +105,7 @@ const AddProduct = () => {
   };
 
   return (
-    <Card className="my-8 w-6/12">
+    <Card className="my-8 w-8/12">
       <CardHeader>
         <CardTitle>Add New Product</CardTitle>
       </CardHeader>
@@ -171,7 +177,7 @@ const AddProduct = () => {
 
           {/* Unit Type Combobox */}
           <div className="flex items-center space-y-2 ">
-            <Label htmlFor="type_id" className=" mr-4">
+            <Label htmlFor="type_id" className="mr-4">
               Unit Type:{" "}
             </Label>
             <Controller
@@ -200,6 +206,7 @@ const AddProduct = () => {
               control={form.control}
               type="number"
               error={form.formState.errors.price?.message}
+              defaultValue={10}
             />
             <InputField
               className="ml-6 mr-4"
@@ -208,16 +215,19 @@ const AddProduct = () => {
               control={form.control}
               type="number"
               error={form.formState.errors.quantity_available?.message}
+              defaultValue={10}
             />
           </div>
           <ImageUploader setImages={setImages} images={images} />
-          <Button
-            type="submit"
-            className="mb-7 "
-            disabled={images.length === 0}
-          >
-            {uploading ? "Saving..." : "Add Product"}
-          </Button>
+          <div className="flex justify-end">
+            <Button
+              type="submit"
+              className="justify-item-center mb-7 mr-2 bg-emerald-500"
+              disabled={images.length === 0}
+            >
+              {uploading ? "Saving..." : "Add Product"}
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>

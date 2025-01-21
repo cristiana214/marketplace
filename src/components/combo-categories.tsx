@@ -29,7 +29,7 @@ const ComboCategories = ({ selectedItems, onSelect }: ComboCategoriesProps) => {
 
   if (!comboboxItems?.length) return null;
   return (
-    <div className="flex w-28 items-center space-x-4">
+    <div className="flex w-40 items-center space-x-4">
       <Combobox
         items={comboboxItems}
         selectedItems={selectedItems}

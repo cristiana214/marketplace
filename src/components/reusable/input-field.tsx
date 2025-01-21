@@ -9,6 +9,7 @@ const InputField = ({
   type = "text",
   error,
   className,
+  defaultValue = "",
 }: {
   name: string;
   label: string;
@@ -17,12 +18,14 @@ const InputField = ({
   type?: string;
   error?: string;
   className?: string;
+  defaultValue?: string | number;
 }) => (
   <div>
     {label ? <Label>{label}</Label> : false}
     <Controller
       name={name}
       control={control}
+      defaultValue={defaultValue}
       render={({ field }) => (
         <Input
           {...field}
