@@ -7,10 +7,11 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardTitle } from "./ui/card";
+import FarmersSkeleton from "./loading/famers";
 
 const ListSellers = () => {
   const { data, isLoading, error } = useSellers();
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <FarmersSkeleton />;
   if (error) return <div>Error loading categories</div>;
   const sellers = data?.users;
 

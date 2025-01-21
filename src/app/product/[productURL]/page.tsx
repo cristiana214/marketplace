@@ -16,6 +16,7 @@ import Cards from "@/components/reusable/cards";
 import { useProduct } from "@/hooks/query/useProduct";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { useCartStore } from "@/lib/store/useCartStore";
+import ProductSkeleton from "@/components/loading/product";
 
 export default function ProductPage({
   params,
@@ -41,7 +42,7 @@ export default function ProductPage({
     setImages(product?.images?.toString()?.split(",") || []);
   }, [product?.images]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProductSkeleton />;
   if (error) return <div>Error loading product</div>;
 
   const handleAddToCart = () => {

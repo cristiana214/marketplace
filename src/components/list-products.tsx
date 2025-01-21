@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import ProductsSkeleton from "./loading/products";
 
 type ListProductsProps = {
   type: "home" | "categoryUrl" | "categoryTypeUrl" | "userUrl";
@@ -33,7 +34,7 @@ const ListProducts = ({ type, url, className }: ListProductsProps) => {
   // const searchParams = useSearchParams()
   // const search = searchParams.get('search');
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProductsSkeleton />;
   if (error) return <div>Error loading products</div>;
   const filteredProducts = data?.products;
 
