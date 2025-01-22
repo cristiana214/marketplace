@@ -4,12 +4,13 @@ import { useCategoryTypes } from "@/hooks/query/useCategoryTypes";
 import { generateUrl } from "@/lib/helper/generate-url";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import CategoriesSkeleton from "./loading/categories";
 
 type Props = { url: string };
 // also known as sub category?
 const ListCategoryTypes = ({ url }: Props) => {
   const { data, isLoading, error } = useCategoryTypes({ categoryUrl: url });
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <CategoriesSkeleton />;
   if (error) return <div>Error loading category Types</div>;
   const categoryTypes = data?.categoryTypes;
 

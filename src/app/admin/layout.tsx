@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <ProfileHeader />
 
       <div className="mb-6 mt-8 flex space-x-4">
-        <NavOrders />
+        <NavOrders userType={session?.user?.userType} />
       </div>
       {children}
     </div>
