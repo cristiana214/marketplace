@@ -12,7 +12,8 @@ import {
 } from "@/drizzle/schema";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { products } from "@/lib/data/farm";
+import { authConfig } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
 const getBaseQuery = () =>
   // select all products
@@ -74,7 +75,30 @@ const getTotalOrdersQuery = () =>
 
 export async function GET(req: NextRequest) {
   try {
-    const userId = req.nextUrl.searchParams.get("userId");
+    // verify user only the owner of the products can view the stats
+    const session = await getServerSession(authConfig);
+    if (!session) {
+      return NextResponse.json({
+        success: false,
+        message: "403 authentication required",
+      });
+    }
+
+    const currentUserId = session?.user?.userId;
+    if (!currentUserId) {
+      return NextResponse.json({
+        success: false,
+        message: "403 authentication required",
+      });
+    }
+    const userId = req.nextUrl.searchParams.get("userId")?.toString();
+
+    if (currentUserId !== parseInt(userId || "0", 10)) {
+      return NextResponse.json({
+        success: false,
+        message: "403 authentication required",
+      });
+    }
     let totalProductsQuery;
     let totalOrdersQuery;
 

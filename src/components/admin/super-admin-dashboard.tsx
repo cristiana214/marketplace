@@ -1,14 +1,14 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSellerStats } from "@/hooks/query/useSellerStats";
+import { useAdminStats } from "@/hooks/query/useAdminStats";
 import { Sprout, ShoppingCart, BarChart3 } from "lucide-react";
 import { useSession } from "next-auth/react";
 
 export default function SuperAdminDashboard() {
   const { data: session } = useSession();
   const user = session?.user;
-  const { data, isLoading, isError } = useSellerStats({
+  const { data, isLoading, isError } = useAdminStats({
     userId: user?.userId || 0,
   });
 
@@ -33,7 +33,7 @@ export default function SuperAdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {data?.stats?.totalProducts || 0}
+              {data?.stats?.totalUserSignups || 0}
             </div>
             <p className="text-xs text-muted-foreground" />
           </CardContent>
@@ -45,14 +45,40 @@ export default function SuperAdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {data?.stats?.totalProducts || 0}
+              {data?.stats?.totalSellers || 0}
             </div>
             <p className="text-xs text-muted-foreground" />
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
+            <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+            <Sprout className="size-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {data?.stats?.totalUsers || 0}
+            </div>
+            <p className="text-xs text-muted-foreground" />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Total products ordered
+            </CardTitle>
+            <ShoppingCart className="size-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{data?.stats?.totalOrders}</div>
+            <p className="text-xs text-muted-foreground" />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">
+              Total Count of Orders
+            </CardTitle>
             <ShoppingCart className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>

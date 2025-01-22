@@ -11,7 +11,7 @@ const fetchSellerStats = async (
   queryParams: SellerStatsQueryParams, // accepts query parameters of type ProductsQueryParams
 ): Promise<SellerStatsApiResponse> => {
   const response: SellerStatsApiResponse = await axios.get(
-    `/api/admin_stats/`,
+    `/api/stats/seller/`,
     {
       // axios GET request to fetch stats
       params: {
