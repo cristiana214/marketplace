@@ -43,7 +43,7 @@ const ListSellers = () => {
             </div>
             <div className="space-y-1">
               {seller?.contact ? (
-                <div className="flex items-center">
+                <div className="mb-4 flex items-center">
                   <Phone className="mr-2 size-4 text-gray-500" />
                   <p className="text-sm">{seller?.contact}</p>
                 </div>

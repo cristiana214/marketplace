@@ -68,7 +68,7 @@ export default function FarmerPage({
         </div>
         <div className="md:col-span-2">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7">
+            <TabsList className="flex h-full flex-wrap justify-center gap-2  lg:grid lg:w-full lg:grid-cols-7">
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="harvests">Harvests</TabsTrigger>
               <TabsTrigger value="map">Location</TabsTrigger>

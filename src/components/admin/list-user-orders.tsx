@@ -37,15 +37,17 @@ const ListUserOrders = ({ type, userUrl, className }: ListOrdersProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-8">
+    <div className="min-h-screen rounded-md bg-gray-50 p-4 dark:bg-slate-900 md:p-8">
       <div className="mx-auto max-w-3xl">
         {filteredOrders?.map((order: any) => (
-          <Card className="mt-6 shadow-lg">
+          <Card key={order.orderId} className="mt-6 shadow-lg">
             <CardHeader className="border-b border-gray-200 pb-4">
-              <CardTitle className="flex items-center gap-2 text-xl font-semibold text-gray-800">
-                <Hash className="size-5 text-gray-500" />
-                Order #{order.orderId}
-                <div className="flex items-center justify-end gap-2 text-sm text-gray-500">
+              <CardTitle className="flex flex-col text-xl font-semibold text-gray-800 md:flex-row md:items-center md:gap-2">
+                <div className="flex items-center gap-2">
+                  <Hash className="size-5 text-gray-500" />
+                  Order #{order.orderId}
+                </div>
+                <div className="mt-2 flex items-center justify-end gap-2 text-sm text-gray-500 md:mt-0">
                   <Calendar className="size-4" />
                   {moment(order.dateAdded).format("MMM DD, YYYY HH:mm:ss")}
                 </div>
@@ -53,13 +55,13 @@ const ListUserOrders = ({ type, userUrl, className }: ListOrdersProps) => {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                <div className="mx-auto flex">
+                <div className="flex flex-col md:flex-row">
                   <div className="m-4 text-sm text-gray-600">
-                    <div className="flex text-sm text-gray-600">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
                       <User className="size-4" />
                       <strong>Seller ID:</strong> {order.sellerId}
                     </div>
-                    <div className="flex text-sm text-gray-600">
+                    <div className="mt-2 flex items-center gap-2 text-sm text-gray-600">
                       <User className="size-4" />
                       <strong>Seller Name:</strong> {order.sellerName}
                     </div>
@@ -70,7 +72,7 @@ const ListUserOrders = ({ type, userUrl, className }: ListOrdersProps) => {
                       {order.isCompleted ? "Completed" : "Pending"}
                     </div>
                     {order.messageForSeller && (
-                      <div className="text-sm text-gray-600">
+                      <div className="mt-2 text-sm text-gray-600">
                         <strong>Message to Seller:</strong>{" "}
                         {order.messageForSeller}
                       </div>
