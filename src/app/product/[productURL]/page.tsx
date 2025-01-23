@@ -60,6 +60,7 @@ export default function ProductPage({
   return (
     <GridLayout>
       <GridItemEight>
+        <title>{product?.name}</title>
         <div className="relative mb-4 aspect-square">
           {product?.images?.length ? (
             <Image
