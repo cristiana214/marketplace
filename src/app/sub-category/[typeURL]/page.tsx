@@ -26,7 +26,7 @@ export default function SubCategory({
     <div className="container mx-auto w-8/12 p-4">
       <div className="mb-8">
         <div className="flex items-center">
-          <title> {categoryType?.typeName}</title>
+          <title>{categoryType?.typeName}</title>
           <h1 className="text-3xl font-bold">{categoryType?.typeName}</h1>
           <Link
             className="ml-2"
