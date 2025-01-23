@@ -10,16 +10,8 @@ export const siteConfig = {
       href: "/farms/",
     },
     {
-      title: "Vegetables",
+      title: "Products",
       href: "/category/fruit-vegetables/",
-    },
-    {
-      title: "Product",
-      href: "/product/10/",
-    },
-    {
-      title: "Fruits",
-      href: "/category/fruits/",
     },
     {
       title: "About Us",

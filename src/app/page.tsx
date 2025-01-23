@@ -45,11 +45,6 @@ export default function IndexPage() {
             Fresh Coconuts
           </Button>
         </Link>
-        <Link href="/category/">
-          <Button variant="outline" rel="noreferrer">
-            Categories
-          </Button>
-        </Link>
       </div>
       <ListCategories />
       <ListProducts type="home" />

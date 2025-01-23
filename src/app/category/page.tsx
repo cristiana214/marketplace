@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/agrilogo.png",
-    shortcut: "/agrilogo.png",
-    apple: "/agrilogo.png",
+    icon: "/logo-agri.ico",
+    shortcut: "/logo-agri.ico",
+    apple: "/logo-agri.ico",
   },
 };
 export default function CategoryPage() {

@@ -40,7 +40,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/products/"
+                  href="/category/fruit-vegetables/"
                   className="transition-colors hover:text-green-300"
                 >
                   Products
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           {/* Newsletter Signup */}
-          <div>
+          {/* <div>
             <h3 className="mb-4 text-lg font-semibold">Newsletter</h3>
             <p className="mb-2">
               Stay updated with our latest offers and news.
@@ -96,7 +96,7 @@ export default function Footer() {
                 <span className="sr-only">Subscribe</span>
               </Button>
             </form>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-8 border-t border-green-800 pt-8">
