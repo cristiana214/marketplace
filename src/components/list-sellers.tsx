@@ -21,7 +21,7 @@ const ListSellers = () => {
         <Card key={seller.userId} className="p-4">
           <CardContent className="pt-4">
             <div className="mb-4 flex items-center space-x-4">
-              <Avatar className="size-12">
+              <Avatar className="size-12 shrink-0 rounded-full">
                 <AvatarImage
                   src={
                     seller?.image
@@ -29,6 +29,7 @@ const ListSellers = () => {
                       : "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
                   }
                   alt={seller.displayName}
+                  className="rounded-full"
                 />
                 <AvatarFallback>{seller?.name}</AvatarFallback>
               </Avatar>
