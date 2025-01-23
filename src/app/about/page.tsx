@@ -8,11 +8,12 @@ import WhyChooseUs from "@/components/why-choose-us";
 export default function About() {
   return (
     <section>
+      <title>About Us</title>
       <div id="about" className="mx-auto flex w-full max-w-6xl">
         <div className="container">
-          <h2 className="text-white-800 mb-8 text-center text-4xl font-bold">
+          <h1 className="text-white-800 mb-8 text-center text-4xl font-bold">
             About AgriCBR
-          </h2>
+          </h1>
           <div className="flex flex-col items-center justify-between md:flex-row">
             <div className="mb-8 md:mb-0 md:w-1/2">
               <img

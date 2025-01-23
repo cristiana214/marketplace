@@ -11,7 +11,12 @@ const OrderCompletedPage = () => {
   const router = useRouter();
   const user = session?.user;
 
-  return <MyOrders type="sellerId" id={user?.userId} status="all" />;
+  return (
+    <>
+      <title>Recent Orders</title>
+      <MyOrders type="sellerId" id={user?.userId} status="all" />
+    </>
+  );
 };
 
 export default OrderCompletedPage;

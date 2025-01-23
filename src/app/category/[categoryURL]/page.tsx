@@ -27,6 +27,7 @@ export default function CategoryPage({
         <h2 className="text-1xl mt-2 font-normal leading-tight tracking-tighter">
           {category?.categoryDescription}
         </h2>
+        <title>{category?.categoryName}</title>
       </div>
       <ListCategoryTypes url={params?.categoryURL} />
       <ListProducts type="categoryUrl" url={params?.categoryURL} />

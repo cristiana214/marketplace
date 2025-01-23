@@ -11,6 +11,7 @@ const OrderInprogressPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <title>Image Gallery</title>
       <h3 className="mb-4 text-xl font-semibold">Image Gallery</h3>
       <GalleryImage url={user?.username} />{" "}
     </div>

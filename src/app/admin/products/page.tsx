@@ -24,6 +24,7 @@ const SellerProducts = () => {
 
   return (
     <div className="container mx-auto px-4">
+      <title>Product list</title>
       <h3 className="mb-4 text-xl font-semibold">My Products</h3>
       <div className="flex w-full justify-end">
         <Button

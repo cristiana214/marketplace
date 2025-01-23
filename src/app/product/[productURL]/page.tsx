@@ -94,7 +94,7 @@ export default function ProductPage({
         </div>
 
         <div className="mt-12">
-          <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2>
+          {/* <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2> */}
           {/* <div className="mb-8 space-y-4">
             {comments.map((comment) => (
               <Card key={comment.id}>
@@ -118,7 +118,7 @@ export default function ProductPage({
               </Card>
             ))}
           </div> */}
-          <form onSubmit={handleSubmitComment}>
+          {/* <form onSubmit={handleSubmitComment}>
             <h3 className="mb-2 text-xl font-semibold">Leave a Comment</h3>
             <Textarea
               value={newComment}
@@ -127,7 +127,7 @@ export default function ProductPage({
               className="mb-4"
             />
             <Button type="submit">Submit Comment</Button>
-          </form>
+          </form> */}
         </div>
       </GridItemEight>
       <GridItemFour>
