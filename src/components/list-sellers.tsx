@@ -16,16 +16,16 @@ const ListSellers = () => {
   const sellers = data?.users;
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
       {sellers?.map((seller) => (
-        <Card key={seller.userId}>
-          <CardContent className="pt-4 ">
+        <Card key={seller.userId} className="p-4">
+          <CardContent className="pt-4">
             <div className="mb-4 flex items-center space-x-4">
               <Avatar className="size-12">
                 <AvatarImage
                   src={
                     seller?.image
-                      ? `https://img-farm.s3.us-west-2.amazonaws.com/user/${seller.image}`
+                      ? `${seller.image}`
                       : "https://img-farm.s3.us-west-2.amazonaws.com/user/profile.jpg"
                   }
                   alt={seller.displayName}
@@ -35,40 +35,32 @@ const ListSellers = () => {
               <div>
                 <CardTitle>{seller?.displayName}</CardTitle>
                 <p className="mt-1 text-sm text-gray-500">
-                  {" "}
-                  {seller?.about?.split(" ").slice(0, 14).join(" ")}
-                  ...
+                  {seller?.about?.split(" ").slice(0, 14).join(" ")}...
                 </p>
               </div>
             </div>
-            <div className="space-y-1">
-              {seller?.contact ? (
-                <div className="mb-4 flex items-center">
+            <div className="space-y-2">
+              {seller?.contact && (
+                <div className="flex items-center">
                   <Phone className="mr-2 size-4 text-gray-500" />
                   <p className="text-sm">{seller?.contact}</p>
                 </div>
-              ) : (
-                false
               )}
-              {seller?.email ? (
+              {seller?.email && (
                 <div className="flex items-center">
                   <Mail className="mr-2 size-4 text-gray-500" />
                   <p className="text-sm">{seller?.email}</p>
                 </div>
-              ) : (
-                false
               )}
-              {seller?.location ? (
+              {seller?.location && (
                 <div className="flex items-center">
                   <MapPin className="mr-2 size-4 text-gray-500" />
                   <p className="text-sm">{seller?.location}</p>
                 </div>
-              ) : (
-                false
               )}
             </div>
             <Link href={`/farm/${generateUrl(seller.username || "")}`}>
-              <Button className="w-full" variant="outline">
+              <Button className="mt-4 w-full" variant="outline">
                 View Products
               </Button>
             </Link>
