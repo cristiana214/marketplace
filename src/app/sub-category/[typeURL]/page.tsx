@@ -27,7 +27,10 @@ export default function SubCategory({
       <div className="mb-8">
         <div className="flex items-center">
           <h1 className="text-3xl font-bold">{categoryType?.typeName}</h1>
-          <Link href={`/category/${categoryType?.categoryUrl}/`}>
+          <Link
+            className="ml-2"
+            href={`/category/${categoryType?.categoryUrl}/`}
+          >
             <Badge variant="outline">{categoryType?.categoryName}</Badge>
           </Link>
         </div>

@@ -17,6 +17,7 @@ import { useProduct } from "@/hooks/query/useProduct";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { useCartStore } from "@/lib/store/useCartStore";
 import ProductSkeleton from "@/components/loading/product";
+import { Badge } from "@/components/ui/badge";
 
 export default function ProductPage({
   params,
@@ -135,7 +136,16 @@ export default function ProductPage({
         <p className="mb-4 text-2xl font-semibold">
           P{product?.price.toFixed(2)} / {product?.unitDisplayName}
         </p>
+        <div className="my-2 flex flex-wrap gap-2">
+          <Link href={`/sub-category/${product?.typeUrl}/`}>
+            <Badge variant="secondary">{product?.typeName}</Badge>
+          </Link>
+          <Link href={`/category/${product?.categoryUrl}/`}>
+            <Badge variant="outline">{product?.categoryName}</Badge>
+          </Link>
+        </div>
         <p className="mb-4">{product?.description}</p>
+
         <div className="mb-4 flex items-center gap-4">
           <Button
             variant="outline"
