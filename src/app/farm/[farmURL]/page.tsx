@@ -56,10 +56,12 @@ export default function FarmerPage({
               ) : (
                 false
               )}
-              <div className="flex items-center">
-                <Mail className="mr-2 size-5" />
-                <span>{user?.email}</span>
-              </div>
+              {user?.email ? (
+                <div className="flex items-center">
+                  <Mail className="mr-2 size-5" />
+                  <span>{user?.email}</span>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="md:col-span-2">
