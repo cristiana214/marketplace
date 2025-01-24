@@ -37,7 +37,7 @@ const ListSellerOrders = ({ type, id, className }: ListOrdersProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen p-4 sm:p-6 md:p-8">
       <div className="mx-auto max-w-4xl">
         {filteredOrders?.map((order: any) => (
           <Card className="mx-auto mt-3 w-full max-w-md">

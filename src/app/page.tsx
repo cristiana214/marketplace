@@ -3,10 +3,8 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
 
-import ListCard from "@/components/list-card";
 import ListCategories from "@/components/list-categories";
 import ListProducts from "@/components/list-products";
-import CartTotal from "@/components/cart-total";
 
 import DropdownCategory from "@/components/dropdown-category";
 import Footer from "@/components/footer";
@@ -14,6 +12,9 @@ import Footer from "@/components/footer";
 export default function IndexPage() {
   return (
     <section className="container mx-auto grid w-full max-w-6xl  gap-6 pb-8 pt-6 ">
+      <title>
+        AgriCBR | Fresh Farm Produce - Direct from local farm to your door
+      </title>
       <div className="mx-auto w-full py-4">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-4xl">
           Fresh Farm Produce - Direct from local farm to your door
@@ -43,11 +44,6 @@ export default function IndexPage() {
         <Link href="/category/coconuts/">
           <Button className="bg-green-700 hover:font-semibold" rel="noreferrer">
             Fresh Coconuts
-          </Button>
-        </Link>
-        <Link href="/category/">
-          <Button variant="outline" rel="noreferrer">
-            Categories
           </Button>
         </Link>
       </div>

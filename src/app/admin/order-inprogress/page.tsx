@@ -12,7 +12,10 @@ const OrderInprogressPage = () => {
   const user = session?.user;
 
   return (
-    <InProgressOrders type="sellerId" id={user?.userId} status="inprogress" />
+    <>
+      <title>Inprogress Orders</title>
+      <InProgressOrders type="sellerId" id={user?.userId} status="inprogress" />
+    </>
   );
 };
 

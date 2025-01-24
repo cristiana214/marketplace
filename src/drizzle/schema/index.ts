@@ -137,6 +137,7 @@ export const productsTb = mysqlTable("products", {
   ),
   price: int("price").notNull(),
   quantity_available: int("quantity_available").notNull(),
+  active: boolean("active").notNull().default(true),
   date_added: timestamp("date_added").default(sql`CURRENT_TIMESTAMP`),
   date_updated: timestamp("date_updated").default(
     sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`,

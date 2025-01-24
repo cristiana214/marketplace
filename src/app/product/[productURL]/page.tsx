@@ -16,6 +16,8 @@ import Cards from "@/components/reusable/cards";
 import { useProduct } from "@/hooks/query/useProduct";
 import { generateUrl } from "@/lib/helper/generate-url";
 import { useCartStore } from "@/lib/store/useCartStore";
+import ProductSkeleton from "@/components/loading/product";
+import { Badge } from "@/components/ui/badge";
 
 export default function ProductPage({
   params,
@@ -41,7 +43,7 @@ export default function ProductPage({
     setImages(product?.images?.toString()?.split(",") || []);
   }, [product?.images]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProductSkeleton />;
   if (error) return <div>Error loading product</div>;
 
   const handleAddToCart = () => {
@@ -58,6 +60,7 @@ export default function ProductPage({
   return (
     <GridLayout>
       <GridItemEight>
+        <title>{product?.name}</title>
         <div className="relative mb-4 aspect-square">
           {product?.images?.length ? (
             <Image
@@ -92,7 +95,7 @@ export default function ProductPage({
         </div>
 
         <div className="mt-12">
-          <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2>
+          {/* <h2 className="mb-4 text-2xl font-bold">Customer Reviews</h2> */}
           {/* <div className="mb-8 space-y-4">
             {comments.map((comment) => (
               <Card key={comment.id}>
@@ -116,7 +119,7 @@ export default function ProductPage({
               </Card>
             ))}
           </div> */}
-          <form onSubmit={handleSubmitComment}>
+          {/* <form onSubmit={handleSubmitComment}>
             <h3 className="mb-2 text-xl font-semibold">Leave a Comment</h3>
             <Textarea
               value={newComment}
@@ -125,7 +128,7 @@ export default function ProductPage({
               className="mb-4"
             />
             <Button type="submit">Submit Comment</Button>
-          </form>
+          </form> */}
         </div>
       </GridItemEight>
       <GridItemFour>
@@ -134,7 +137,16 @@ export default function ProductPage({
         <p className="mb-4 text-2xl font-semibold">
           P{product?.price.toFixed(2)} / {product?.unitDisplayName}
         </p>
+        <div className="my-2 flex flex-wrap gap-2">
+          <Link href={`/sub-category/${product?.typeUrl}/`}>
+            <Badge variant="secondary">{product?.typeName}</Badge>
+          </Link>
+          <Link href={`/category/${product?.categoryUrl}/`}>
+            <Badge variant="outline">{product?.categoryName}</Badge>
+          </Link>
+        </div>
         <p className="mb-4">{product?.description}</p>
+
         <div className="mb-4 flex items-center gap-4">
           <Button
             variant="outline"

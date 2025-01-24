@@ -80,6 +80,17 @@ export type SellerStatsApiResponse = {
     totalProducts: number;
   };
 };
+export type AdminStatsApiResponse = {
+  stats: {
+    totalUserSignups: number;
+    totalSellers: number;
+    totalUsers: number;
+    totalProducts: number;
+    totalOrders: number;
+    totalCountOrders: number;
+    totalSales: number;
+  };
+};
 export type OrdersApiResponse = {
   orders: OrderProduct;
 };

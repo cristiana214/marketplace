@@ -3,11 +3,12 @@
 import { useCategories } from "@/hooks/query/useCategories";
 import { generateUrl } from "@/lib/helper/generate-url";
 import Link from "next/link";
+import CategoriesSkeleton from "@/components/loading/categories";
 import { Button } from "./ui/button";
 
 const ListCategories = () => {
   const { data, isLoading, error } = useCategories();
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <CategoriesSkeleton />;
   if (error) return <div>Error loading categories</div>;
   const categories = data?.categories;
 
@@ -15,9 +16,11 @@ const ListCategories = () => {
     <div className="mb-8">
       <div className="flex flex-wrap gap-2">
         {categories?.map((category, index) => (
-          <Link href={`/category/${generateUrl(category.categoryUrl)}`}>
+          <Link
+            href={`/category/${generateUrl(category.categoryUrl)}`}
+            key={index}
+          >
             <Button
-              key={index}
               variant="default"
               className="bg-green-500 hover:font-semibold"
               // onClick={() => setSelectedCategory(category)}
@@ -30,4 +33,5 @@ const ListCategories = () => {
     </div>
   );
 };
+
 export default ListCategories;

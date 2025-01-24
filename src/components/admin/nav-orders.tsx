@@ -3,11 +3,24 @@
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-const NavOrders = () => {
+interface NavOrdersProps {
+  userType?: number;
+}
+const NavOrders = ({ userType }: NavOrdersProps) => {
   const router = useRouter();
   const pathname = usePathname();
   return (
     <>
+      {userType === 4 ? (
+        <Button
+          onClick={() => {
+            router.push("/admin/super-admin/");
+          }}
+          variant={pathname === "/admin/super-admin/" ? "default" : "outline"}
+        >
+          Super Admin Dashboard
+        </Button>
+      ) : null}
       <Button
         onClick={() => {
           router.push("/admin/");

@@ -141,8 +141,8 @@ export const authConfig: NextAuthOptions = {
             authId: user.id,
           });
 
-          console.log(" signIn isSuccess,userDb");
-          console.log(isSuccess, userDb);
+          // console.log(" signIn isSuccess,userDb");
+          // console.log(isSuccess, userDb);
           // pass the user information to the `jwt` callback
 
           if (isSuccess) {
@@ -186,6 +186,7 @@ export const authConfig: NextAuthOptions = {
         accessToken: token.accessToken,
         authId: token.authId,
         name: token.name,
+        userType: token.userType,
         imageUrl: token.imageUrl,
         email: token.email,
         username: token.username,

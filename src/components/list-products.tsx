@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import ProductsSkeleton from "./loading/products";
 
 type ListProductsProps = {
   type: "home" | "categoryUrl" | "categoryTypeUrl" | "userUrl";
@@ -30,18 +31,16 @@ const ListProducts = ({ type, url, className }: ListProductsProps) => {
     [type]: url,
   });
 
-  // const searchParams = useSearchParams()
-  // const search = searchParams.get('search');
-
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProductsSkeleton />;
   if (error) return <div>Error loading products</div>;
+
   const filteredProducts = data?.products;
 
   if (!filteredProducts?.length) {
     return (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <div className="text-sm">
-          No available product on this category, please add in db
+          No available product in this category, please add in the database.
         </div>
       </div>
     );
@@ -76,12 +75,14 @@ const ListProducts = ({ type, url, className }: ListProductsProps) => {
             </p>
             <p className="text-sm text-gray-500">{product.description}</p>
 
-            <Link href={`/sub-category/${product.typeUrl}/`}>
-              <Badge variant="secondary">{product.typeName}</Badge>
-            </Link>
-            <Link href={`/category/${product.categoryUrl}/`}>
-              <Badge variant="outline">{product.categoryName}</Badge>
-            </Link>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Link href={`/sub-category/${product.typeUrl}/`}>
+                <Badge variant="secondary">{product.typeName}</Badge>
+              </Link>
+              <Link href={`/category/${product.categoryUrl}/`}>
+                <Badge variant="outline">{product.categoryName}</Badge>
+              </Link>
+            </div>
           </CardContent>
           <CardFooter>
             <Button

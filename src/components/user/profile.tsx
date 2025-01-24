@@ -14,7 +14,7 @@ const ProfileHeader = () => {
   if (!session?.user) redirect("/signin");
   const user = session?.user;
   return (
-    <div className="rounded-lg bg-white p-6 shadow-md">
+    <div className="rounded-lg bg-white p-6 shadow-md dark:bg-slate-900">
       <Image
         src={
           session?.user?.imageUrl ||
@@ -26,9 +26,13 @@ const ProfileHeader = () => {
         className="mr-6 size-24 rounded-full"
       />
       <div className="mt-4">
-        <p className="text- gray-500">@{user?.username || ""}</p>
-        <h2 className="text-2xl font-semibold">{user?.name}</h2>
-        <p className="text-gray-600">{user?.email}</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          @{user?.username || ""}
+        </p>
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          {user?.name}
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300">{user?.email}</p>
       </div>
       <ReausableDialog />
       <Link className="ml-4" href={`/farm/${user?.username}/`}>

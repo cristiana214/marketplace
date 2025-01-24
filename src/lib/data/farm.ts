@@ -411,7 +411,7 @@ const farmer: Farmer = {
   phone: "(555) 123-4567",
   email: "sarah@sunshineorganicfarm.com",
   mapUrl:
-    "https://www.openstreetmap.org/export/embed.html?bbox=-74.0060%2C40.7128%2C-73.9860%2C40.7328&layer=mapnik",
+    "https://www.openstreetmap.org/export/embed.html?bbox=125.5208%2C9.1077%2C125.5408%2C9.1277&layer=mapnik",
   socialMedia: {
     facebook: "https://facebook.com/sunshineorganicfarm",
   },

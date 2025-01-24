@@ -12,7 +12,10 @@ const OrderCompletedPage = () => {
   const user = session?.user;
 
   return (
-    <CompletedOrders type="sellerId" id={user?.userId} status="completed" />
+    <>
+      <title>Completed Orders</title>
+      <CompletedOrders type="sellerId" id={user?.userId} status="completed" />
+    </>
   );
 };
 
