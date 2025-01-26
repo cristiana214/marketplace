@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { redirect } from "next/navigation";
 
 export function SiteHeaderLogin() {
   const { data: session } = useSession();
@@ -56,7 +57,12 @@ export function SiteHeaderLogin() {
               </Link>
             )}
 
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem
+              onClick={() => {
+                signOut();
+                redirect("/");
+              }}
+            >
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>

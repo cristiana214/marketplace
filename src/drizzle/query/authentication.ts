@@ -241,6 +241,7 @@ export const checkEmailExist = async ({
       .select({
         userId: userTb.user_id,
         displayName: userTb.display_name,
+        name: userTb.display_name,
         about: userTb.about,
         authId: userAuthTb.auth_id,
         authEmail: userAuthTb.auth_email,

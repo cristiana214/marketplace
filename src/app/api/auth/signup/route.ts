@@ -2,24 +2,42 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { getRandomNumber } from "@/lib/helper/gerate-random-number";
+import { z } from "zod";
 import {
-  getAuthUser,
+  checkEmailExist,
   insertNewSignupUser,
 } from "@/drizzle/query/authentication";
 
-const users: Array<{
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-}> = [];
+const signupSchema = z.object({
+  name: z.string().min(4, "Name is required atleast 4 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters long"),
+});
 
 export async function POST(req: Request) {
-  const { name, email, password } = await req.json();
+  const body = await req.json();
+
+  // validate the request body
+  const result = signupSchema.safeParse(body);
+
+  if (!result.success) {
+    return NextResponse.json(
+      {
+        message: `${result.error.errors[0].message}`,
+        errors: result.error.errors,
+      },
+      { status: 400 },
+    );
+  }
+
+  const { name, email, password } = result.data;
 
   // check if email already exists
-  const existingUser = users.find((user) => user.email === email);
-  if (existingUser) {
+  const { isSuccess: emailCheckExist } = await checkEmailExist({
+    email,
+  });
+
+  if (emailCheckExist) {
     return NextResponse.json(
       { message: "Email already exist." },
       { status: 400 },
@@ -29,15 +47,6 @@ export async function POST(req: Request) {
   // hash the password
   const hashPassword = await bcrypt.hash(password, 13);
 
-  // create new user
-  // const newUser = {
-  //   id: Date.now().toString(),
-  //   name,
-  //   email,
-  //   password: hashedPassword,
-  // };
-  // users.push(newUser);
-
   const userData = {
     username: name
       ?.toLowerCase()
@@ -45,7 +54,7 @@ export async function POST(req: Request) {
       ?.replace(/\s/g, "")
       ?.trim(),
     displayName: name.trim() || "",
-    authId: getRandomNumber(1, 5000).toString(),
+    authId: getRandomNumber(1, 500000).toString(),
     authToken: " ", // we will save the token that googleapis provides to the user
     authTypeId: 2,
     authEmail: email,
@@ -54,25 +63,16 @@ export async function POST(req: Request) {
   };
 
   // insert signup local
+  const { isSuccess } = await insertNewSignupUser(userData);
 
-  const { isSuccess, user, error } = await insertNewSignupUser(userData);
-
-  // const { isSuccess, userDb } = await getAuthUser({
-  //   authId: user.id,
-  // });
-  // Pass the user information to the `jwt` callback
   if (isSuccess) {
-    console.log("User registered successfully");
-    console.log(user);
-    // Save the DB ID to pass it later
-    // user.userId = userDb?.[0]?.userId || 0;
-    // user.imageUrl = userDb?.[0]?.imageUrl || "";
-  } else {
-    console.log("User error signup", error);
+    return NextResponse.json(
+      { message: "User registered successfully" },
+      { status: 201 },
+    );
   }
-
   return NextResponse.json(
-    { message: "User registered successfully" },
-    { status: 201 },
+    { message: "Error in signing up." },
+    { status: 400 },
   );
 }

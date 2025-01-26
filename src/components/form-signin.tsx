@@ -3,25 +3,23 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 interface CredentialsFormProps {
   csrfToken?: string;
 }
 
 export function FormSignin(props: CredentialsFormProps) {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-
     const signInResponse = await signIn("credentials", {
       email: data.get("email"),
       password: data.get("password"),
@@ -29,12 +27,9 @@ export function FormSignin(props: CredentialsFormProps) {
     });
 
     if (signInResponse && !signInResponse.error) {
-      console.log("signInResponse");
-      console.log(signInResponse);
-      // redirect to homepage (/)
-      router.push("/");
+      toast.success("You have login successfully");
     } else {
-      console.log("Error: ", signInResponse);
+      toast.error("Invalid Email or Password, Please try again!");
       setError("Invalid Email or Password, Please try again!");
     }
   };
