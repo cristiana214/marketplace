@@ -2,9 +2,10 @@ import { useOrders } from "@/hooks/query/useOrders";
 import type { ListOrdersProps } from "@/types/params";
 import OrderList from "./order-list";
 
-const InprogressOrders = ({ type, id, className }: ListOrdersProps) => {
+const InprogressOrders = ({ type, id, status, className }: ListOrdersProps) => {
   const { data, isLoading, error } = useOrders({
     [type]: id,
+    status,
   });
 
   if (isLoading) return <div>Loading orders...</div>;

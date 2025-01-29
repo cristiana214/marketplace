@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
+/* eslint-disable react/jsx-no-bind */
 import type { OrderProduct } from "@/types/data";
 import moment from "moment";
+import type { ComboboxUnitItem } from "@/lib/data/unitTypes";
+import ComboStatus from "../combo-status";
 
 interface OrderListProps {
   orders: OrderProduct[];
@@ -23,7 +25,7 @@ const OrderList = ({ orders, showStatus }: OrderListProps) => (
           <th className="px-2 py-3 text-left sm:px-6">Address</th>
           <th className="px-2 py-3 text-left sm:px-6">Date</th>
           <th className="px-2 py-3 text-left sm:px-6">Customer</th>
-          {/* <th className="px-2 py-3 text-center sm:px-6">Actions</th> */}
+          <th className="px-2 py-3 text-center sm:px-6">Actions</th>
         </tr>
       </thead>
       <tbody className="text-sm font-light text-gray-600">
@@ -65,11 +67,19 @@ const OrderList = ({ orders, showStatus }: OrderListProps) => (
             <td className="px-2 py-3 text-left sm:px-6">
               {order?.username || ""}
             </td>
-            {/* <td className="px-2 py-3 text-center sm:px-6">
-              <Button variant="outline" size="sm">
-                View Details
-              </Button>
-            </td> */}
+            <td className="px-2 py-3 text-center sm:px-6">
+              {/* selectedItems: default selected status for display */}
+              <ComboStatus
+                selectedItems={[
+                  {
+                    id: order.isCompleted ? 1 : 0,
+                    name: order.isCompleted ? "Completed" : "Inprogress",
+                  },
+                ]} // pass the state
+                productId={order.productId}
+                orderId={order.orderId}
+              />
+            </td>
           </tr>
         ))}
       </tbody>

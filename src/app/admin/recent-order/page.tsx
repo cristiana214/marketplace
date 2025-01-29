@@ -14,7 +14,9 @@ const OrderCompletedPage = () => {
   return (
     <>
       <title>Recent Orders</title>
-      <MyOrders type="sellerId" id={user?.userId} status="all" />
+      {user?.userId ? (
+        <MyOrders type="sellerId" id={user?.userId} status="all" />
+      ) : null}
     </>
   );
 };

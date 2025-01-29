@@ -175,9 +175,9 @@ export const ordersTb = mysqlTable("orders", {
     .references(() => userTb.user_id)
     .notNull(), // Foreign key to seller/farmer (user_type = 2)
   total_amount: decimal("total_amount").notNull(), // Total amount in PHP (up to 10 digits, 2 decimal places)
-  is_completed: boolean("is_completed").default(false), // 1 = true, 0 = false (default is false)
+  // is_completed: boolean("is_completed").default(false), // 1 = true, 0 = false (default is false)
   active: boolean("active").default(true), // Order is active by default
-  date_completed: timestamp("date_completed"), // Date order was completed (nullable)
+  // date_completed: timestamp("date_completed"), // Date order was completed (nullable)
   date_added: timestamp("date_added").defaultNow().notNull(), // Date order was added (automatically set)
   date_updated: timestamp("date_updated").defaultNow().onUpdateNow().notNull(), // Tracks changes and updates automatically
 });
@@ -191,6 +191,8 @@ export const orderProductsTb = mysqlTable("order_products", {
     .notNull(),
   current_price: int("current_price").notNull(),
   quantity: int("quantity").notNull(),
+  date_completed: timestamp("date_completed"),
+  is_completed: boolean("is_completed").default(false), // 1 = true, 0 = false
   active: boolean("active").notNull().default(true),
   date_added: timestamp("date_added").notNull().defaultNow(),
   date_updated: timestamp("date_updated").notNull().defaultNow().onUpdateNow(),
