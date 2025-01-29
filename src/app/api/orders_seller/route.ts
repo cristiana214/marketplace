@@ -22,8 +22,8 @@ const getBaseQuery = () =>
       address: ordersTb.address,
       totalAmount: ordersTb.total_amount,
       dateAdded: ordersTb.date_added,
-      dateCompleted: ordersTb.date_completed,
-      isCompleted: ordersTb.is_completed,
+      dateCompleted: orderProductsTb.date_completed,
+      isCompleted: orderProductsTb.is_completed,
       productName: productsTb.name,
       productId: orderProductsTb.product_id,
       totalQuantity: orderProductsTb.quantity,
@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
         and(
           eq(productsTb.seller_id, Number(sellerId)),
           eq(ordersTb.active, true),
-          eq(ordersTb.is_completed, false),
+          eq(orderProductsTb.is_completed, false),
         ),
       );
     } else if (status === "completed") {
@@ -66,7 +66,7 @@ export async function GET(req: NextRequest) {
         and(
           eq(productsTb.seller_id, Number(sellerId)),
           eq(ordersTb.active, true),
-          eq(ordersTb.is_completed, true),
+          eq(orderProductsTb.is_completed, true),
         ),
       );
     } else {

@@ -1,5 +1,5 @@
 export type ComboboxItem = {
-  id: string | number;
+  id: number;
   name: string;
   url?: string;
 };
@@ -15,16 +15,6 @@ const unitTypes: ComboboxUnitItem[] = [
     id: 2,
     name: "Gram",
     displayName: "g",
-  },
-  {
-    id: 3,
-    name: "Ton",
-    displayName: "t",
-  },
-  {
-    id: 4,
-    name: "Pound",
-    displayName: "lb",
   },
   {
     id: 5,
@@ -57,5 +47,15 @@ const unitTypes: ComboboxUnitItem[] = [
     displayName: "sack",
   },
 ];
+const statusTypes: ComboboxItem[] = [
+  {
+    id: 0,
+    name: "In Progress",
+  },
+  {
+    id: 1,
+    name: "Completed",
+  },
+];
 
-export { unitTypes };
+export { unitTypes, statusTypes };

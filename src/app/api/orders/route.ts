@@ -14,8 +14,8 @@ const getBaseQuery = () =>
       address: ordersTb.address,
       totalAmount: ordersTb.total_amount,
       dateAdded: ordersTb.date_added,
-      dateCompleted: ordersTb.date_completed,
-      isCompleted: ordersTb.is_completed,
+      dateCompleted: orderProductsTb.date_completed,
+      isCompleted: orderProductsTb.is_completed,
       // items: sql`GROUP_CONCAT(${productsTb.product_id})`, // Adjust for individual items if needed
     })
     .from(ordersTb)
@@ -28,7 +28,6 @@ const getBaseQuery = () =>
 export async function GET(req: NextRequest) {
   try {
     const orderId = req.nextUrl.searchParams.get("orderId");
-    console.log(req.nextUrl.searchParams);
 
     let orderQuery;
     if (orderId) {
@@ -51,7 +50,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ orders });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({
       message: "Error fetching orders1",
       error,
