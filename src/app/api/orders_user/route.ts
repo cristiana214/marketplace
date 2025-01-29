@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
         and(
           eq(userTb.username, String(userUrl)),
           eq(ordersTb.active, true),
-          eq(ordersTb.is_completed, false),
+          eq(orderProductsTb.is_completed, false),
         ),
       );
     } else if (status === "completed") {
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
         and(
           eq(userTb.username, String(userUrl)),
           eq(ordersTb.active, true),
-          eq(ordersTb.is_completed, true),
+          eq(orderProductsTb.is_completed, true),
         ),
       );
     } else {
