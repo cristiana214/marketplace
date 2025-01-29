@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 
+// auth.ts
+
 import {
   checkEmailExist,
   checkUserExist,
@@ -14,8 +16,9 @@ import bcrypt from "bcrypt";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { signIn } from "next-auth/react";
 import { isAlphanumeric, blacklist } from "validator";
+
+import { z } from "zod";
 /**
  * Note:
  * to update the user types needs to update the next-auth.d.ts file
@@ -35,50 +38,44 @@ export const authConfig: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials || !credentials.email || !credentials.password)
           return null;
-        try {
-          const { email, password } = credentials as {
-            email: string;
-            password: string;
-          };
 
-          console.log("credentials");
-          console.log(credentials);
+        // Define schema for credentials
+        const credentialsSchema = z.object({
+          email: z.string().email("Invalid email address"),
+          password: z
+            .string()
+            .min(6, "Password must be at least 6 characters long"),
+        });
+
+        try {
+          // validate and sanitize input
+          const result = credentialsSchema.safeParse(credentials);
+
+          if (!result.success) {
+            throw new Error(result.error.errors[0].message);
+          }
+          const { email, password } = result.data;
+
           const { isSuccess, userExist } = await checkEmailExist({
             email,
           });
           if (!isSuccess) {
             throw new Error("No user found with this email.");
           }
-          console.log("userExist.userPassword", userExist.userPassword);
-          // Verify password
+          // verify password
           const isValidPassword = await bcrypt.compare(
             password,
-            userExist.userPassword,
+            userExist[0].userPassword,
           );
           if (!isValidPassword) {
-            console.log("Invalid password.");
             throw new Error("Invalid password.");
           }
 
-          console.log("userExist");
-          console.log(userExist);
-
-          // add credentials.email checker, query if email is available
-          // query dbUser is exist where email is equal to credentials.email
-
-          // Verify Password here
-          // We are going to use a simple === operator
-          // In production DB, passwords should be encrypted using something like bcrypt...
-          // if()
-          // if (dbUser && dbUser.password === credentials.password) {
-          //   const { password, createdAt, id, ...dbUserWithoutPassword } =
-          //     dbUser;
-          //   return dbUserWithoutPassword as User;
-          // }
+          return userExist[0]; // Returns user data to NextAuth
         } catch (e) {
+          console.error(e);
           return null;
         }
-        return null;
       },
     }),
     GoogleProvider({
@@ -97,6 +94,7 @@ export const authConfig: NextAuthOptions = {
             authId: user?.id,
           });
 
+          // user not exist
           if (!userExist?.length) {
             // insert new  auth user
             // validate username use email if username is invalid
@@ -137,14 +135,12 @@ export const authConfig: NextAuthOptions = {
             }
             return !!isSuccess;
           }
+          // user exist
           const { isSuccess, userDb } = await getAuthUser({
             authId: user.id,
           });
 
-          // console.log(" signIn isSuccess,userDb");
-          // console.log(isSuccess, userDb);
           // pass the user information to the `jwt` callback
-
           if (isSuccess) {
             user.userId = userDb?.[0]?.userId || 0;
             user.imageUrl = userDb?.[0]?.imageUrl || "";
@@ -157,20 +153,36 @@ export const authConfig: NextAuthOptions = {
           return false;
         }
       }
-      // login only using google
+      if (account?.provider === "credentials") {
+        const { authId = 0 } = user;
+
+        const { isSuccess, userDb } = await getAuthUser({
+          authId: authId.toString(),
+        });
+
+        // pass the user information to the `jwt` callback
+        if (isSuccess) {
+          user.userId = userDb?.[0]?.userId || 0;
+          user.imageUrl = userDb?.[0]?.imageUrl || "";
+          user.userType = userDb?.[0]?.userType || 1;
+          user.username = userDb?.[0]?.username || "1";
+        }
+        return true;
+      }
+
       return true;
-      // Do different verification for other providers that don't have `email_verified`
+      // do different verification for other providers that don't have `email_verified`
     },
     async jwt({ token, user, account, profile }) {
       if (account && user) {
-        // Store Google accessToken and idToken in the JWT
+        // store Google accessToken and idToken in the JWT
         token.userId = user.userId;
-        token.accessToken = account.access_token;
-        token.idToken = account.id_token;
+        token.accessToken = account?.access_token;
+        token.idToken = account?.id_token;
         token.name = user.name;
         token.userType = user.userType;
-        // Include additional profile info (if needed)
-        token.authId = profile?.sub;
+        // include additional profile info (if needed)
+        token.authId = profile?.sub || user.authId;
         token.email = user?.email;
         token.imageUrl = user?.imageUrl;
         token.username = user?.username;
@@ -180,7 +192,7 @@ export const authConfig: NextAuthOptions = {
     },
 
     async session({ session, token, user }) {
-      // Pass additional properties to the session
+      // pass additional properties to the session
       const userData = {
         userId: token.userId,
         accessToken: token.accessToken,

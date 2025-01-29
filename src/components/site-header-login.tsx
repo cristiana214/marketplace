@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { redirect } from "next/navigation";
 
 export function SiteHeaderLogin() {
   const { data: session } = useSession();
@@ -46,17 +47,21 @@ export function SiteHeaderLogin() {
               <DropdownMenuItem className="w-full">My Orders</DropdownMenuItem>
             </Link>
             {/* validation if already a seller account */}
-            {session?.user?.userType === 1 ? (
-              <Link href="/seller-signup">
-                <DropdownMenuItem>Be a Seller</DropdownMenuItem>
-              </Link>
-            ) : (
+            {session?.user?.userType === 1 ? null : (
+              // <Link href="/seller-signup">
+              //   <DropdownMenuItem>Be a Seller</DropdownMenuItem>
+              // </Link>
               <Link href="/admin">
                 <DropdownMenuItem>Manage Store</DropdownMenuItem>
               </Link>
             )}
 
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem
+              onClick={async () => {
+                await signOut();
+                redirect("/");
+              }}
+            >
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -2,27 +2,27 @@
 
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 interface CredentialsFormProps {
   csrfToken?: string;
 }
 
 export function FormSignup(props: CredentialsFormProps) {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     const data = new FormData(e.currentTarget);
 
-    const res = await fetch("/api/auth/signup", {
+    const res = await fetch("/api/auth/signup/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -31,30 +31,20 @@ export function FormSignup(props: CredentialsFormProps) {
         password: data.get("password"),
       }),
     });
-    console.log(res);
     if (res.ok) {
-      // router.push("/signin");
+      setSuccess(true);
+      toast.success("You have signup successfully, please login.");
     } else {
       const loginRes = await res.json();
-      // setError(data.message);
-      setError(`Invalid Email or Password, Please try again!${loginRes}`);
+      toast.error(
+        loginRes?.message ||
+          "User already exist or cannot signup at the moment",
+      );
+      setError(
+        loginRes?.message ||
+          "User already exist or cannot signup at the moment",
+      );
     }
-
-    // const signInResponse = await signIn("credentials", {
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    //   redirect: false,
-    // });
-
-    // if (signInResponse && !signInResponse.error) {
-    //   console.log("signInResponse");
-    //   console.log(signInResponse);
-    //   // redirect to homepage (/)
-    //   router.push("/");
-    // } else {
-    //   console.log("Error: ", signInResponse);
-    //   setError("Invalid Email or Password, Please try again!");
-    // }
   };
 
   return (
@@ -65,41 +55,55 @@ export function FormSignup(props: CredentialsFormProps) {
         </span>
       )}
 
-      <Input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        className="mb-4 w-full rounded-md border border-gray-300 p-4"
-      />
-      <Input
-        type="name"
-        name="name"
-        placeholder="Name"
-        required
-        className="mb-4 w-full rounded-md border border-gray-300 p-4"
-      />
-      <Input
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-        className="mb-4 w-full rounded-md border border-gray-300 p-4"
-      />
-      <Button
-        type="submit"
-        className="focus:shadow-outline mt-4 h-12 w-full rounded-lg px-6 text-lg text-white transition-colors duration-150 dark:text-gray-700"
-      >
-        Sign Up
-      </Button>
-
-      <span className="mt-2 text-xs">
-        Already have an account?
-        <Link className=" text-cyan-600 hover:font-semibold" href="/signin/">
-          {" "}
-          Signin
-        </Link>
-      </span>
+      {success ? (
+        <>
+          <p className="text-green-500">Signup successful! Please log in.</p>
+          <Link className=" text-cyan-600 hover:font-semibold" href="/signin/">
+            {" "}
+            Login
+          </Link>
+        </>
+      ) : (
+        <>
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            className="mb-4 w-full rounded-md border border-gray-300 p-4"
+          />
+          <Input
+            type="name"
+            name="name"
+            placeholder="Name"
+            required
+            className="mb-4 w-full rounded-md border border-gray-300 p-4"
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            className="mb-4 w-full rounded-md border border-gray-300 p-4"
+          />
+          <Button
+            type="submit"
+            className="focus:shadow-outline mt-4 h-12 w-full rounded-lg px-6 text-lg text-white transition-colors duration-150 dark:text-gray-700"
+          >
+            Sign Up
+          </Button>
+          <span className="mt-2 text-xs">
+            Already have an account?
+            <Link
+              className=" text-cyan-600 hover:font-semibold"
+              href="/signin/"
+            >
+              {" "}
+              Signin
+            </Link>
+          </span>
+        </>
+      )}
     </form>
   );
 }

@@ -17,6 +17,7 @@ declare module "next-auth" {
     /** The user's database ID */
     userId: number;
     imageUrl?: string;
+    authId?: number;
     userType?: number;
     username?: string;
   }
